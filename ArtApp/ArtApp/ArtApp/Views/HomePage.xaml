@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArtApp.Pages.HomePage">
+  
+  <StackLayout>
+    <Label Text="HomePage" VerticalOptions="Center" HorizontalOptions="Center"/>
+    <Button x:Name="newWorkButton" Text="Create Work"/>
+    <Button x:Name="newConditionReportButton" Text="Create Condition Report"/>
+  </StackLayout>
+
+</ContentPage>

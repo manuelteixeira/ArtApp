@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArtApp.Pages.MenuPage"
+             xmlns:local="clr-namespace:ArtApp.Pages;assembly=ArtApp">
+  
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <MasterDetailPage.Master>
+    <ContentPage Title="Menu">
+      <StackLayout Orientation="Vertical">
+        <Button x:Name="homeButton" Text="Home"/>
+        <Button x:Name="worksButton" Text="Works"/>
+        <Button x:Name="conditionReportsButton" Text="Condition Reports"/>
+        <Button x:Name="photosButton" Text="Photos"/>
+        <Button x:Name="settingsButton" Text="Settings"/>
+      </StackLayout>
+    </ContentPage>
+  </MasterDetailPage.Master>
+
+
+
+  
+</MasterDetailPage>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArtApp.Pages.NewWorkPage">
+
+  <ContentPage.Content>
+    <ScrollView>
+
+      <StackLayout Padding="10,30,10,10" Spacing = "10">
+        <Label Text="Create Work" Font = "30" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="titleEntry" Placeholder="Title" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="descriptionEntry" Placeholder="Description" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <DatePicker x:Name="datePicker" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Techique" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="techiqueEntry" Placeholder="Techique" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Length" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="lengthEntry" Placeholder="Length" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Width" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="widthEntry" Placeholder="Width" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Heigth" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="HeigthEntry" Placeholder="Heigth" Keyboard="Numeric" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Picker x:Name="classificationPicker" Title="Select a classification" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Authors" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry x:Name="authorsEntry" Placeholder="Authors" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <Button x:Name="newButton" Text="Create" BackgroundColor="Navy" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+
+      </StackLayout>
+    </ScrollView>
+
+  </ContentPage.Content>
+</ContentPage>
