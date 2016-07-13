@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ArtApp.ViewModels;assembly=ArtApp"
+             x:Class="ArtApp.Views.WorkView">
+
+  <ContentPage.BindingContext>
+    <viewModels:WorksViewModel/>
+  </ContentPage.BindingContext>
+
+  <ContentPage.Content>
+    <ScrollView>
+
+      <StackLayout Padding="10,30,10,10" Spacing = "10">
+        <Label Text="Work" Font = "30" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding SelectedWork.Title, Mode=TwoWay}" Placeholder="{Binding SelectedWork.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        
+        <Button x:Name="editButton" Text="Edit" Command="{Binding EditCommand}" BackgroundColor="Navy" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Label Text="{Binding StatusMessage}"/>
+      </StackLayout>
+    </ScrollView>
+
+  </ContentPage.Content>
+
+</ContentPage>

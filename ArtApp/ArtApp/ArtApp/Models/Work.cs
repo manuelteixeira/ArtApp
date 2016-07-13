@@ -30,6 +30,8 @@ namespace ArtApp.Models
         public Classification Classification { get; set; }
         public List<Author> Authors { get; set; }
 
+
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 

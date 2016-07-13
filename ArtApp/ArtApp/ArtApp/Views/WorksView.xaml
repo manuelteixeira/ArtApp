@@ -14,10 +14,14 @@
     <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" TextChanged="SearchBar_OnTextChanged"/>
 
 
-    <ListView x:Name="WorkListView" ItemsSource="{Binding Works}" HasUnevenRows="True" SeparatorVisibility="Default">
+    <ListView x:Name="WorkListView" ItemsSource="{Binding WorksSearch}" HasUnevenRows="True" SeparatorVisibility="Default">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Text="Edit" Clicked="Edit_OnClicked" CommandParameter="{Binding .}" />
+              <MenuItem Text="Delete" Clicked="Delete_OnClicked"/>
+            </ViewCell.ContextActions>
             <StackLayout Orientation="Horizontal">
               <Label Text="{Binding Title}"/>
               <Label Text="{Binding Authors}" />

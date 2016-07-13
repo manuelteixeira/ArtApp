@@ -1,15 +1,13 @@
 ﻿using ArtApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArtApp.Services
 {
     public class WorksServices
     {
 
+        //Method to get the works from the API
         public List<Work> GetWorks()
         {
             //var list = new List<Work>();
@@ -87,6 +85,18 @@ namespace ArtApp.Services
 
 
             return list;
+        }
+
+        //Method to edit the work
+        public bool PutWork(int workId, Work work)
+        {
+            return true;
+        }
+
+        //Method to delete a work
+        public bool DeleteWork(int workId)
+        {
+            return true;
         }
     }
 }

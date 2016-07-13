@@ -1,13 +1,10 @@
-﻿using ArtApp.Models;
+﻿using System;
+using ArtApp.Models;
 using ArtApp.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,8 +12,8 @@ namespace ArtApp.ViewModels
 {
     public class WorksViewModel : INotifyPropertyChanged
     {
-        private string _searchText;
 
+        private string _searchText;
         public string SearchText
         {
             get { return _searchText; }
@@ -34,16 +31,47 @@ namespace ArtApp.ViewModels
         public ObservableCollection<Work> WorksSearch => _worksSearch;
 
 
-        private List<Work> _works;
-        public List<Work> Works
+        public List<Work> Works { get; set; }
+
+        private Work _selectedWork;
+        private string _statusMessage;
+
+        public Work SelectedWork
         {
-            get { return _works; }
+            get { return _selectedWork; }
             set
             {
-                _works = value;
-                //OnPropertyChanged();
+                _selectedWork = value;
+                OnPropertyChanged();
             }
         }
+
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                _statusMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public WorksViewModel()
+        {
+            this.SearchCommand = new Command(this.ExecuteSearchCommand, this.CanExecuteSearchCommand);
+            this.EditCommand = new Command(this.ExecuteEditCommand, this.CanExecuteEditCommand);
+            this.DeleteCommand = new Command(this.ExecuteDeleteCommand, this.CanExecuteDeleteCommand);
+
+
+            //Singleton?
+            var worksServices = new WorksServices();
+
+            Works = worksServices.GetWorks();
+
+            _worksSearch = new ObservableCollection<Work>(Works);
+        }
+
 
         #region Search Commands and methods
         public ICommand SearchCommand { get; private set; }
@@ -60,11 +88,11 @@ namespace ArtApp.ViewModels
             IEnumerable<Work> foundWorks;
             if (string.IsNullOrEmpty(this.SearchText))
             {
-                foundWorks = _works;
+                foundWorks = Works;
             }
             else
             {
-                foundWorks = _works.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower()));
+                foundWorks = Works.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower()));
             }
 
             foreach (var foundWork in foundWorks)
@@ -75,23 +103,60 @@ namespace ArtApp.ViewModels
 
         #endregion
 
+        #region Edit Commands and methods
+        public ICommand EditCommand { get; private set; }
 
-        public WorksViewModel()
+        protected virtual bool CanExecuteEditCommand()
         {
-            this.SearchCommand = new Command(this.ExecuteSearchCommand, this.CanExecuteSearchCommand);
-
-            var worksServices = new WorksServices();
-
-            Works = worksServices.GetWorks();
-
-            _worksSearch = new ObservableCollection<Work>(_works);
+            return true;
         }
 
+        protected virtual void ExecuteEditCommand()
+        {
+            var worksServices = new WorksServices();
+
+            //Change to the request code from the API? if status code == 200
+            if (worksServices.PutWork(_selectedWork.WorkId, _selectedWork))
+            {
+                StatusMessage = "SUCCESS EDIT!";
+            }
+
+
+        }
+
+        #endregion
+
+        #region Delete Commands and methods
+        public ICommand DeleteCommand { get; private set; }
+
+        protected virtual bool CanExecuteDeleteCommand()
+        {
+            return true;
+        }
+
+        protected virtual void ExecuteDeleteCommand()
+        {
+            var worksServices = new WorksServices();
+
+            //Change to the request code from the API? if status code == 200
+            if (worksServices.DeleteWork(_selectedWork.WorkId))
+            {
+                StatusMessage = "SUCCESS DELETE!";
+            }
+
+
+        }
+
+        #endregion
+
+
+        #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
