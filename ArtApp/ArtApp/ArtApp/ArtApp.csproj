@@ -39,14 +39,35 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Work.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Repositories\WorkRepository.cs" />
+    <Compile Include="Services\IMessageService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\IRestAPIService.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\RestApiService.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\WorkViewModel.cs" />
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WorkView.xaml.cs">
       <DependentUpon>WorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Compile Include="Views\LoginViewOLD.xaml.cs">
+      <DependentUpon>LoginViewOLD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
@@ -55,8 +76,8 @@
       <DependentUpon>NewWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\WorksServices.cs" />
-    <Compile Include="ViewModels\WorksViewModel.cs" />
+    <Compile Include="Services\WorksAPIServices.cs" />
+    <Compile Include="ViewModels\WorksViewModelOLD.cs" />
     <Compile Include="Views\WorksView.xaml.cs">
       <DependentUpon>WorksView.xaml</DependentUpon>
     </Compile>
@@ -92,7 +113,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\LoginView.xaml">
+    <EmbeddedResource Include="Views\LoginViewOLD.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -123,6 +144,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\WorkView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RegisterView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MainView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

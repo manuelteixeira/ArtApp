@@ -12,7 +12,7 @@ namespace ArtApp.Views
             InitializeComponent();
         }
 
-        public WorkView(WorksViewModel workViewModel)
+        public WorkView(WorksViewModelOLD workViewModel)
         {
             InitializeComponent();
 

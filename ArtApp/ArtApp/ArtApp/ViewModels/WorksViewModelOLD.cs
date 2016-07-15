@@ -1,5 +1,4 @@
-﻿using System;
-using ArtApp.Models;
+﻿using ArtApp.Models;
 using ArtApp.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ArtApp.ViewModels
 {
-    public class WorksViewModel : INotifyPropertyChanged
+    public class WorksViewModelOLD : INotifyPropertyChanged
     {
 
         private string _searchText;
@@ -57,7 +56,7 @@ namespace ArtApp.ViewModels
         }
 
 
-        public WorksViewModel()
+        public WorksViewModelOLD()
         {
             this.SearchCommand = new Command(this.ExecuteSearchCommand, this.CanExecuteSearchCommand);
             this.EditCommand = new Command(this.ExecuteEditCommand, this.CanExecuteEditCommand);
@@ -65,7 +64,7 @@ namespace ArtApp.ViewModels
 
 
             //Singleton?
-            var worksServices = new WorksServices();
+            var worksServices = new WorksAPIServices();
 
             Works = worksServices.GetWorks();
 
@@ -113,7 +112,7 @@ namespace ArtApp.ViewModels
 
         protected virtual void ExecuteEditCommand()
         {
-            var worksServices = new WorksServices();
+            var worksServices = new WorksAPIServices();
 
             //Change to the request code from the API? if status code == 200
             if (worksServices.PutWork(_selectedWork.WorkId, _selectedWork))
@@ -136,7 +135,7 @@ namespace ArtApp.ViewModels
 
         protected virtual void ExecuteDeleteCommand()
         {
-            var worksServices = new WorksServices();
+            var worksServices = new WorksAPIServices();
 
             //Change to the request code from the API? if status code == 200
             if (worksServices.DeleteWork(_selectedWork.WorkId))

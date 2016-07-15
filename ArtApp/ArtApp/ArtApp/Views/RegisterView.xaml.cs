@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
-    public partial class LoginView : ContentPage
+    public partial class RegisterView : ContentPage
     {
-        public LoginView()
+        public RegisterView()
         {
             InitializeComponent();
         }

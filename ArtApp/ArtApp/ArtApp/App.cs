@@ -1,9 +1,5 @@
-﻿using ArtApp.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using ArtApp.Models;
+using ArtApp.Views;
 using Xamarin.Forms;
 
 namespace ArtApp
@@ -12,8 +8,15 @@ namespace ArtApp
     {
         public App()
         {
+
+            #region Services DependencyInjection
+            DependencyService.Register<Services.IMessageService, Services.MessageService>();
+            DependencyService.Register<Services.INavigationService, Services.NavigationService>();
+            //DependencyService.Register<Services.IRestApiService<Work,string>, Services.RestApiService<Work,string>>();
+            #endregion
+
             // The root page of your application
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new LoginView());
             //MainPage = new MenuPage();
         }
 

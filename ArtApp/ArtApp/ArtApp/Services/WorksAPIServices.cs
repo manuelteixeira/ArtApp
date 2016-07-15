@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ArtApp.Services
 {
-    public class WorksServices
+    public class WorksAPIServices
     {
 
         //Method to get the works from the API

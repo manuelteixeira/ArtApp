@@ -12,18 +12,18 @@ namespace ArtApp.Views
 {
     public partial class WorksPage : ContentPage
     {
-        public WorksViewModel ViewModel
+        public WorksViewModelOLD ViewModel
         {
             get
             {
-                return this.BindingContext as WorksViewModel;
+                return this.BindingContext as WorksViewModelOLD;
             }
             set { this.BindingContext = value; }
         }
 
         public WorksPage()
         {
-            this.ViewModel = new WorksViewModel();
+            this.ViewModel = new WorksViewModelOLD();
 
             InitializeComponent();
 
@@ -49,7 +49,7 @@ namespace ArtApp.Views
 
             if (workSelected != null)
             {
-                var worksViewModel = BindingContext as WorksViewModel;
+                var worksViewModel = BindingContext as WorksViewModelOLD;
 
                 if (worksViewModel != null)
                 {
