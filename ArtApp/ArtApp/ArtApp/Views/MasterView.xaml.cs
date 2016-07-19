@@ -8,11 +8,13 @@ using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
-    public partial class MenuView : ContentPage
+    public partial class MasterView : MasterDetailPage
     {
-        public MenuView()
+        public MasterView()
         {
             InitializeComponent();
         }
+
+        
     }
 }

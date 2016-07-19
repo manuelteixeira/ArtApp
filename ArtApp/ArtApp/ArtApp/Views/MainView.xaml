@@ -2,28 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:ArtApp.ViewModels;assembly=ArtApp"
-             x:Class="ArtApp.Views.MainView">
+             x:Class="ArtApp.Views.MainView"
+             Padding="10">
   
   <ContentPage.BindingContext>
     <viewModels:MainViewModel/>
   </ContentPage.BindingContext>
   
-  <ContentPage.Content>
-    <StackLayout>
-      <ListView ItemsSource="{Binding Works}" HasUnevenRows="True" SeparatorVisibility="Default">
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Title}"/>
-                <Label Text="{Binding Description}" />
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
+  <Label Text="MAINVIEW"></Label>
 
-      </ListView>
-    </StackLayout>
-  </ContentPage.Content>
   
 </ContentPage>

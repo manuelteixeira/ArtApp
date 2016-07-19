@@ -51,7 +51,8 @@ namespace ArtApp.ViewModels
             {
                 await this._messageService.ShowASync("Welcome " + this.Email);
                 //Navegar para o inicio
-                await this._navigationService.NavigateToMain();
+                //await this._navigationService.NavigateToMaster();
+                this._navigationService.SetMainPage();
             }
             else
             {

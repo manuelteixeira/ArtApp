@@ -4,11 +4,23 @@ namespace ArtApp.Services
 {
     public interface INavigationService
     {
-        //Baseado num dicionario String - Pagina
-        //Task NavigateTo(string viewName, object param);
 
+        //Login and Register Navigation
         Task NavigateToLogin();
         Task NavigateToRegister();
+
+
         Task NavigateToMain();
+        Task NavigateToMaster();
+        void SetMainPage();
+
+        //Menu Navigation
+        Task NavigateToWorks();
+        Task NavigateToConditionReports();
+        Task NavigateToSettings();
+
+        //Works
+        Task NavigateToWork();
+
     }
 }

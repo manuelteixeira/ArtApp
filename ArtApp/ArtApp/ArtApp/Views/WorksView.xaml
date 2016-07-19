@@ -1,41 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArtApp.Views.WorksPage"
-             xmlns:ViewModels="clr-namespace:ArtApp.ViewModels;assembly=ArtApp">
+             xmlns:viewModels="clr-namespace:ArtApp.ViewModels;assembly=ArtApp"
+             x:Class="ArtApp.Views.WorksView" Padding="10">
 
   <ContentPage.BindingContext>
-    <ViewModels:WorksViewModel/>
+    <viewModels:WorksViewModel/>
   </ContentPage.BindingContext>
 
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Add" Command="{Binding CreateWorkCommand}"/>
+  </ContentPage.ToolbarItems>
 
-  <StackLayout Orientation="Vertical" Padding="10,10,10,10">
-    <Button x:Name="createWorkButton" Text="Create"/>
-    <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" TextChanged="SearchBar_OnTextChanged"/>
+  <ContentPage.Content>
+    <StackLayout>
+      <Label Text="WORKS VIEW"></Label>
+      <ListView ItemsSource="{Binding Works}" HasUnevenRows="True" SeparatorVisibility="Default">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Title}"/>
+                <Label Text="{Binding Description}" />
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
 
-
-    <ListView x:Name="WorkListView" ItemsSource="{Binding WorksSearch}" HasUnevenRows="True" SeparatorVisibility="Default">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <ViewCell.ContextActions>
-              <MenuItem Text="Edit" Clicked="Edit_OnClicked" CommandParameter="{Binding .}" />
-              <MenuItem Text="Delete" Clicked="Delete_OnClicked"/>
-            </ViewCell.ContextActions>
-            <StackLayout Orientation="Horizontal">
-              <Label Text="{Binding Title}"/>
-              <Label Text="{Binding Authors}" />
-              <Label Text="{Binding Classification}"/>
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-
-    </ListView>
-  </StackLayout>
+      </ListView>
+    </StackLayout>
 
 
-
+  </ContentPage.Content>
 
 
 </ContentPage>

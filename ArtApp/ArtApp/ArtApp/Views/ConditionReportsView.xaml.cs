@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
-    public partial class MenuView : ContentPage
+    public partial class ConditionReportsView : ContentPage
     {
-        public MenuView()
+        public ConditionReportsView()
         {
             InitializeComponent();
         }
