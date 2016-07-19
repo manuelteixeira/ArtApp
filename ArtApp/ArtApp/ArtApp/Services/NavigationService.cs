@@ -28,17 +28,13 @@ namespace ArtApp.Services
 
         public void SetMainPage()
         {
-            //ArtApp.App.Current.MainPage.Navigation.PopAsync();
             ArtApp.App.Current.MainPage = new MasterView();
         }
 
         public async Task NavigateToWorks()
         {
-            //arranjar forma de quando quisermos voltar a navegar para a works views sem ter 
-            //como mainpage a masterdetail Page
             ((MasterDetailPage)ArtApp.App.Current.MainPage).Detail = new NavigationPage(new WorksView());
-            var a = ArtApp.App.Current.MainPage.Navigation.NavigationStack.ToList();
-            ((MasterDetailPage) ArtApp.App.Current.MainPage).IsPresented = false;
+            ((MasterDetailPage)ArtApp.App.Current.MainPage).IsPresented = false;
             //await ArtApp.App.Current.MainPage.Navigation.PushAsync(new WorksView());
         }
 
@@ -60,12 +56,12 @@ namespace ArtApp.Services
 
         public async Task NavigateToWork()
         {
-            var a = ArtApp.App.Current.MainPage.Navigation.NavigationStack.ToList();
-            await ArtApp.App.Current.MainPage.Navigation.PushAsync(new WorkView());
+            await ((MasterDetailPage) ArtApp.App.Current.MainPage).Detail.Navigation.PushAsync(new WorkView());
+            //await ArtApp.App.Current.MainPage.Navigation.PushAsync(new WorkView());
         }
 
 
 
-        
+
     }
 }

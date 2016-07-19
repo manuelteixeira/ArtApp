@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using ArtApp.Models;
 using ArtApp.Services;
 using Xamarin.Forms;
@@ -20,11 +21,13 @@ namespace ArtApp.ViewModels
         public float Heigth { get; set; }
         public Classification Classification { get; set; }
         public List<Author> Authors { get; set; }
+
         #endregion
 
         public WorkViewModel()
         {
         }
+
 
     }
 }

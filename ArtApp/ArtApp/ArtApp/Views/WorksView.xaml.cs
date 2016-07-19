@@ -13,6 +13,7 @@ namespace ArtApp.Views
         public WorksView()
         {
             InitializeComponent();
+            
         }
     }
 }

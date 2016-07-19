@@ -6,6 +6,7 @@ namespace ArtApp
 {
     public class App : Application
     {
+
         public App()
         {
 
