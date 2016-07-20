@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using ArtApp.Pages;
+using ArtApp.ViewModels;
 using ArtApp.Views;
 using Xamarin.Forms;
 
@@ -60,8 +61,15 @@ namespace ArtApp.Services
             //await ArtApp.App.Current.MainPage.Navigation.PushAsync(new WorkView());
         }
 
+        public async Task NavigateToEditWork(object viewModel)
+        {
+            EditWorkViewModel workViewModel = (EditWorkViewModel)viewModel;
+            await((MasterDetailPage)ArtApp.App.Current.MainPage).Detail.Navigation.PushAsync(new EditWorkView(workViewModel));
+        }
 
-
-
+        public Task NavigateToCreateWork()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

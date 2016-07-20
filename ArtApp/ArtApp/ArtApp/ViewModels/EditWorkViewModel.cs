@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ArtApp.Models;
-using ArtApp.Services;
-using ArtApp.Views;
+using ArtApp.Repositories;
 using Xamarin.Forms;
 
 namespace ArtApp.ViewModels
 {
-    public class WorkViewModel : BaseViewModel
+    public class EditWorkViewModel : BaseViewModel
     {
+        protected readonly Repositories.WorkRepository _workRepository;
 
-        #region Properties
+
         public string WorkId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -25,32 +28,27 @@ namespace ArtApp.ViewModels
 
         //Commands
         public ICommand EditWorkCommand { get; set; }
-        public ICommand DeleteWorkCommand { get; set; }
-        #endregion
 
-        public WorkViewModel()
+        public EditWorkViewModel()
         {
+            this._workRepository = new WorkRepository();
             this.EditWorkCommand = new Command(EditWork);
-            this.DeleteWorkCommand = new Command(DeleteWork);
-        }
 
+        }
 
         private void EditWork()
         {
-            //enviar o id e pedir ao repositorio
-            EditWorkViewModel editWorkViewModel = new EditWorkViewModel()
+            //Converter para object work?
+            Work work = new Work()
             {
                 Title = this.Title,
                 Description = this.Description
             };
-            this._navigationService.NavigateToEditWork(editWorkViewModel);
-        }
+            //Conectar com API
+            //this._workRepository.PutWorkAsync(this.WorkId, work);
+            
 
-        private void DeleteWork()
-        {
-            throw new NotImplementedException();
+            this._messageService.ShowASync("Edit Success");
         }
-
-        
     }
 }

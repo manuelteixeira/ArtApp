@@ -1,9 +1,7 @@
-﻿using System;
-using ArtApp.Models;
-using ArtApp.ViewModels;
+﻿using ArtApp.ViewModels;
 using Xamarin.Forms;
 
-namespace ArtApp.Views
+namespace ArtApp.Pages
 {
     public partial class WorkView : ContentPage
     {
@@ -12,15 +10,11 @@ namespace ArtApp.Views
             InitializeComponent();
         }
 
-        public WorkView(WorksViewModelOLD workViewModel)
+        public WorkView(WorkViewModel workViewModel)
         {
             InitializeComponent();
-
-            BindingContext = workViewModel;
-
+            this.BindingContext = workViewModel;
 
         }
-
-       
     }
 }

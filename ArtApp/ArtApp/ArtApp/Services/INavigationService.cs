@@ -21,6 +21,8 @@ namespace ArtApp.Services
 
         //Works
         Task NavigateToWork();
+        Task NavigateToEditWork(object viewModel);
+        Task NavigateToCreateWork();
 
     }
 }

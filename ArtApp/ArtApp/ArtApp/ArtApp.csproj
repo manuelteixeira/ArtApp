@@ -46,6 +46,7 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\RestApiService.cs" />
+    <Compile Include="ViewModels\EditWorkViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
@@ -55,6 +56,15 @@
     <Compile Include="ViewModels\WorkViewModel.cs" />
     <Compile Include="Views\ConditionReportsView.xaml.cs">
       <DependentUpon>ConditionReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateWorkView.xaml.cs">
+      <DependentUpon>CreateWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteWorkView.xaml.cs">
+      <DependentUpon>DeleteWorkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditWorkView.xaml.cs">
+      <DependentUpon>EditWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -74,18 +84,11 @@
     <Compile Include="Views\WorksView.xaml.cs">
       <DependentUpon>WorksView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkViewOLD.xaml.cs">
-      <DependentUpon>WorkViewOLD.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NewWorkView.xaml.cs">
-      <DependentUpon>NewWorkView.xaml</DependentUpon>
+    <Compile Include="Views\WorkView.xaml.cs">
+      <DependentUpon>WorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\WorksAPIServices.cs" />
-    <Compile Include="ViewModels\WorksViewModelOLD.cs" />
-    <Compile Include="Views\WorksViewOLD.xaml.cs">
-      <DependentUpon>WorksViewOLD.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -118,19 +121,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\NewWorkView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\WorksViewOLD.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\WorkViewOLD.xaml">
+    <EmbeddedResource Include="Views\WorkView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -173,6 +164,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ConditionReportsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CreateWorkView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditWorkView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DeleteWorkView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -12,19 +12,18 @@
     <ToolbarItem Text="Add" Command="{Binding CreateWorkCommand}"></ToolbarItem>
   </ContentPage.ToolbarItems>
 
-
-
   <ContentPage.Content>
     <StackLayout>
       <Label Text="WORKS VIEW"></Label>
-      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" SearchCommand="{Binding SearchWorkCommand}"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" TextChanged="SearchBar_OnTextChanged"/>
 
-      <ListView ItemsSource="{Binding Works}" HasUnevenRows="True" SeparatorVisibility="Default">
+      <ListView ItemsSource="{Binding WorksSearch}" HasUnevenRows="True" SeparatorVisibility="Default">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <ViewCell.ContextActions>
-                <MenuItem Text="Add" Command="{Binding CreateWorkCommand}"></MenuItem>
+                <MenuItem Text="Edit" Command="{Binding EditWorkCommand}"></MenuItem>
+                <MenuItem Text="Delete" Command="{Binding DeleteWorkCommand}"></MenuItem>
               </ViewCell.ContextActions>
               <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Title}"/>

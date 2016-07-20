@@ -8,17 +8,17 @@ using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
-    public partial class WorksView : ContentPage
+    public partial class EditWorkView : ContentPage
     {
-        public WorksView()
+        public EditWorkView()
         {
             InitializeComponent();
-            
         }
 
-        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        public EditWorkView(EditWorkViewModel viewModel)
         {
-            ((WorksViewModel) this.BindingContext).SearchWorkCommand.Execute(null);
+            InitializeComponent();
+            this.BindingContext = viewModel;
         }
     }
 }

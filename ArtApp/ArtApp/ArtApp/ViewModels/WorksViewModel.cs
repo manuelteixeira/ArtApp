@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ArtApp.Models;
 using ArtApp.Repositories;
@@ -13,6 +14,8 @@ namespace ArtApp.ViewModels
         protected readonly Repositories.WorkRepository _workRepository;
 
         private string _searchText;
+        private ObservableCollection<WorkViewModel> _worksSearch;
+
         public string SearchText
         {
             get { return _searchText; }
@@ -27,8 +30,24 @@ namespace ArtApp.ViewModels
         }
 
         public WorkViewModel NewWork { get; set; }
-        public ObservableCollection<WorkViewModel> Works { get; set; }
-        public ObservableCollection<WorkViewModel> WorksSearch { get; set; }
+
+        public ObservableCollection<WorkViewModel> WorksSearch
+        {
+            get
+            {
+                return _worksSearch;
+            }
+            set
+            {
+                if (_worksSearch != value)
+                {
+                    _worksSearch = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        private List<WorkViewModel> Works { get; set; }
 
 
         public ICommand GetWorksCommand { get; set; }
@@ -40,43 +59,30 @@ namespace ArtApp.ViewModels
         {
             this._workRepository = new WorkRepository();
 
-            Works = new ObservableCollection<WorkViewModel>();
-
             this.GetWorksCommand = new Command(this.GetWorks);
             this.CreateWorkCommand = new Command(this.CreateWork);
             this.SearchWorkCommand = new Command(this.SearchWork);
 
             //TESTING
+            this.Works = new List<WorkViewModel>();
             this.GetWorks();
         }
 
-        private void SearchWork()
+        #region Command Methods
+        private async void SearchWork()
         {
             this.WorksSearch.Clear();
 
-            IEnumerable<WorkViewModel> foundWorks;
             if (string.IsNullOrEmpty(this.SearchText))
-            {
-                foundWorks = Works;
-            }
-            else
-            {
-                
-                foundWorks = Works.Where(p => p.Title.ToLower().Contains(this.SearchText.ToLower()));
-            }
-
-            if (foundWorks != null)
-            {
-                foreach (var foundWork in foundWorks)
-                {
-                    this.WorksSearch.Add(foundWork);
-                }
-            }
-            else
             {
                 this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
             }
-            
+            else
+            {
+                this.WorksSearch = new ObservableCollection<WorkViewModel>
+                    (Works.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower())));
+            }
+
         }
 
         private void CreateWork()
@@ -88,23 +94,25 @@ namespace ArtApp.ViewModels
         private async void GetWorks()
         {
             var list = await this._workRepository.GetWorksAsync();
-            Works.Clear();
-
             //Populate the list in the mainview
             foreach (var item in list)
             {
-                Works.Add(new WorkViewModel()
+                if (!string.IsNullOrEmpty(item.Title))
                 {
-                    Title = item.Title,
-                    Description = item.Description,
-                    //Date = item.Date
-                });
+                    Works.Add(new WorkViewModel()
+                    {
+                        Title = item.Title,
+                        Description = item.Description,
+                        //Date = item.Date
+                    });
+                }
 
             }
 
             this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
 
-        }
+        } 
+        #endregion
 
     }
 }
