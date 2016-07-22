@@ -1,73 +1,72 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
+﻿using Prism.Commands;
+using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Prism.Navigation;
+using Prism.Services;
 
 namespace ArtApp.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BindableBase
     {
-        private string _email;
-        private string _password;
+        private INavigationService _navigationService;
+        private IPageDialogService _pageDialogService;
 
+        private string _email;
         public string Email
         {
             get { return _email; }
-            set
-            {
-                _email = value;
-                this.OnPropertyChanged();
-            }
+            set { SetProperty(ref _email, value); }
         }
 
+        private string _password;
         public string Password
         {
             get { return _password; }
-            set
-            {
-                _password = value;
-                this.OnPropertyChanged();
-            }
+            set { SetProperty(ref _password, value); }
         }
 
-        public ICommand LoginCommand { get; set; }
-        public ICommand RegisterCommand { get; set; }
-
-
-        public LoginViewModel()
+        private bool _canLogin = false;
+        public bool CanLogin
         {
-            this.LoginCommand = new Command(this.Login);
-            this.RegisterCommand = new Command(this.Register);
-
-            
+            get { return _canLogin; }
+            set { SetProperty(ref _canLogin, value); }
         }
 
+        public DelegateCommand LoginCommand { get; private set; }
+        public DelegateCommand RegisterCommand { get; private set; }
+        public DelegateCommand CanLoginCommand { get; private set; } 
 
-        #region Methods for commands
-        private async void Login()
+        public LoginViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
-            //Comunicação com API
+            this._navigationService = navigationService;
+            this._pageDialogService = pageDialogService;
 
-            //DUMMY LOGIN
+            this.LoginCommand = new DelegateCommand(this.Login).ObservesCanExecute((p) => CanLogin);
+            this.RegisterCommand = new DelegateCommand(this.Register);
+
+        }
+
+        private void Register()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Login()
+        {
+            //Comunicar com API
+
+            //For testing
             if (this.Email == "a" && this.Password == "a")
             {
-                await this._messageService.ShowASync("Welcome " + this.Email);
-                //Navegar para o inicio
-                //await this._navigationService.NavigateToMaster();
-                this._navigationService.SetMainPage();
+                this._pageDialogService.DisplayAlert("Login Successfully", "Welcome " + this.Email, "Ok");
+                this._navigationService.Navigate("MasterView/NavigationView/HomeView");
             }
             else
             {
-                //msg de erro
-                await this._messageService.ShowASync("Email and/or password invalid");
+                this._pageDialogService.DisplayAlert("Login Failed", "Email and/or Password incorrect", "Ok");
             }
         }
-
-        private async void Register()
-        {
-            await this._navigationService.NavigateToRegister();
-
-        }
-        #endregion
     }
-        
-        
 }

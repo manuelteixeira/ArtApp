@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{0D255CC6-5FD9-4C7F-9AE2-A91B9877C185}</ProjectGuid>
+    <ProjectGuid>{18BB7D56-3473-4C3E-AD63-14F31303F824}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArtApp.UWP</RootNamespace>
     <AssemblyName>ArtApp.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -129,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArtApp\ArtApp.csproj">
-      <Project>{5A706BA1-0160-4E62-8271-F268C9ED4C39}</Project>
       <Name>ArtApp</Name>
     </ProjectReference>
   </ItemGroup>

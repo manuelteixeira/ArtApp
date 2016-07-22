@@ -1,54 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using ArtApp.Models;
+﻿using ArtApp.Model;
 using ArtApp.Repositories;
-using Xamarin.Forms;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Navigation;
+using Prism.Services;
 
 namespace ArtApp.ViewModels
 {
-    public class EditWorkViewModel : BaseViewModel
+    public class EditWorkViewModel : BindableBase
     {
-        protected readonly Repositories.WorkRepository _workRepository;
+        private INavigationService _navigationService;
+        private IPageDialogService _pageDialogService;
+        private readonly WorkRepository _workRepository;
 
-
-        public string WorkId { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
-        public string Technique { get; set; }
-        public float Length { get; set; }
-        public float Width { get; set; }
-        public float Heigth { get; set; }
-        public Classification Classification { get; set; }
-        public List<Author> Authors { get; set; }
-
-        //Commands
-        public ICommand EditWorkCommand { get; set; }
-
-        public EditWorkViewModel()
+        private string _title;
+        public string Title
         {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
+        }
+
+        public DelegateCommand EditWorkCommand { get; private set; } 
+
+        public EditWorkViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
+        {
+            this._navigationService = navigationService;
+            this._pageDialogService = pageDialogService;
             this._workRepository = new WorkRepository();
-            this.EditWorkCommand = new Command(EditWork);
+            
+            this.EditWorkCommand = new DelegateCommand(this.EditWork);
 
         }
 
-        private void EditWork()
+        private async void EditWork()
         {
-            //Converter para object work?
             Work work = new Work()
             {
                 Title = this.Title,
-                Description = this.Description
+                Description = this.Description,
+                //The rest of the work attributes 
             };
-            //Conectar com API
-            //this._workRepository.PutWorkAsync(this.WorkId, work);
-            
 
-            this._messageService.ShowASync("Edit Success");
+            await this._pageDialogService.DisplayAlert("Work", "Work edited: New Title: " + work.Title, "Ok");
+            this._navigationService.GoBack();
+
+            //IMPLEMENTAR
+
+            //if (await this._workRepository.PutWorkAsync(work.WorkId, work) != null)
+            //{
+            //    await this._pageDialogService.DisplayAlert("Work", "Work edited", "Ok");
+            //    this._navigationService.GoBack();
+            //}
+            //else
+            //{
+            //    await this._pageDialogService.DisplayAlert("Work", "Failed to edit work", "Ok");
+            //}
         }
     }
 }

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ArtApp.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace ArtApp.Services
 {
     /*
-     * The T, identifies the class i want to work with, such as, work, condition report, etc;
-     * The TResourceIdentifier, identifies the specific resource i want to acces, such as, Id or username
-     */
+        * The T, identifies the class i want to work with, such as, work, condition report, etc;
+        * The TResourceIdentifier, identifies the specific resource i want to acces, such as, Id or username
+        */
     public class RestApiService<T, TResourceIdentifier> : IDisposable, IRestApiService<T, TResourceIdentifier> where T : class
     {
         private bool disposed = false;

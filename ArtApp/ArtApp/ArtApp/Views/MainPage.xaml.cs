@@ -2,9 +2,9 @@
 
 namespace ArtApp.Views
 {
-    public partial class MasterView : MasterDetailPage
+    public partial class MainPage : ContentPage
     {
-        public MasterView()
+        public MainPage()
         {
             InitializeComponent();
         }

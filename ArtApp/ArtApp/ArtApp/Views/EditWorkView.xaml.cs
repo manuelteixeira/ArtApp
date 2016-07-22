@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtApp.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
@@ -13,12 +7,6 @@ namespace ArtApp.Views
         public EditWorkView()
         {
             InitializeComponent();
-        }
-
-        public EditWorkView(EditWorkViewModel viewModel)
-        {
-            InitializeComponent();
-            this.BindingContext = viewModel;
         }
     }
 }

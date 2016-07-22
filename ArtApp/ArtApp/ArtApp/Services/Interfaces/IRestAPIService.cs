@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using ArtApp.Annotations;
 
-namespace ArtApp.Services
+namespace ArtApp.Services.Interfaces
 {
     public interface IRestApiService<T, TResourceIdentifier> where T : class
     {

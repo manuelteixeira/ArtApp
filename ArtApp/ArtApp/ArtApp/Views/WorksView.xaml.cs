@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtApp.ViewModels;
+﻿using ArtApp.ViewModels;
 using Xamarin.Forms;
 
 namespace ArtApp.Views
@@ -13,12 +8,16 @@ namespace ArtApp.Views
         public WorksView()
         {
             InitializeComponent();
-            
         }
 
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            ((WorksViewModel) this.BindingContext).SearchWorkCommand.Execute(null);
+            ((WorksViewModel)this.BindingContext).SearchWorkCommand.Execute();
+        }
+
+        private void Work_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ((WorksViewModel)this.BindingContext).DisplayWorkActionSheetCommand.Execute();
         }
     }
 }

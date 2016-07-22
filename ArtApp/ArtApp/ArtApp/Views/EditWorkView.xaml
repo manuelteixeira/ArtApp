@@ -1,19 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:ArtApp.ViewModels;assembly=ArtApp"
-             x:Class="ArtApp.Views.EditWorkView"
-             Title="Edit Work">
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArtApp.Views.EditWorkView">
 
-  <ContentPage.BindingContext>
-    <viewModels:EditWorkViewModel/>
-  </ContentPage.BindingContext>
 
   <ContentPage.Content>
     <ScrollView>
-
-      <StackLayout Padding="10,30,10,10" Spacing = "10">
-
+      <StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
@@ -22,13 +17,9 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-
         <Button Text="Edit" Command="{Binding EditWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-
       </StackLayout>
     </ScrollView>
-
   </ContentPage.Content>
-  
-  
+
 </ContentPage>

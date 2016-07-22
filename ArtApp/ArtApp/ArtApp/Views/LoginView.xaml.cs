@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ArtApp.ViewModels;
 using Xamarin.Forms;
 
 namespace ArtApp.Views
@@ -13,6 +8,11 @@ namespace ArtApp.Views
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void PasswordEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((LoginViewModel) this.BindingContext).CanLogin = true;
         }
     }
 }
