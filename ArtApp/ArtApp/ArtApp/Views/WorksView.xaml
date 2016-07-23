@@ -13,7 +13,7 @@
     <StackLayout>
       <Label Text="Works" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
-      <ListView ItemsSource="{Binding WorksSearch}" HasUnevenRows="True" SeparatorVisibility="Default" ItemSelected="Work_OnItemSelected">
+      <ListView ItemsSource="{Binding WorksSearch}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding WorkSelected}">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>

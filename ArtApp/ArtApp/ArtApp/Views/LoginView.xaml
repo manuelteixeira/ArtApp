@@ -8,8 +8,8 @@
   <ContentPage.Content>
     <StackLayout Padding="20">
       <Entry Text="{Binding Email}" Keyboard="Email" Placeholder="email@server.com"/>
-      <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextChanged="PasswordEntry_OnTextChanged"/>
-      <Button Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding CanLogin}"/>
+      <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password"/>
+      <Button Text="Login" Command="{Binding LoginCommand}"/>
       <Button Text="Register" Command="{Binding RegisterCommand}"/>
     </StackLayout>
   </ContentPage.Content>

@@ -1,8 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Navigation;
@@ -16,6 +13,9 @@ namespace ArtApp.ViewModels
         private IPageDialogService _pageDialogService;
         private readonly WorkRepository _workRepository;
 
+        #region Properties
+
+        //Need to be completed with the rest of the work attributes
         private string _title;
         public string Title
         {
@@ -28,7 +28,8 @@ namespace ArtApp.ViewModels
         {
             get { return _description; }
             set { SetProperty(ref _description, value); }
-        }
+        } 
+        #endregion
 
         public DelegateCommand CreateWorkCommand { get; private set; } 
 

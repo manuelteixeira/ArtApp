@@ -7,6 +7,7 @@ using System.Linq;
 using ArtApp.Repositories;
 using Prism.Navigation;
 using Prism.Services;
+using Xamarin.Forms;
 
 namespace ArtApp.ViewModels
 {
@@ -16,7 +17,7 @@ namespace ArtApp.ViewModels
         private IPageDialogService _pageDialogService;
         protected readonly WorkRepository _workRepository;
 
-        private ObservableCollection<WorkViewModel> _worksSearch;       
+        private ObservableCollection<WorkViewModel> _worksSearch;
         public ObservableCollection<WorkViewModel> WorksSearch
         {
             get { return _worksSearch; }
@@ -27,17 +28,32 @@ namespace ArtApp.ViewModels
         public string SearchText
         {
             get { return _searchText; }
-            set { SetProperty(ref _searchText, value); }
+            set
+            {
+                SetProperty(ref _searchText, value);
+
+            }
+        }
+
+        private WorkViewModel _workSelected;
+        public WorkViewModel WorkSelected
+        {
+            get { return _workSelected; }
+            set
+            {
+                if (value != null)
+                {
+                    SetProperty(ref _workSelected, value);
+                    DetailsWork();
+                }
+            }
         }
 
         private List<WorkViewModel> Works { get; set; }
 
         public DelegateCommand SearchWorkCommand { get; private set; }
         public DelegateCommand CreateWorkCommand { get; private set; }
-        public DelegateCommand EditWorkCommand { get; private set; }
-        public DelegateCommand DeleteWorkCommand { get; private set; }
         public DelegateCommand DetailsWorkCommand { get; private set; }
-        public DelegateCommand DisplayWorkActionSheetCommand { get; private set; } 
 
         public WorksViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
@@ -47,48 +63,13 @@ namespace ArtApp.ViewModels
 
             this.SearchWorkCommand = new DelegateCommand(this.SearchWork);
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
-            this.EditWorkCommand = new DelegateCommand(this.EditWork);
-            this.DeleteWorkCommand = new DelegateCommand(this.DeleteWork);
             this.DetailsWorkCommand = new DelegateCommand(this.DetailsWork);
-            this.DisplayWorkActionSheetCommand = new DelegateCommand(this.DisplayWorkActionSheet);
             //creating the works list
             this.GetWorks();
 
         }
 
-        private async void DisplayWorkActionSheet()
-        {
-            IActionSheetButton DetailsAction = ActionSheetButton.CreateButton("Detail", this.DetailsWorkCommand);
-            IActionSheetButton AddAction = ActionSheetButton.CreateButton("Add", this.CreateWorkCommand);
-            IActionSheetButton EditAction = ActionSheetButton.CreateButton("Edit", this.EditWorkCommand);
-            IActionSheetButton DeleteAction = ActionSheetButton.CreateButton("Detail", this.DeleteWorkCommand);
-            IActionSheetButton CancelAction = ActionSheetButton.CreateCancelButton("Cancel", new DelegateCommand(() => _navigationService.GoBack()));
 
-            await
-                this._pageDialogService.DisplayActionSheet("Work Actions", AddAction, DetailsAction, EditAction,
-                    DeleteAction);
-        }
-
-        private void DetailsWork()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DeleteWork()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void EditWork()
-        {
-            this._navigationService.Navigate("EditWorkView");
-        }
-
-        private void CreateWork()
-        {
-            this._navigationService.Navigate("CreateWorkView");
-
-        }
 
         #region Command method
         private void SearchWork()
@@ -126,7 +107,20 @@ namespace ArtApp.ViewModels
             }
 
             this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
-        } 
+        }
+
+        private void DetailsWork()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add("id", this.WorkSelected.Id);
+            this._navigationService.Navigate("DetailsWorkView", parameters);
+        }
+
+        private void CreateWork()
+        {
+            this._navigationService.Navigate("CreateWorkView");
+
+        }
         #endregion
     }
 }

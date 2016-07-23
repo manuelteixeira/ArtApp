@@ -10,9 +10,5 @@ namespace ArtApp.Views
             InitializeComponent();
         }
 
-        private void PasswordEntry_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            ((LoginViewModel) this.BindingContext).CanLogin = true;
-        }
     }
 }

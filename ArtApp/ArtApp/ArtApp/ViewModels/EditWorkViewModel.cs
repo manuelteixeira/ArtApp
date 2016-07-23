@@ -53,7 +53,7 @@ namespace ArtApp.ViewModels
 
             //IMPLEMENTAR
 
-            //if (await this._workRepository.PutWorkAsync(work.WorkId, work) != null)
+            //if (await this._workRepository.PutWorkAsync(work.Id, work) != null)
             //{
             //    await this._pageDialogService.DisplayAlert("Work", "Work edited", "Ok");
             //    this._navigationService.GoBack();

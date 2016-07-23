@@ -3,20 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ArtApp.Views.CreateWorkView">
+             x:Class="ArtApp.Views.DetailsWorkView">
 
   <ContentPage.Content>
     <ScrollView>
       <StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-        <Button Text="Create" Command="{Binding CreateWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Actions" Command="{Binding DisplayWorkActionSheetCommand}"></Button>
+        <Button Text="Back" Command="{Binding GoBack}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

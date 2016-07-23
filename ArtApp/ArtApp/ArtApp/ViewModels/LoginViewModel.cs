@@ -27,13 +27,6 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _password, value); }
         }
 
-        private bool _canLogin = false;
-        public bool CanLogin
-        {
-            get { return _canLogin; }
-            set { SetProperty(ref _canLogin, value); }
-        }
-
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand RegisterCommand { get; private set; }
         public DelegateCommand CanLoginCommand { get; private set; } 
@@ -43,14 +36,25 @@ namespace ArtApp.ViewModels
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
 
-            this.LoginCommand = new DelegateCommand(this.Login).ObservesCanExecute((p) => CanLogin);
+            this.LoginCommand = new DelegateCommand(this.Login, this.CanLogin).ObservesProperty(() => Password).ObservesProperty(()=> Email);
             this.RegisterCommand = new DelegateCommand(this.Register);
 
         }
 
+    
+
         private void Register()
         {
             throw new NotImplementedException();
+        }
+
+        private bool CanLogin()
+        {
+            if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void Login()

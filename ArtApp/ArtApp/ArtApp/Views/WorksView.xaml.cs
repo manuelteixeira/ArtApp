@@ -15,9 +15,6 @@ namespace ArtApp.Views
             ((WorksViewModel)this.BindingContext).SearchWorkCommand.Execute();
         }
 
-        private void Work_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            ((WorksViewModel)this.BindingContext).DisplayWorkActionSheetCommand.Execute();
-        }
+
     }
 }
