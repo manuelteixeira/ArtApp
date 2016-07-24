@@ -17,7 +17,6 @@
           <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <Button Text="Actions" Command="{Binding DisplayWorkActionSheetCommand}"></Button>
-        <Button Text="Back" Command="{Binding GoBack}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

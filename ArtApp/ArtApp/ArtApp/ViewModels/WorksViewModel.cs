@@ -13,6 +13,14 @@ namespace ArtApp.ViewModels
 {
     public class WorksViewModel : BindableBase
     {
+
+        private bool _isBusy;
+        public bool isBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
         protected readonly WorkRepository _workRepository;
@@ -54,6 +62,7 @@ namespace ArtApp.ViewModels
         public DelegateCommand SearchWorkCommand { get; private set; }
         public DelegateCommand CreateWorkCommand { get; private set; }
         public DelegateCommand DetailsWorkCommand { get; private set; }
+        public DelegateCommand ResfreshWorkListCommand { get; private set; } 
 
         public WorksViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
@@ -64,12 +73,11 @@ namespace ArtApp.ViewModels
             this.SearchWorkCommand = new DelegateCommand(this.SearchWork);
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
             this.DetailsWorkCommand = new DelegateCommand(this.DetailsWork);
+            this.ResfreshWorkListCommand = new DelegateCommand(this.GetWorks);
             //creating the works list
             this.GetWorks();
 
         }
-
-
 
         #region Command method
         private void SearchWork()
@@ -89,6 +97,13 @@ namespace ArtApp.ViewModels
 
         private async void GetWorks()
         {
+            if (this.isBusy)
+            {
+                return;
+            }
+
+            this.isBusy = true;
+
             this.Works = new List<WorkViewModel>();
             var list = await this._workRepository.GetWorksAsync();
             //Populate the list in the mainview
@@ -107,6 +122,8 @@ namespace ArtApp.ViewModels
             }
 
             this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
+            this.isBusy = false;
+
         }
 
         private void DetailsWork()

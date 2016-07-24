@@ -1,4 +1,5 @@
 ﻿using System;
+using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
 using Prism.Commands;
@@ -27,7 +28,9 @@ namespace ArtApp.ViewModels
         {
             get { return _description; }
             set { SetProperty(ref _description, value); }
-        } 
+        }
+
+        private string _workId;
         #endregion
 
         public DelegateCommand CreateWorkCommand { get; private set; }
@@ -35,7 +38,6 @@ namespace ArtApp.ViewModels
         public DelegateCommand DeleteWorkCommand { get; private set; }
 
         public DelegateCommand DisplayWorkActionSheetCommand { get; private set; }
-        public DelegateCommand GoBack { get; private set; } 
 
         public DetailsWorkViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
@@ -48,7 +50,6 @@ namespace ArtApp.ViewModels
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
 
             this.DisplayWorkActionSheetCommand = new DelegateCommand(this.DisplayWorkActionSheet);
-            this.GoBack = new DelegateCommand(() => this._navigationService.GoBack());
 
         }
 
@@ -64,9 +65,20 @@ namespace ArtApp.ViewModels
                     DeleteAction, CancelAction);
         }
 
-        private void DeleteWork()
+        private async void DeleteWork()
         {
-            throw new NotImplementedException();
+            var result = await this._pageDialogService.DisplayAlert("Work", "Are you sure you want to delete this work?", "Confirm",
+                "Cancel");
+
+            if (result == true) //the user confirms 
+            {
+                //await this._workRepository.DeleteWorkAsync(this._workId);
+                //Confirm if was delete see StatusCode?
+                this._pageDialogService.DisplayAlert("Work", "Work was deleted successfully", "ok");
+                this._navigationService.GoBack();
+                //Force worklist refresh?
+            }
+
         }
 
         private void EditWork()
@@ -82,14 +94,20 @@ namespace ArtApp.ViewModels
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
-            
+
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+        public async void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("id"))
             {
-               //Pedir ao repositorio API
+                //Pedir ao repositorio API
+                //Work work = new Work();
+                //work = this._workRepository.GetWorkAsync((string)parameters["id"]).Result;
+                ////update attributes
+                //this._workId = work.Id;
+                //this.Title = work.Title;
+                //this.Description = work.Description;
             }
         }
     }
