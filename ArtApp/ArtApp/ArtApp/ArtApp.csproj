@@ -36,28 +36,47 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Model\Author.cs" />
+    <Compile Include="Model\ConditionReport.cs" />
     <Compile Include="Model\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ConditionReportRepository.cs" />
     <Compile Include="Repositories\WorkRepository.cs" />
     <Compile Include="Services\Interfaces\IRestAPIService.cs" />
     <Compile Include="Services\RestApiService.cs" />
-    <Compile Include="ViewModels\CreateWorkViewModel.cs" />
-    <Compile Include="ViewModels\DetailsWorkViewModel.cs" />
-    <Compile Include="ViewModels\EditWorkViewModel.cs" />
+    <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
+    <Compile Include="ViewModels\Condition Reports\ConditionReportViewModel.cs" />
+    <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
+    <Compile Include="ViewModels\Works\CreateWorkViewModel.cs" />
+    <Compile Include="ViewModels\Condition Reports\DetailsConditionReportViewModel.cs" />
+    <Compile Include="ViewModels\Works\DetailsWorkViewModel.cs" />
+    <Compile Include="ViewModels\Condition Reports\EditConditionReportViewModel.cs" />
+    <Compile Include="ViewModels\Works\EditWorkViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
-    <Compile Include="ViewModels\WorksViewModel.cs" />
-    <Compile Include="ViewModels\WorkViewModel.cs" />
-    <Compile Include="Views\CreateWorkView.xaml.cs">
+    <Compile Include="ViewModels\Works\WorksViewModel.cs" />
+    <Compile Include="ViewModels\Works\WorkViewModel.cs" />
+    <Compile Include="Views\Condition Reports\ConditionReportsView.xaml.cs">
+      <DependentUpon>ConditionReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Condition Reports\CreateConditionReportView.xaml.cs">
+      <DependentUpon>CreateConditionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Works\CreateWorkView.xaml.cs">
       <DependentUpon>CreateWorkView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DetailsWorkView.xaml.cs">
+    <Compile Include="Views\Condition Reports\DetailsConditionReportView.xaml.cs">
+      <DependentUpon>DetailsConditionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Works\DetailsWorkView.xaml.cs">
       <DependentUpon>DetailsWorkView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditWorkView.xaml.cs">
+    <Compile Include="Views\Condition Reports\EditConditionReportView.xaml.cs">
+      <DependentUpon>EditConditionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Works\EditWorkView.xaml.cs">
       <DependentUpon>EditWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
@@ -69,7 +88,7 @@
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorksView.xaml.cs">
+    <Compile Include="Views\Works\WorksView.xaml.cs">
       <DependentUpon>WorksView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -160,30 +179,53 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\WorksView.xaml">
+    <EmbeddedResource Include="Views\Works\WorksView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CreateWorkView.xaml">
+    <EmbeddedResource Include="Views\Works\CreateWorkView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\EditWorkView.xaml">
+    <EmbeddedResource Include="Views\Works\EditWorkView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\DetailsWorkView.xaml">
+    <EmbeddedResource Include="Views\Works\DetailsWorkView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Condition Reports\ConditionReportsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Condition Reports\DetailsConditionReportView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Condition Reports\CreateConditionReportView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Condition Reports\EditConditionReportView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

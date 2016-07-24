@@ -24,6 +24,10 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<CreateWorkView>();
             Container.RegisterTypeForNavigation<EditWorkView>();
             Container.RegisterTypeForNavigation<DetailsWorkView>();
+            Container.RegisterTypeForNavigation<ConditionReportsView>();
+            Container.RegisterTypeForNavigation<CreateConditionReportView>();
+            Container.RegisterTypeForNavigation<EditConditionReportView>();
+            Container.RegisterTypeForNavigation<DetailsConditionReportView>();
         }
     }
 }

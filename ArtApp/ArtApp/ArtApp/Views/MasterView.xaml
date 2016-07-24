@@ -10,6 +10,7 @@
       <StackLayout>
         <Button Text="Home" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/HomeView"/>
         <Button Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
+        <Button Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

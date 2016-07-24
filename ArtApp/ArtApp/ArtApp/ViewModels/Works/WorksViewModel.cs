@@ -136,7 +136,6 @@ namespace ArtApp.ViewModels
         private void CreateWork()
         {
             this._navigationService.Navigate("CreateWorkView");
-
         }
         #endregion
     }
