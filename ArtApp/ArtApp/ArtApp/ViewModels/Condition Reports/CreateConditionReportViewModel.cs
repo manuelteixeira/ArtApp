@@ -1,4 +1,7 @@
-﻿using ArtApp.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
 using Prism.Commands;
@@ -20,17 +23,118 @@ namespace ArtApp.ViewModels
 
 
         #region Properties
-        //Need to be completed with the rest of the conditon Report attributes
+        //Need to be completed with the rest of the condition Report attributes
         private string _title;
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
+
+        private float _rh;
+        public float Rh
+        {
+            get { return _rh; }
+            set { SetProperty(ref _rh, value); }
+        }
+
+        private float _lux;
+        public float Lux
+        {
+            get { return _lux; }
+            set { SetProperty(ref _lux, value); }
+        }
+
+        private float _temperature;
+        public float Temperature
+        {
+            get { return _temperature; }
+            set { SetProperty(ref _temperature, value); }
+        }
+
+        private string _handling;
+        public string Handling
+        {
+            get { return _handling; }
+            set { SetProperty(ref _handling, value); }
+        }
+
+        private string _handlingPosition;
+        public string HandlingPosition
+        {
+            get { return _handlingPosition; }
+            set { SetProperty(ref _handlingPosition, value); }
+        }
+
+        private string _frontProtection;
+        public string FrontProtection
+        {
+            get { return _frontProtection; }
+            set { SetProperty(ref _frontProtection, value); }
+        }
+
+        private string _backProtection;
+        public string BackProtection
+        {
+            get { return _backProtection; }
+            set { SetProperty(ref _backProtection, value); }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
+        }
+
+        private string _madeBy;
+        public string MadeBy
+        {
+            get { return _madeBy; }
+            set { SetProperty(ref _madeBy, value); }
+        }
+
+        private string _notes;
+        public string Notes
+        {
+            get { return _notes; }
+            set { SetProperty(ref _notes, value); }
+        }
+
+        private Work _work;
+        public Work Work
+        {
+            get { return _work; }
+            set { SetProperty(ref _work, value); }
+        }
+
+        //Pickers Data
+        private ObservableCollection<string> _handlingOptions;
+        public ObservableCollection<string> HandlingOptions
+        {
+            get { return _handlingOptions; }
+            set { SetProperty(ref _handlingOptions, value); }
+        }
+
+        private ObservableCollection<string> _handlingPositionsOptions;
+        public ObservableCollection<string> HandlingPositionsOptions
+        {
+            get { return _handlingPositionsOptions; }
+            set { SetProperty(ref _handlingPositionsOptions, value); }
+        }
+
+        private ObservableCollection<string> _protectionOptions;
+        public ObservableCollection<string> ProtectionOptions
+        {
+            get { return _protectionOptions; }
+            set { SetProperty(ref _protectionOptions, value); }
+        }
+
         #endregion
 
+
         #region Commands
-        public DelegateCommand CreateConditionReportCommand { get; private set; } 
+        public DelegateCommand CreateConditionReportCommand { get; private set; }
         #endregion
 
 
@@ -46,20 +150,41 @@ namespace ArtApp.ViewModels
 
             this.CreateConditionReportCommand = new DelegateCommand(CreateConditionReport);
 
+            //Populate Pickers
+            PopulatePickers();
+
+        }
+
+        private void PopulatePickers()
+        {
+            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
+            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
+            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
         }
 
         #region Command methods
         private async void CreateConditionReport()
         {
-            ConditionReport conditionReport = new ConditionReport();
+            ConditionReport conditionReport = new ConditionReport()
             {
-                Title = this.Title;
-                //The rest of the ConditionReport attributes 
+                Title = this.Title,
+                RH = this.Rh,
+                Lux = this.Lux,
+                Temperature = this.Temperature,
+                Handling = (Handling)Enum.Parse(typeof(Handling), this.Handling),
+                HandlingPosition = (HandlingPosition)Enum.Parse(typeof(HandlingPosition), this.HandlingPosition),
+                FrontProtection = (Protection)Enum.Parse(typeof(Protection), this.FrontProtection),
+                BackProtection = (Protection)Enum.Parse(typeof(Protection), this.BackProtection),
+                Date = this.Date,
+                MadeBy = this.MadeBy,
+                Notes = this.Notes,
+                Work = this.Work,
             };
+
 
             //For API objects
             //if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
-            if(await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
+            if (await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "New condition report created", "Ok");
                 this._navigationService.GoBack();
@@ -68,7 +193,7 @@ namespace ArtApp.ViewModels
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "Failed to create condition report", "Ok");
             }
-        } 
+        }
         #endregion
     }
 }

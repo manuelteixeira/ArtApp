@@ -20,7 +20,7 @@ namespace ArtApp.Model
 
     public enum Protection
     {
-        Glass, Plexiglass, Climabox, Tablex, Policarbonade, Nome, Others
+        Glass, Plexiglass, Climabox, Tablex, Policarbonade, None, Others
     }
 
     //Confirmar atributos que faltam

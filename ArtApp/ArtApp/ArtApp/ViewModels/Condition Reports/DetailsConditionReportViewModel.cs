@@ -31,11 +31,81 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private float _rh;
+        public float Rh
+        {
+            get { return _rh; }
+            set { SetProperty(ref _rh, value); }
+        }
+
+        private float _lux;
+        public float Lux
+        {
+            get { return _lux; }
+            set { SetProperty(ref _lux, value); }
+        }
+
+        private float _temperature;
+        public float Temperature
+        {
+            get { return _temperature; }
+            set { SetProperty(ref _temperature, value); }
+        }
+
+        private Handling _handling;
+        public Handling Handling
+        {
+            get { return _handling; }
+            set { SetProperty(ref _handling, value); }
+        }
+
+        private HandlingPosition _handlingPosition;
+        public HandlingPosition HandlingPosition
+        {
+            get { return _handlingPosition; }
+            set { SetProperty(ref _handlingPosition, value); }
+        }
+
+        private Protection _frontProtection;
+        public Protection FrontProtection
+        {
+            get { return _frontProtection; }
+            set { SetProperty(ref _frontProtection, value); }
+        }
+
+        private Protection _backProtection;
+        public Protection BackProtection
+        {
+            get { return _backProtection; }
+            set { SetProperty(ref _backProtection, value); }
+        }
+
         private DateTime _date;
         public DateTime Date
         {
             get { return _date; }
             set { SetProperty(ref _date, value); }
+        }
+
+        private string _madeBy;
+        public string MadeBy
+        {
+            get { return _madeBy; }
+            set { SetProperty(ref _madeBy, value); }
+        }
+
+        private string _notes;
+        public string Notes
+        {
+            get { return _notes; }
+            set { SetProperty(ref _notes, value); }
+        }
+
+        private Work _work;
+        public Work Work
+        {
+            get { return _work; }
+            set { SetProperty(ref _work, value); }
         }
 
         #endregion
@@ -117,7 +187,18 @@ namespace ArtApp.ViewModels
                     await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
 
                 this.Title = conditionReport.Title;
+                this.Rh = conditionReport.RH;
+                this.Lux = conditionReport.Lux;
+                this.Temperature = conditionReport.Temperature;
+                this.Handling = conditionReport.Handling.Value;
+                this.HandlingPosition = conditionReport.HandlingPosition.Value;
+                this.FrontProtection = conditionReport.FrontProtection.Value;
+                this.BackProtection = conditionReport.BackProtection.Value;
                 this.Date = conditionReport.Date;
+                this.MadeBy = conditionReport.MadeBy;
+                this.Notes = conditionReport.Notes;
+                this.Work = conditionReport.Work;
+
 
                 ////Pedir ao repositorio API
                 //ConditionReport conditionReport = new ConditionReport();

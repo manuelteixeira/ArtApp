@@ -3,16 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ArtApp.Views.CreateConditionReportView">
+             x:Class="ArtApp.Views.CreateConditionReportView"
+             xmlns:controls="clr-namespace:ArtApp.Controls;assembly=ArtApp"
+             xmlns:converters="clr-namespace:ArtApp.Converters;assembly=ArtApp">
 
   <ContentPage>
     <ScrollView>
       <StackLayout>
+        <Label Text="Condition Report Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Work" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding Work}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-        <Button Text="Create" Command="{Binding CreateConditionReportCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>
@@ -20,11 +26,37 @@
   <ContentPage>
     <ScrollView>
       <StackLayout>
+        <Label Text="Room Conditions Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Rh" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding Rh}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-        <Button Text="Create" Command="{Binding CreateConditionReportCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Lux" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding Lux}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Temperature" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Stepper Increment="0.1" Maximum="200" Minimum="-200" Value="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage>
+
+  <ContentPage>
+    <ContentPage.Resources>
+      <ResourceDictionary>
+        <converters:HandlingEnumConverter x:Key="HandlingEnumConverter"/>
+      </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+      <StackLayout>
+        <Label Text="Handling Conditions" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Handling" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Handling Options" ItemsSource="{Binding HandlingOptions}" SelectedValue="{Binding Handling, Converter={StaticResource HandlingEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+
       </StackLayout>
     </ScrollView>
   </ContentPage>
@@ -32,13 +64,23 @@
   <ContentPage>
     <ScrollView>
       <StackLayout>
+        <Label Text="Reviewer Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Made By" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding MadeBy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Notes" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Editor Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <DatePicker Date="{Binding Date}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <Button Text="Create" Command="{Binding CreateConditionReportCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>
+
 
 </CarouselPage>
