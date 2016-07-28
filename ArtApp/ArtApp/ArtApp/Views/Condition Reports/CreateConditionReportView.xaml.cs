@@ -2,7 +2,7 @@
 
 namespace ArtApp.Views
 {
-    public partial class CreateConditionReportView : ContentPage
+    public partial class CreateConditionReportView : CarouselPage
     {
         public CreateConditionReportView()
         {

@@ -13,7 +13,11 @@ namespace ArtApp.ViewModels
         #region Services
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        private readonly ConditionReportRepository _conditionReportRepository; 
+        
+        //For API objects
+        //private readonly ConditionReportRepository _conditionReportRepository; 
+        //For mock objects
+        private readonly ConditionReportMockRepository _conditionReportMockRepository;
         #endregion
 
         #region Properties
@@ -40,7 +44,9 @@ namespace ArtApp.ViewModels
         {
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
-            this._conditionReportRepository = new ConditionReportRepository();
+            //For API objects
+            //this._conditionReportRepository = new ConditionReportRepository();
+            this._conditionReportMockRepository = new ConditionReportMockRepository();
 
             this.EditConditionReportCommand = new DelegateCommand(this.EditConditionReport);
         }
@@ -56,9 +62,17 @@ namespace ArtApp.ViewModels
                 //The rest of the Condition Report attributes 
             };
 
-
-            await this._pageDialogService.DisplayAlert("Condition Report",
-                        "Condition Report edited: New Title: " + conditionReport.Title, "Ok");
+            if (await this._conditionReportMockRepository.PutConditionReportAsync(
+                        conditionReport.ConditionReportId.ToString(), conditionReport) != null)
+            {
+                await this._pageDialogService.DisplayAlert("Condition Report",
+                    "Condition Report edited: New Title: " + conditionReport.Title, "Ok");
+            }
+            else
+            {
+                await
+                    this._pageDialogService.DisplayAlert("Condition Report", "Failed to edit the condition report", "Ok");
+            }
             this._navigationService.GoBack();
 
             ////IMPLEMENTAR

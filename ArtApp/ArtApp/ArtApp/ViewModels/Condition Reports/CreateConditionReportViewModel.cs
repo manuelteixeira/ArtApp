@@ -12,7 +12,11 @@ namespace ArtApp.ViewModels
 
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        private readonly ConditionReportRepository _conditionReportRepository;
+
+        //For API objects
+        //private readonly ConditionReportRepository _conditionReportRepository;
+        //For Mock Objects
+        private readonly ConditionReportMockRepository _conditionReportMockRepository;
 
 
         #region Properties
@@ -32,7 +36,11 @@ namespace ArtApp.ViewModels
 
         public CreateConditionReportViewModel(IPageDialogService pageDialogService, INavigationService navigationService)
         {
-            this._conditionReportRepository = new ConditionReportRepository();
+            //For API objects
+            //this._conditionReportRepository = new ConditionReportRepository();
+            //For mock objects
+            this._conditionReportMockRepository = new ConditionReportMockRepository();
+
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
 
@@ -49,7 +57,9 @@ namespace ArtApp.ViewModels
                 //The rest of the ConditionReport attributes 
             };
 
-            if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
+            //For API objects
+            //if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
+            if(await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "New condition report created", "Ok");
                 this._navigationService.GoBack();

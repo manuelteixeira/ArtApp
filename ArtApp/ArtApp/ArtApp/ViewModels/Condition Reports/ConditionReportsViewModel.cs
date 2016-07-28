@@ -22,7 +22,11 @@ namespace ArtApp.ViewModels
 
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        protected readonly ConditionReportRepository _conditionReportRepository;
+
+        //For API objects
+        //protected readonly ConditionReportRepository _conditionReportRepository;
+        //For mock objects
+        protected readonly ConditionReportMockRepository _conditionReportMockRepository;
 
 
         private ObservableCollection<ConditionReportViewModel> _conditionReportSearch;
@@ -73,7 +77,10 @@ namespace ArtApp.ViewModels
         {
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
-            this._conditionReportRepository = new ConditionReportRepository();
+
+            //For API objects
+            //this._conditionReportRepository = new ConditionReportRepository();
+            this._conditionReportMockRepository = new ConditionReportMockRepository();
 
             this.SearchConditionReportCommand = new DelegateCommand(this.SearchConditionReport);
             this.CreateConditionReportCommand = new DelegateCommand(this.CreateConditionReport);
@@ -95,7 +102,11 @@ namespace ArtApp.ViewModels
             this.isBusy = true;
 
             this.ConditionReports = new List<ConditionReportViewModel>();
-            var list = await this._conditionReportRepository.GetConditionReportsAsync();
+
+            //For API objects
+            //var list = await this._conditionReportRepository.GetConditionReportsAsync();
+            var list = await this._conditionReportMockRepository.GetConditionReportsAsync();
+
             //Populate the list in the mainview
             foreach (var item in list)
             {
@@ -104,7 +115,10 @@ namespace ArtApp.ViewModels
                 {
                     ConditionReports.Add(new ConditionReportViewModel()
                     {
+                        ConditionReportId = item.ConditionReportId,
                         Title = item.Title,
+                        Date = item.Date,
+                        MadeBy = item.MadeBy
                         //... the rest of the needed attributes
                     });
                 }

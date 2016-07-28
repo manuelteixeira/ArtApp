@@ -12,6 +12,10 @@
           <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Label Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding Date}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
         <Button Text="Actions" Command="{Binding DisplayConditionReportActionSheetCommand}"></Button>
       </StackLayout>
     </ScrollView>

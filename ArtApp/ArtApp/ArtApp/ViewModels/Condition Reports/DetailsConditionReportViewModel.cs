@@ -14,7 +14,12 @@ namespace ArtApp.ViewModels
         #region Services
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        private readonly ConditionReportRepository _conditionReportRepository; 
+
+        //For API objects
+        //private readonly ConditionReportRepository _conditionReportRepository; 
+
+        //For mock objects
+        private readonly ConditionReportMockRepository _conditionReportMockRepository;
         #endregion
 
         #region Properties
@@ -26,7 +31,13 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private string _conditionReportId;
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -37,8 +48,11 @@ namespace ArtApp.ViewModels
         #endregion
 
         public DetailsConditionReportViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
-        {
-            this._conditionReportRepository = new ConditionReportRepository();
+        {        
+            //For API objects
+            //this._conditionReportRepository = new ConditionReportRepository();
+            this._conditionReportMockRepository = new ConditionReportMockRepository();
+
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
 
@@ -91,12 +105,20 @@ namespace ArtApp.ViewModels
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
+
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+        public async void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("id"))
             {
+                //Mock objects
+                ConditionReport conditionReport =
+                    await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
+
+                this.Title = conditionReport.Title;
+                this.Date = conditionReport.Date;
+
                 ////Pedir ao repositorio API
                 //ConditionReport conditionReport = new ConditionReport();
                 //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
@@ -105,5 +127,6 @@ namespace ArtApp.ViewModels
                 //this.Title = ConditionReport.Title;
             }
         }
+
     }
 }
