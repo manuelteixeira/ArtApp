@@ -1,4 +1,6 @@
-﻿using ArtApp.Model;
+﻿using System;
+using System.Collections.ObjectModel;
+using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -7,7 +9,7 @@ using Prism.Services;
 
 namespace ArtApp.ViewModels
 {
-    public class EditConditionReportViewModel : BindableBase
+    public class EditConditionReportViewModel : BindableBase, INavigationAware
     {
 
         #region Services
@@ -21,13 +23,113 @@ namespace ArtApp.ViewModels
         #endregion
 
         #region Properties
+        //Need to be completed with the rest of the condition Report attributes
+        private int ConditionReportId { get; set; }
 
         private string _title;
-
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        private float _rh;
+        public float Rh
+        {
+            get { return _rh; }
+            set { SetProperty(ref _rh, value); }
+        }
+
+        private float _lux;
+        public float Lux
+        {
+            get { return _lux; }
+            set { SetProperty(ref _lux, value); }
+        }
+
+        private float _temperature;
+        public float Temperature
+        {
+            get { return _temperature; }
+            set { SetProperty(ref _temperature, value); }
+        }
+
+        private Handling _handling;
+        public Handling Handling
+        {
+            get { return _handling; }
+            set { SetProperty(ref _handling, value); }
+        }
+
+        private HandlingPosition _handlingPosition;
+        public HandlingPosition HandlingPosition
+        {
+            get { return _handlingPosition; }
+            set { SetProperty(ref _handlingPosition, value); }
+        }
+
+        private Protection _frontProtection;
+        public Protection FrontProtection
+        {
+            get { return _frontProtection; }
+            set { SetProperty(ref _frontProtection, value); }
+        }
+
+        private Protection _backProtection;
+        public Protection BackProtection
+        {
+            get { return _backProtection; }
+            set { SetProperty(ref _backProtection, value); }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
+        }
+
+        private string _madeBy;
+        public string MadeBy
+        {
+            get { return _madeBy; }
+            set { SetProperty(ref _madeBy, value); }
+        }
+
+        private string _notes;
+        public string Notes
+        {
+            get { return _notes; }
+            set { SetProperty(ref _notes, value); }
+        }
+
+        private Work _work;
+        public Work Work
+        {
+            get { return _work; }
+            set { SetProperty(ref _work, value); }
+        }
+
+        //Pickers Data
+        private ObservableCollection<string> _handlingOptions;
+        public ObservableCollection<string> HandlingOptions
+        {
+            get { return _handlingOptions; }
+            set { SetProperty(ref _handlingOptions, value); }
+        }
+
+        private ObservableCollection<string> _handlingPositionsOptions;
+        public ObservableCollection<string> HandlingPositionsOptions
+        {
+            get { return _handlingPositionsOptions; }
+            set { SetProperty(ref _handlingPositionsOptions, value); }
+        }
+
+        private ObservableCollection<string> _protectionOptions;
+        public ObservableCollection<string> ProtectionOptions
+        {
+            get { return _protectionOptions; }
+            set { SetProperty(ref _protectionOptions, value); }
         }
 
         #endregion
@@ -49,8 +151,17 @@ namespace ArtApp.ViewModels
             this._conditionReportMockRepository = new ConditionReportMockRepository();
 
             this.EditConditionReportCommand = new DelegateCommand(this.EditConditionReport);
+            
+            //Populate Pickers
+            PopulatePickers();
         }
 
+        private void PopulatePickers()
+        {
+            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
+            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
+            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
+        }
 
         #region Command Methods
 
@@ -58,8 +169,18 @@ namespace ArtApp.ViewModels
         {
             ConditionReport conditionReport = new ConditionReport()
             {
-                Title = this.Title
-                //The rest of the Condition Report attributes 
+                Title = this.Title,
+                RH = this.Rh,
+                Lux = this.Lux,
+                Temperature = this.Temperature,
+                Handling = this.Handling,
+                HandlingPosition = this.HandlingPosition,
+                FrontProtection = this.FrontProtection,
+                BackProtection = this.BackProtection,
+                Date = this.Date,
+                MadeBy = this.MadeBy,
+                Notes = this.Notes,
+                Work = this.Work,
             };
 
             if (await this._conditionReportMockRepository.PutConditionReportAsync(
@@ -88,5 +209,42 @@ namespace ArtApp.ViewModels
         }
 
         #endregion
+
+        public void OnNavigatedFrom(NavigationParameters parameters)
+        {
+            
+        }
+
+        public async void OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("id"))
+            {
+                //Mock objects
+                ConditionReport conditionReport =
+                    await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
+
+                this.ConditionReportId = conditionReport.ConditionReportId;
+                this.Title = conditionReport.Title;
+                this.Rh = conditionReport.RH;
+                this.Lux = conditionReport.Lux;
+                this.Temperature = conditionReport.Temperature;
+                this.Handling = conditionReport.Handling.Value;
+                this.HandlingPosition = conditionReport.HandlingPosition.Value;
+                this.FrontProtection = conditionReport.FrontProtection.Value;
+                this.BackProtection = conditionReport.BackProtection.Value;
+                this.Date = conditionReport.Date;
+                this.MadeBy = conditionReport.MadeBy;
+                this.Notes = conditionReport.Notes;
+                this.Work = conditionReport.Work;
+
+
+                ////Pedir ao repositorio API
+                //ConditionReport conditionReport = new ConditionReport();
+                //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
+                ////update attributes
+                //this.ConditionReportId = conditionReport.ConditionReportId;
+                //this.Title = ConditionReport.Title;
+            }
+        }
     }
 }

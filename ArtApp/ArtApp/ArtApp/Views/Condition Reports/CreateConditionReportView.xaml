@@ -47,6 +47,8 @@
     <ContentPage.Resources>
       <ResourceDictionary>
         <converters:HandlingEnumConverter x:Key="HandlingEnumConverter"/>
+        <converters:HandlingPositionEnumConverter x:Key="HandlingPositionEnumConverter"/>
+        <converters:ProtectionEnumConverter x:Key="ProtectionEnumConverter"/>
       </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -54,9 +56,20 @@
         <Label Text="Handling Conditions" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
         <StackLayout Orientation="Horizontal">
           <Label Text="Handling" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <controls:BindablePicker Title="Handling Options" ItemsSource="{Binding HandlingOptions}" SelectedValue="{Binding Handling, Converter={StaticResource HandlingEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Handling Options" ItemsSource="{Binding HandlingOptions}" SelectedItem="{Binding Handling, Converter={StaticResource HandlingEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Handling Position" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Handling Position Options" ItemsSource="{Binding HandlingPositionsOptions}" SelectedItem="{Binding HandlingPosition, Converter={StaticResource HandlingPositionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Front Protection" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Front Protection Options" ItemsSource="{Binding ProtectionOptions}" SelectedItem="{Binding FrontProtection, Converter={StaticResource ProtectionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Back Protection" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Back Protection Options" ItemsSource="{Binding ProtectionOptions}" SelectedItem="{Binding BackProtection, Converter={StaticResource ProtectionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
       </StackLayout>
     </ScrollView>
   </ContentPage>

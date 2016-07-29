@@ -13,13 +13,15 @@ namespace ArtApp.ViewModels
     public class CreateConditionReportViewModel : BindableBase
     {
 
+        #region Services
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
 
         //For API objects
         //private readonly ConditionReportRepository _conditionReportRepository;
         //For Mock Objects
-        private readonly ConditionReportMockRepository _conditionReportMockRepository;
+        private readonly ConditionReportMockRepository _conditionReportMockRepository; 
+        #endregion
 
 
         #region Properties
@@ -52,29 +54,29 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _temperature, value); }
         }
 
-        private string _handling;
-        public string Handling
+        private Handling _handling;
+        public Handling Handling
         {
             get { return _handling; }
             set { SetProperty(ref _handling, value); }
         }
 
-        private string _handlingPosition;
-        public string HandlingPosition
+        private HandlingPosition _handlingPosition;
+        public HandlingPosition HandlingPosition
         {
             get { return _handlingPosition; }
             set { SetProperty(ref _handlingPosition, value); }
         }
 
-        private string _frontProtection;
-        public string FrontProtection
+        private Protection _frontProtection;
+        public Protection FrontProtection
         {
             get { return _frontProtection; }
             set { SetProperty(ref _frontProtection, value); }
         }
 
-        private string _backProtection;
-        public string BackProtection
+        private Protection _backProtection;
+        public Protection BackProtection
         {
             get { return _backProtection; }
             set { SetProperty(ref _backProtection, value); }
@@ -171,10 +173,10 @@ namespace ArtApp.ViewModels
                 RH = this.Rh,
                 Lux = this.Lux,
                 Temperature = this.Temperature,
-                Handling = (Handling)Enum.Parse(typeof(Handling), this.Handling),
-                HandlingPosition = (HandlingPosition)Enum.Parse(typeof(HandlingPosition), this.HandlingPosition),
-                FrontProtection = (Protection)Enum.Parse(typeof(Protection), this.FrontProtection),
-                BackProtection = (Protection)Enum.Parse(typeof(Protection), this.BackProtection),
+                Handling = this.Handling,
+                HandlingPosition = this.HandlingPosition,
+                FrontProtection = this.FrontProtection,
+                BackProtection = this.BackProtection,
                 Date = this.Date,
                 MadeBy = this.MadeBy,
                 Notes = this.Notes,

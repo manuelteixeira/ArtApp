@@ -24,6 +24,8 @@ namespace ArtApp.ViewModels
 
         #region Properties
         //Need to be completed with the rest of the condition Report attributes
+        private int ConditionReportId { get; set; }
+
         private string _title;
         public string Title
         {
@@ -168,7 +170,9 @@ namespace ArtApp.ViewModels
 
         private void EditConditionReport()
         {
-            this._navigationService.Navigate("EditConditionReportView");
+            var parameters = new NavigationParameters();
+            parameters.Add("id", this.ConditionReportId);
+            this._navigationService.Navigate("EditConditionReportView", parameters);
         } 
         #endregion
 
@@ -186,6 +190,7 @@ namespace ArtApp.ViewModels
                 ConditionReport conditionReport =
                     await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
 
+                this.ConditionReportId = conditionReport.ConditionReportId;
                 this.Title = conditionReport.Title;
                 this.Rh = conditionReport.RH;
                 this.Lux = conditionReport.Lux;

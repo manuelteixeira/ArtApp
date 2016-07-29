@@ -37,6 +37,8 @@
   <ItemGroup>
     <Compile Include="Controls\BindablePicker.cs" />
     <Compile Include="Converters\HandlingEnumConverter.cs" />
+    <Compile Include="Converters\HandlingPositionEnumConverter.cs" />
+    <Compile Include="Converters\ProtectionEnumConverter.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\ConditionReport.cs" />
     <Compile Include="Model\Work.cs" />
