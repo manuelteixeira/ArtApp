@@ -137,6 +137,7 @@ namespace ArtApp.ViewModels
 
         #region Commands
         public DelegateCommand CreateConditionReportCommand { get; private set; }
+        public DelegateCommand TakePhotoCommand { get; private set; } 
         #endregion
 
 
@@ -151,11 +152,13 @@ namespace ArtApp.ViewModels
             this._navigationService = navigationService;
 
             this.CreateConditionReportCommand = new DelegateCommand(CreateConditionReport);
+            this.TakePhotoCommand = new DelegateCommand(TakePhoto);
 
             //Populate Pickers
             PopulatePickers();
 
         }
+
 
         private void PopulatePickers()
         {
@@ -195,6 +198,11 @@ namespace ArtApp.ViewModels
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "Failed to create condition report", "Ok");
             }
+        }
+
+        private void TakePhoto()
+        {
+            this._pageDialogService.DisplayAlert("E»He,", "Heloo", "ok");
         }
         #endregion
     }
