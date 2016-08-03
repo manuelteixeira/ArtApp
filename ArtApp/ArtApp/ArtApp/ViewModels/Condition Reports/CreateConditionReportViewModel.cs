@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
+using Plugin.Media;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -137,7 +138,8 @@ namespace ArtApp.ViewModels
 
         #region Commands
         public DelegateCommand CreateConditionReportCommand { get; private set; }
-        public DelegateCommand TakePhotoCommand { get; private set; } 
+        public DelegateCommand TakePhotoCommand { get; private set; }
+        public DelegateCommand PickPhotoCommand { get; private set; } 
         #endregion
 
 
@@ -153,12 +155,12 @@ namespace ArtApp.ViewModels
 
             this.CreateConditionReportCommand = new DelegateCommand(CreateConditionReport);
             this.TakePhotoCommand = new DelegateCommand(TakePhoto);
+            this.PickPhotoCommand = new DelegateCommand(PickPhoto);
 
             //Populate Pickers
             PopulatePickers();
 
         }
-
 
         private void PopulatePickers()
         {
@@ -200,9 +202,35 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private void TakePhoto()
+        private async void TakePhoto()
         {
-            this._pageDialogService.DisplayAlert("E»He,", "Heloo", "ok");
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await this._pageDialogService.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                SaveToAlbum = true
+            });
+
+            if (file == null)
+                return;
+
+            await this._pageDialogService.DisplayAlert("File Location", file.Path, "OK");
+        }
+
+        private async void PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var file = await CrossMedia.Current.PickPhotoAsync();
+
+            await this._pageDialogService.DisplayAlert("Teste", file.Path, "ok");
+
         }
         #endregion
     }

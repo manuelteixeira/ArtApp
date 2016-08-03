@@ -40,6 +40,7 @@
           <Stepper Increment="0.1" Maximum="200" Minimum="-200" Value="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>
