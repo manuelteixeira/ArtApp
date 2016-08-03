@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArtApp.Views.DetailsProjectView">
+
+
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Begin Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding BeginDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="End Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <Button Text="Actions" Command="{Binding DisplayProjectActionSheetCommand}"></Button>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+
+
+</ContentPage>

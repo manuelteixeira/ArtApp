@@ -41,16 +41,24 @@
     <Compile Include="Converters\ProtectionEnumConverter.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\ConditionReport.cs" />
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Work.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConditionReportMockRepository.cs" />
     <Compile Include="Repositories\ConditionReportRepository.cs" />
+    <Compile Include="Repositories\ProjectMockRepository.cs" />
+    <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\WorkRepository.cs" />
     <Compile Include="Services\Interfaces\IRestAPIService.cs" />
     <Compile Include="Services\RestApiService.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
+    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\DetailsProjectViewModel.cs" />
+    <Compile Include="ViewModels\EditProjectViewModel.cs" />
+    <Compile Include="ViewModels\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Works\CreateWorkViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\DetailsConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Works\DetailsWorkViewModel.cs" />
@@ -71,6 +79,18 @@
     </Compile>
     <Compile Include="Views\Condition Reports\EditConditionReportView.xaml.cs">
       <DependentUpon>EditConditionReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateProjectView.xaml.cs">
+      <DependentUpon>CreateProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailsProjectView.xaml.cs">
+      <DependentUpon>DetailsProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditProjectView.xaml.cs">
+      <DependentUpon>EditProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectsView.xaml.cs">
+      <DependentUpon>ProjectsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Works\CreateWorkView.xaml.cs">
       <DependentUpon>CreateWorkView.xaml</DependentUpon>
@@ -239,7 +259,30 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProjectsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DetailsProjectView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CreateProjectView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditProjectView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

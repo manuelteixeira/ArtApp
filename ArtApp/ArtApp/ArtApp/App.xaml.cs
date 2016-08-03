@@ -28,6 +28,11 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<CreateConditionReportView>();
             Container.RegisterTypeForNavigation<EditConditionReportView>();
             Container.RegisterTypeForNavigation<DetailsConditionReportView>();
+            Container.RegisterTypeForNavigation<ProjectsView>();
+            Container.RegisterTypeForNavigation<CreateProjectView>();
+            Container.RegisterTypeForNavigation<EditProjectView>();
+            Container.RegisterTypeForNavigation<DetailsProjectView>();
+
 
         }
     }

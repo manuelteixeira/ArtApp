@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArtApp.Views.ProjectsView">
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Add" Command="{Binding CreateProjectCommand}"></ToolbarItem>
+  </ContentPage.ToolbarItems>
+
+  <ContentPage.Content>
+    <StackLayout>
+      <Label Text="Projects" HorizontalOptions="Center" FontSize="20"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
+      <ListView ItemsSource="{Binding ProjectSearch}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding ProjectSelected}"
+                IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshProjectsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <!-- Problems in the toolbar
+              <ViewCell.ContextActions>
+                <MenuItem Text="Edit" Command="{Binding EditWorkCommand}"></MenuItem>
+                <MenuItem Text="Delete" Command="{Binding DeleteWorkCommand}"></MenuItem>
+              </ViewCell.ContextActions>-->
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Name}"/>
+                <Label Text="{Binding BeginDate}"/>
+                <Label Text="{Binding EndDate}"/>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </ContentPage.Content>
+
+</ContentPage>
