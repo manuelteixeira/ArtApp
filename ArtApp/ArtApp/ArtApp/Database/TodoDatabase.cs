@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ArtApp.Model;
-using ArtApp.Services;
 using ArtApp.Services.Interfaces;
 using SQLite;
 using Xamarin.Forms;
@@ -26,6 +25,30 @@ namespace ArtApp.Database
             lock (locker)
             {
                 return (from i in database.Table<TodoItem>() select i).ToList();
+            }
+        }
+
+        public IEnumerable<TodoItem> GetItemsNotDone()
+        {
+            lock (locker)
+            {
+                return database.Query<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            }
+        }
+
+        public TodoItem GetItem(int id)
+        {
+            lock (locker)
+            {
+                return database.Table<TodoItem>().FirstOrDefault(x => x.ID == id);
+            }
+        }
+
+        public int DeleteItem(int id)
+        {
+            lock (locker)
+            {
+                return database.Delete<TodoItem>(id);
             }
         }
 

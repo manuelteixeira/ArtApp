@@ -57,12 +57,15 @@
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
-    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
-    <Compile Include="ViewModels\DetailsProjectViewModel.cs" />
-    <Compile Include="ViewModels\EditProjectViewModel.cs" />
-    <Compile Include="ViewModels\ProjectsViewModel.cs" />
-    <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\TodoItemsViewModel.cs" />
+    <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\Todo Items\CreateTodoItemViewModel.cs" />
+    <Compile Include="ViewModels\Projects\DetailsProjectViewModel.cs" />
+    <Compile Include="ViewModels\Todo Items\DetailsTodoItemViewModel.cs" />
+    <Compile Include="ViewModels\Projects\EditProjectViewModel.cs" />
+    <Compile Include="ViewModels\Todo Items\EditTodoItemViewModel.cs" />
+    <Compile Include="ViewModels\Projects\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Projects\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\Todo Items\TodoItemsViewModel.cs" />
     <Compile Include="ViewModels\Works\CreateWorkViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\DetailsConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Works\DetailsWorkViewModel.cs" />
@@ -84,19 +87,28 @@
     <Compile Include="Views\Condition Reports\EditConditionReportView.xaml.cs">
       <DependentUpon>EditConditionReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreateProjectView.xaml.cs">
+    <Compile Include="Views\Projects\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DetailsProjectView.xaml.cs">
+    <Compile Include="Views\Todo Items\CreateTodoItemView.xaml.cs">
+      <DependentUpon>CreateTodoItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\DetailsProjectView.xaml.cs">
       <DependentUpon>DetailsProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditProjectView.xaml.cs">
+    <Compile Include="Views\Todo Items\DetailsTodoItemView.xaml.cs">
+      <DependentUpon>DetailsTodoItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\EditProjectView.xaml.cs">
       <DependentUpon>EditProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectsView.xaml.cs">
+    <Compile Include="Views\Todo Items\EditTodoItemView.xaml.cs">
+      <DependentUpon>EditTodoItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectsView.xaml.cs">
       <DependentUpon>ProjectsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TodoItemsView.xaml.cs">
+    <Compile Include="Views\Todo Items\TodoItemsView.xaml.cs">
       <DependentUpon>TodoItemsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Works\CreateWorkView.xaml.cs">
@@ -279,35 +291,54 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ProjectsView.xaml">
+    <EmbeddedResource Include="Views\Projects\ProjectsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\DetailsProjectView.xaml">
+    <EmbeddedResource Include="Views\Projects\DetailsProjectView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CreateProjectView.xaml">
+    <EmbeddedResource Include="Views\Projects\CreateProjectView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\EditProjectView.xaml">
+    <EmbeddedResource Include="Views\Projects\EditProjectView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\TodoItemsView.xaml">
+    <EmbeddedResource Include="Views\Todo Items\TodoItemsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Todo Items\CreateTodoItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Todo Items\DetailsTodoItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Todo Items\EditTodoItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.4-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

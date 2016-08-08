@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArtApp.Views.CreateTodoItemView">
+
+
+  <ScrollView>
+    <StackLayout>
+      <Label Text="Todo Item" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+      </StackLayout>
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Notes" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+      </StackLayout>
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Done" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Switch IsToggled="{Binding Done}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+      </StackLayout>
+      <Button Text="Create" Command="{Binding CreateTodoItemCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+    </StackLayout>
+  </ScrollView>
+
+</ContentPage>

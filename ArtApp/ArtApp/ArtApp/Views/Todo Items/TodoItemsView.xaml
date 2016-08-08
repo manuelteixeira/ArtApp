@@ -12,13 +12,14 @@
   <ContentPage.Content>
     <StackLayout>
       <Label Text="Todo Items" HorizontalOptions="Center" FontSize="20"/>
-      <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default">
+      <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding TodoItemSelected}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshTodoItemsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">>
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Name}"/>
                 <Label Text="{Binding Notes}"/>
+                <!--<Image Source="check" IsVisible="{Binding Done}"/>-->
               </StackLayout>
             </ViewCell>
           </DataTemplate>

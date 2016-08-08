@@ -20,7 +20,28 @@ namespace ArtApp.ViewModels
 
 
         #region Properties
+        private bool _isBusy;
+        public bool isBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
 
+        private TodoItem _todoItemSelected;
+        public TodoItem TodoItemSelected
+        {
+            get { return _todoItemSelected; }
+            set
+            {
+
+                if (value != null)
+                {
+                    SetProperty(ref _todoItemSelected, value);
+                    DetailsTodoItem();
+
+                }
+            }
+        }
 
         private IEnumerable<TodoItem> _todoItems;
         public IEnumerable<TodoItem> TodoItems
@@ -32,6 +53,8 @@ namespace ArtApp.ViewModels
 
         #region Command
         public DelegateCommand CreateTodoItemCommand { get; private set; }
+        public DelegateCommand ResfreshTodoItemsListCommand { get; private set; }
+        public DelegateCommand DetailsTodoItemCommand { get; private set; }
         #endregion
 
 
@@ -43,20 +66,39 @@ namespace ArtApp.ViewModels
             _todoDatabase = new TodoDatabase();
 
             this.CreateTodoItemCommand = new DelegateCommand(CreateTodoItem);
+            this.ResfreshTodoItemsListCommand = new DelegateCommand(GetTodoItems);
+            this.DetailsTodoItemCommand = new DelegateCommand(DetailsTodoItem);
             GetTodoItems();
         }
 
-        private void GetTodoItems()
-        {
-
-            TodoItems = _todoDatabase.GetItems();
-        }
 
         #region Command Methods
         private void CreateTodoItem()
         {
             this._navigationService.Navigate("CreateTodoItemView");
         }
+
+        private void GetTodoItems()
+        {
+            if (this.isBusy)
+            {
+                return;
+            }
+
+            this.isBusy = true;
+
+            TodoItems = _todoDatabase.GetItems();
+
+            this.isBusy = false;
+        }
+
+        private void DetailsTodoItem()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add("id", this.TodoItemSelected.ID);
+            this._navigationService.Navigate("DetailsTodoItemView", parameters);
+        }
+
         #endregion
     }
 }

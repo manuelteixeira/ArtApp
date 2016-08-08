@@ -33,6 +33,9 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<EditProjectView>();
             Container.RegisterTypeForNavigation<DetailsProjectView>();
             Container.RegisterTypeForNavigation<TodoItemsView>();
+            Container.RegisterTypeForNavigation<CreateTodoItemView>();
+            Container.RegisterTypeForNavigation<EditTodoItemView>();
+            Container.RegisterTypeForNavigation<DetailsTodoItemView>();
 
 
         }
