@@ -12,6 +12,7 @@
         <Button Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
         <Button Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
         <Button Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
+        <Button Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

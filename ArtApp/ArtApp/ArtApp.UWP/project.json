@@ -6,6 +6,7 @@
     "Prism.Core": "6.1.0",
     "Prism.Forms": "6.1.0-pre3",
     "Prism.Unity.Forms": "6.2.0-pre3",
+    "sqlite-net-pcl": "1.1.2",
     "Unity": "4.0.1",
     "Xam.Plugin.Media": "2.4.0-beta3",
     "Xamarin.Forms": "2.0.0.6490"
