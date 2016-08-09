@@ -75,23 +75,26 @@ namespace ArtApp.ViewModels
 
         private async void CreateWork()
         {
-            Author author = new Author()
-            {
-                Name = "Alfredo"
-            };
-
-            this._workDatabase.Insert(author);
-
+           
             Work work = new Work()
             {
                 Title = this.Title,
                 Description = this.Description,
-                Authors = new List<Author>() { author }
-                    
+                Authors = new List<Author>()
+                {
+                    new Author()
+                    {
+                        Name = "Alfredo"
+                    }
+                }
             };
 
-            if (_workDatabase.Insert(work) != 0)
+            _workDatabase.Insert(work);
+
+            if (_workDatabase.GetWork(work.ID).ID != 0)
             {
+                Work worktest = _workDatabase.GetWork(work.ID);
+
                 await this._pageDialogService.DisplayAlert("Work", "The work was created successfully", "ok");
                 await this._navigationService.GoBack();
             }

@@ -19,6 +19,10 @@ namespace ArtApp.Database
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
 
+            database.DropTable<Work>();
+            database.DropTable<Author>();
+            database.DropTable<WorkAuthor>();
+
             database.CreateTable<Work>();
             database.CreateTable<Author>();
             database.CreateTable<WorkAuthor>();
@@ -36,7 +40,9 @@ namespace ArtApp.Database
         {
             lock (locker)
             {
-                return database.Table<Work>().FirstOrDefault(x => x.ID == id);
+                var a = database.Table<Author>().First();
+                return database.GetWithChildren<Work>(id);
+                //return database.Table<Work>().FirstOrDefault(x => x.ID == id);
             }
         }
 
@@ -65,9 +71,9 @@ namespace ArtApp.Database
             }
         }
 
-        public int Insert(object obj)
+        public void Insert(object obj)
         {
-            return database.Insert(obj);
+            database.InsertOrReplaceWithChildren(obj);
         }
     }
 }

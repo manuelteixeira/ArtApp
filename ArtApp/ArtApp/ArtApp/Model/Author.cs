@@ -8,12 +8,10 @@ namespace ArtApp.Model
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+
         public string Name { get; set; }
 
-        [ForeignKey(typeof(Work))]
-        public int WorkId { get; set; }
-
-        [ManyToMany(typeof(WorkAuthor))]
-        public ICollection<Work> Works { get; set; }
+        [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.CascadeRead)]
+        public List<Work> Works { get; set; }
     }
 }

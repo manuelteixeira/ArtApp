@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Android.Gms.Common.Data;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
@@ -27,8 +28,8 @@ namespace ArtApp.Model
         //public float Heigth { get; set; }
         //public Classification Classification { get; set; }
 
-        [ManyToMany(typeof(WorkAuthor))]
-        public ICollection<Author> Authors { get; set; }
+        [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeRead)]
+        public List<Author> Authors { get; set; }
 
 
 
