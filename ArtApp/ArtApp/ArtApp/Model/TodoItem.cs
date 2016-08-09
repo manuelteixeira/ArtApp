@@ -1,12 +1,10 @@
-﻿using SQLite;
+﻿using SQLite.Net.Attributes;
 
 namespace ArtApp.Model
 {
     public class TodoItem
     {
-        public TodoItem()
-        {
-        }
+
 
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }

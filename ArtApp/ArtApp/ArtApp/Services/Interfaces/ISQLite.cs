@@ -1,4 +1,4 @@
-﻿using SQLite;
+﻿using SQLite.Net;
 
 namespace ArtApp.Services.Interfaces
 {

@@ -2,7 +2,8 @@
 using System.IO;
 using ArtApp.iOS;
 using ArtApp.Services.Interfaces;
-using SQLite;
+using SQLite.Net;
+using SQLite.Net.Platform.XamarinIOS;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLite_iOS))]
@@ -22,7 +23,7 @@ namespace ArtApp.iOS
             string libraryPath = Path.Combine(documentsPath, "..", "Library"); // Library folder
             var path = Path.Combine(libraryPath, sqliteFilename);
             // Create the connection
-            var conn = new SQLite.SQLiteConnection(path);
+            var conn = new SQLiteConnection(new SQLitePlatformIOS(), path);
             // Return the database connection
             return conn;
         }

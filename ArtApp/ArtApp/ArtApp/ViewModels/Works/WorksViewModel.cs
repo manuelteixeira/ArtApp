@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArtApp.Database;
+using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Navigation;
 using Prism.Services;
@@ -14,6 +16,15 @@ namespace ArtApp.ViewModels
     public class WorksViewModel : BindableBase
     {
 
+
+        #region Services
+        private INavigationService _navigationService;
+        private IPageDialogService _pageDialogService;
+        protected readonly WorkRepository _workRepository;
+        private readonly WorkDatabase _workDatabase;
+        #endregion
+
+        #region Properties
         private bool _isBusy;
         public bool isBusy
         {
@@ -21,12 +32,9 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
-        private INavigationService _navigationService;
-        private IPageDialogService _pageDialogService;
-        protected readonly WorkRepository _workRepository;
 
-        private ObservableCollection<WorkViewModel> _worksSearch;
-        public ObservableCollection<WorkViewModel> WorksSearch
+        private ObservableCollection<Work> _worksSearch;
+        public ObservableCollection<Work> WorksSearch
         {
             get { return _worksSearch; }
             set { SetProperty(ref _worksSearch, value); }
@@ -43,8 +51,8 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private WorkViewModel _workSelected;
-        public WorkViewModel WorkSelected
+        private Work _workSelected;
+        public Work WorkSelected
         {
             get { return _workSelected; }
             set
@@ -57,18 +65,22 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private List<WorkViewModel> Works { get; set; }
+        private List<Work> Works { get; set; }
+        #endregion
 
+        #region Commands
         public DelegateCommand SearchWorkCommand { get; private set; }
         public DelegateCommand CreateWorkCommand { get; private set; }
         public DelegateCommand DetailsWorkCommand { get; private set; }
-        public DelegateCommand ResfreshWorkListCommand { get; private set; } 
+        public DelegateCommand ResfreshWorkListCommand { get; private set; }  
+        #endregion
 
         public WorksViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
             this._workRepository = new WorkRepository();
+            this._workDatabase = new WorkDatabase();
 
             this.SearchWorkCommand = new DelegateCommand(this.SearchWork);
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
@@ -86,17 +98,49 @@ namespace ArtApp.ViewModels
 
             if (string.IsNullOrEmpty(this.SearchText))
             {
-                this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
+                this.WorksSearch = new ObservableCollection<Work>(Works);
             }
             else
             {
-                this.WorksSearch = new ObservableCollection<WorkViewModel>
+                this.WorksSearch = new ObservableCollection<Work>
                     (Works.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower())));
             }
         }
 
-        private async void GetWorks()
+        //private async void GetWorks()
+        //{
+        //    if (this.isBusy)
+        //    {
+        //        return;
+        //    }
+
+        //    this.isBusy = true;
+
+        //    this.Works = new List<WorkViewModel>();
+        //    var list = await this._workRepository.GetWorksAsync();
+        //    //Populate the list in the mainview
+        //    foreach (var item in list)
+        //    {
+        //        if (!string.IsNullOrEmpty(item.Title))
+        //        {
+        //            Works.Add(new WorkViewModel()
+        //            {
+        //                Title = item.Title,
+        //                Description = item.Description,
+        //                //... the rest of the needed attributes
+        //            });
+        //        }
+
+        //    }
+
+        //    this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
+        //    this.isBusy = false;
+
+        //}
+
+        private void GetWorks()
         {
+            Works = new List<Work>();
             if (this.isBusy)
             {
                 return;
@@ -104,32 +148,17 @@ namespace ArtApp.ViewModels
 
             this.isBusy = true;
 
-            this.Works = new List<WorkViewModel>();
-            var list = await this._workRepository.GetWorksAsync();
-            //Populate the list in the mainview
-            foreach (var item in list)
-            {
-                if (!string.IsNullOrEmpty(item.Title))
-                {
-                    Works.Add(new WorkViewModel()
-                    {
-                        Title = item.Title,
-                        Description = item.Description,
-                        //... the rest of the needed attributes
-                    });
-                }
+            Works = _workDatabase.GetWorks().ToList();
 
-            }
+            this.WorksSearch = new ObservableCollection<Work>(Works);
 
-            this.WorksSearch = new ObservableCollection<WorkViewModel>(Works);
             this.isBusy = false;
-
         }
 
         private void DetailsWork()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.WorkSelected.Id);
+            parameters.Add("id", this.WorkSelected.ID);
             this._navigationService.Navigate("DetailsWorkView", parameters);
         }
 

@@ -1,8 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using ArtApp.Database;
 using ArtApp.Model;
 using Prism.Navigation;
@@ -87,10 +84,10 @@ namespace ArtApp.ViewModels
             {
                 if (this._todoDatabase.DeleteItem(this.ID) == 0)
                 {
-                    await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report wasn't deleted", "ok");
+                    await this._pageDialogService.DisplayAlert("Todo Item", "Todo Item wasn't deleted", "ok");
                     await this._navigationService.Navigate("TodoItemsView");
                 }
-                await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
+                await this._pageDialogService.DisplayAlert("Todo Item", "Todo Item was deleted successfully", "ok");
                 await this._navigationService.Navigate("TodoItemsView");
             }
         }

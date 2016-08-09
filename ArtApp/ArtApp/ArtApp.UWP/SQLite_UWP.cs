@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using Windows.Storage;
 using ArtApp.Services.Interfaces;
-using SQLite;
+using SQLite.Net;
+using SQLite.Net.Platform.WinRT;
 
 namespace ArtApp.UWP
 {
@@ -15,7 +16,7 @@ namespace ArtApp.UWP
         {
             var sqliteFilename = "ArtAppSQLite.db3";
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, sqliteFilename);
-            var conn = new SQLite.SQLiteConnection(path);
+            var conn = new SQLiteConnection(new SQLitePlatformWinRT(), path);
             return conn;
         }
     }

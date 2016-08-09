@@ -2,7 +2,8 @@
 using Windows.Storage;
 using ArtApp.Services.Interfaces;
 using ArtApp.Windows;
-using SQLite;
+using SQLite.Net;
+using SQLite.Net.Platform.WinRT;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLite_WinRT))]
@@ -18,7 +19,7 @@ namespace ArtApp.Windows
         {
             var sqliteFilename = "ArtAppSQLite.db3";
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, sqliteFilename);
-            var conn = new SQLite.SQLiteConnection(path);
+            var conn = new SQLiteConnection(new SQLitePlatformWinRT(), path);
             return conn;
         }
     }

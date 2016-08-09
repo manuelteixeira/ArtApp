@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using System.Collections.Generic;
+using ArtApp.Database;
+using Prism.Commands;
 using Prism.Mvvm;
 using ArtApp.Model;
 using ArtApp.Repositories;
@@ -9,9 +11,12 @@ namespace ArtApp.ViewModels
 {
     public class CreateWorkViewModel : BindableBase
     {
+        #region Services
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
         private readonly WorkRepository _workRepository;
+        private readonly WorkDatabase _workDatabase;
+        #endregion
 
         #region Properties
 
@@ -28,40 +33,77 @@ namespace ArtApp.ViewModels
         {
             get { return _description; }
             set { SetProperty(ref _description, value); }
-        } 
+        }
         #endregion
 
-        public DelegateCommand CreateWorkCommand { get; private set; } 
+        #region Commands
+        public DelegateCommand CreateWorkCommand { get; private set; }
+        #endregion
+
 
         public CreateWorkViewModel(IPageDialogService pageDialogService, INavigationService navigationService)
         {
             this._workRepository = new WorkRepository();
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
+            this._workDatabase = new WorkDatabase();
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
 
         }
 
+        #region Command methods
+        //private async void CreateWork()
+        //{
+        //    Work work = new Work()
+        //    {
+        //        Title = this.Title,
+        //        Description = this.Description,
+        //        //The rest of the work attributes 
+        //    };
+
+        //    if (await this._workRepository.PostWorkAsync(work) != null)
+        //    {
+        //        await this._pageDialogService.DisplayAlert("Work", "New work created", "Ok");
+        //        this._navigationService.GoBack();
+        //    }
+        //    else
+        //    {
+        //        await this._pageDialogService.DisplayAlert("Work", "Failed to create work", "Ok");
+        //    }
+        //}
+
         private async void CreateWork()
         {
+            Author author = new Author()
+            {
+                Name = "Alfredo"
+            };
+
+            this._workDatabase.Insert(author);
+
             Work work = new Work()
             {
                 Title = this.Title,
                 Description = this.Description,
-                //The rest of the work attributes 
+                Authors = new List<Author>() { author }
+                    
             };
 
-            if (await this._workRepository.PostWorkAsync(work) != null)
+            if (_workDatabase.Insert(work) != 0)
             {
-                await this._pageDialogService.DisplayAlert("Work", "New work created", "Ok");
-                this._navigationService.GoBack();
+                await this._pageDialogService.DisplayAlert("Work", "The work was created successfully", "ok");
+                await this._navigationService.GoBack();
             }
             else
             {
-                await this._pageDialogService.DisplayAlert("Work", "Failed to create work", "Ok");
+                await this._pageDialogService.DisplayAlert("Work", "The work failed to create", "ok");
+                await this._navigationService.GoBack();
             }
+
+
         }
 
+        #endregion
     }
 }

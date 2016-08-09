@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ArtApp.Model;
 using ArtApp.Services.Interfaces;
-using SQLite;
+using SQLite.Net;
 using Xamarin.Forms;
 
 namespace ArtApp.Database
@@ -17,7 +18,10 @@ namespace ArtApp.Database
         {
             database = DependencyService.Get<ISQLite>().GetConnection();
 
-            database.CreateTable<TodoItem>();
+            var a = database.CreateTable<TodoItem>();
+
+            a.ToString();
+
         }
 
         public IEnumerable<TodoItem> GetItems()
