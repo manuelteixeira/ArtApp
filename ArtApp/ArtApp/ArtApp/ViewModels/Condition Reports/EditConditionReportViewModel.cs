@@ -184,7 +184,7 @@ namespace ArtApp.ViewModels
             };
 
             if (await this._conditionReportMockRepository.PutConditionReportAsync(
-                        conditionReport.ConditionReportId.ToString(), conditionReport) != null)
+                        conditionReport.Id.ToString(), conditionReport) != null)
             {
                 await this._pageDialogService.DisplayAlert("Condition Report",
                     "Condition Report edited: New Title: " + conditionReport.Title, "Ok");
@@ -197,7 +197,7 @@ namespace ArtApp.ViewModels
             this._navigationService.GoBack();
 
             ////IMPLEMENTAR
-            //if (await this._conditionReportRepository.PutConditionReportAsync(conditionReport.ConditionReportId.ToString(), conditionReport) != null)
+            //if (await this._conditionReportRepository.PutConditionReportAsync(conditionReport.Id.ToString(), conditionReport) != null)
             //{
             //    await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report edited", "Ok");
             //    this._navigationService.GoBack();
@@ -223,7 +223,7 @@ namespace ArtApp.ViewModels
                 ConditionReport conditionReport =
                     await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
 
-                this.ConditionReportId = conditionReport.ConditionReportId;
+                this.ConditionReportId = conditionReport.Id;
                 this.Title = conditionReport.Title;
                 this.Rh = conditionReport.RH;
                 this.Lux = conditionReport.Lux;
@@ -242,7 +242,7 @@ namespace ArtApp.ViewModels
                 //ConditionReport conditionReport = new ConditionReport();
                 //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
                 ////update attributes
-                //this.ConditionReportId = conditionReport.ConditionReportId;
+                //this.Id = conditionReport.Id;
                 //this.Title = ConditionReport.Title;
             }
         }

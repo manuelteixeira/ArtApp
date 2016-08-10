@@ -43,19 +43,23 @@
     <Compile Include="Database\WorkDatabase.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\ConditionReport.cs" />
+    <Compile Include="Model\Interfaces\IEntity.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\TodoItem.cs" />
     <Compile Include="Model\Work.cs" />
     <Compile Include="Model\WorkAuthor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ConditionReportMockRepository.cs" />
-    <Compile Include="Repositories\ConditionReportRepository.cs" />
-    <Compile Include="Repositories\ProjectMockRepository.cs" />
-    <Compile Include="Repositories\ProjectRepository.cs" />
-    <Compile Include="Repositories\WorkRepository.cs" />
+    <Compile Include="Repositories\Database\TodoItemRepository.cs" />
+    <Compile Include="Repositories\Database\WorkRepository.cs" />
+    <Compile Include="Repositories\Mock\ConditionReportMockRepository.cs" />
+    <Compile Include="Repositories\API\ConditionReportRepository.cs" />
+    <Compile Include="Repositories\Mock\ProjectMockRepository.cs" />
+    <Compile Include="Repositories\API\ProjectRepository.cs" />
+    <Compile Include="Repositories\API\WorkRepository.cs" />
     <Compile Include="Services\Interfaces\IRestAPIService.cs" />
     <Compile Include="Services\Interfaces\ISQLite.cs" />
     <Compile Include="Services\RestApiService.cs" />
+    <Compile Include="Services\SQLiteDatabase.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
@@ -79,7 +83,6 @@
     <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\Works\WorksViewModel.cs" />
-    <Compile Include="ViewModels\Works\WorkViewModel.cs" />
     <Compile Include="Views\Condition Reports\ConditionReportsView.xaml.cs">
       <DependentUpon>ConditionReportsView.xaml</DependentUpon>
     </Compile>

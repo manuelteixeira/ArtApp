@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Android.Gms.Common.Data;
+using ArtApp.Model.Interfaces;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
@@ -14,10 +15,10 @@ namespace ArtApp.Model
         Extremelly_Good,
     };
 
-    public class Work
+    public class Work : IEntity
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -28,7 +29,7 @@ namespace ArtApp.Model
         //public float Heigth { get; set; }
         //public Classification Classification { get; set; }
 
-        [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeRead)]
+        [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.All)]
         public List<Author> Authors { get; set; }
 
 

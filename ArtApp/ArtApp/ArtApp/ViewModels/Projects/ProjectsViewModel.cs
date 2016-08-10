@@ -111,7 +111,7 @@ namespace ArtApp.ViewModels
                 {
                     Projects.Add(new ProjectViewModel()
                     {
-                        ProjectId = item.ProjectId,
+                        ProjectId = item.Id,
                         Name = item.Name,
                         BeginDate = item.BeginDate,
                         EndDate = item.EndDate,

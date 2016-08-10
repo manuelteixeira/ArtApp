@@ -16,6 +16,10 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Author Name" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Entry Text="{Binding AuthorName}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
         <Button Text="Create" Command="{Binding CreateWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>

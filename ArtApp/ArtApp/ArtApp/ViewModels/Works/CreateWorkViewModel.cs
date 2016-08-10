@@ -15,7 +15,7 @@ namespace ArtApp.ViewModels
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
         private readonly WorkRepository _workRepository;
-        private readonly WorkDatabase _workDatabase;
+        private readonly Repositories.Database.WorkRepository _workDatabase;
         #endregion
 
         #region Properties
@@ -34,6 +34,15 @@ namespace ArtApp.ViewModels
             get { return _description; }
             set { SetProperty(ref _description, value); }
         }
+
+        private string _authorName;
+        public string AuthorName
+        {
+            get { return _authorName; }
+            set { SetProperty(ref _authorName, value); }
+        }
+
+
         #endregion
 
         #region Commands
@@ -46,7 +55,7 @@ namespace ArtApp.ViewModels
             this._workRepository = new WorkRepository();
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
-            this._workDatabase = new WorkDatabase();
+            this._workDatabase = new Repositories.Database.WorkRepository();
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
 
@@ -75,7 +84,7 @@ namespace ArtApp.ViewModels
 
         private async void CreateWork()
         {
-           
+
             Work work = new Work()
             {
                 Title = this.Title,
@@ -84,17 +93,14 @@ namespace ArtApp.ViewModels
                 {
                     new Author()
                     {
-                        Name = "Alfredo"
+                        Name = this.AuthorName
                     }
                 }
             };
 
-            _workDatabase.Insert(work);
 
-            if (_workDatabase.GetWork(work.ID).ID != 0)
+            if (_workDatabase.SaveWork(work) != 0)
             {
-                Work worktest = _workDatabase.GetWork(work.ID);
-
                 await this._pageDialogService.DisplayAlert("Work", "The work was created successfully", "ok");
                 await this._navigationService.GoBack();
             }

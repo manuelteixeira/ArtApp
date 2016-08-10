@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ArtApp.Database;
 using ArtApp.Model;
+using ArtApp.Repositories.Database;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -17,7 +18,7 @@ namespace ArtApp.ViewModels
 
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        private readonly TodoDatabase _todoDatabase;
+        private readonly TodoItemRepository _todoRepository;
 
         #endregion
 
@@ -60,7 +61,7 @@ namespace ArtApp.ViewModels
         {
             _pageDialogService = pageDialogService;
             _navigationService = navigationService;
-            _todoDatabase = new TodoDatabase();
+            _todoRepository = new TodoItemRepository();
 
             this.CreateTodoItemCommand = new DelegateCommand(CreateTodoItem);
 
@@ -77,7 +78,7 @@ namespace ArtApp.ViewModels
                 Done = this.Done,
             };
 
-            if (_todoDatabase.SaveTodoItem(todoItem) == 0)
+            if (_todoRepository.SaveTodoItem(todoItem) == 0)
             {
                 _pageDialogService.DisplayAlert("Todo Item", "The todo item wasn't created, please try again later",
                     "Ok");

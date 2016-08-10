@@ -40,9 +40,7 @@ namespace ArtApp.Database
         {
             lock (locker)
             {
-                var a = database.Table<Author>().First();
                 return database.GetWithChildren<Work>(id);
-                //return database.Table<Work>().FirstOrDefault(x => x.ID == id);
             }
         }
 
@@ -58,11 +56,11 @@ namespace ArtApp.Database
         {
             lock (locker)
             {
-                if (work.ID != 0)
+                if (work.Id != 0)
                 {
                     //database.Update(work);
                     database.UpdateWithChildren(work);
-                    return work.ID;
+                    return work.Id;
                 }
                 else
                 {

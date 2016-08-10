@@ -16,6 +16,16 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Vertical">
+          <Label Text="Authors"/>
+          <ListView ItemsSource="{Binding Authors}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextCell Text="{Binding Name}"/>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
         <Button Text="Actions" Command="{Binding DisplayWorkActionSheetCommand}"></Button>
       </StackLayout>
     </ScrollView>

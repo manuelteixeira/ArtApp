@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using ArtApp.Database;
 using ArtApp.Model;
+using ArtApp.Repositories.Database;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -14,7 +15,7 @@ namespace ArtApp.ViewModels
 
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
-        private readonly TodoDatabase _todoDatabase;
+        private readonly TodoItemRepository _todoRepository;
 
         #endregion
 
@@ -57,7 +58,7 @@ namespace ArtApp.ViewModels
         {
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-            _todoDatabase = new TodoDatabase();
+            _todoRepository = new TodoItemRepository();
             
 
             this.EditTodoItemCommand = new DelegateCommand(EditTodoItem);
@@ -69,13 +70,13 @@ namespace ArtApp.ViewModels
         {
             TodoItem todoItem = new TodoItem()
             {
-                ID = this.ID,
+                Id = this.ID,
                 Name = this.Name,
                 Notes = this.Notes,
                 Done = this.Done
             };
 
-            if (this._todoDatabase.SaveTodoItem(todoItem) == 0)
+            if (this._todoRepository.SaveTodoItem(todoItem) == 0)
             {
                 await this._pageDialogService.DisplayAlert("Todo Item", "The todo item wasn't edited", "Ok");
                 await this._navigationService.Navigate("TodoItemsView");
@@ -96,9 +97,9 @@ namespace ArtApp.ViewModels
         {
             if (parameters.ContainsKey("id"))
             {
-                TodoItem todoItem = _todoDatabase.GetItem((int)parameters["id"]);
+                TodoItem todoItem = _todoRepository.GetTodoItem((int)parameters["id"]);
 
-                this.ID = todoItem.ID;
+                this.ID = todoItem.Id;
                 this.Name = todoItem.Name;
                 this.Notes = todoItem.Notes;
                 this.Done = todoItem.Done;

@@ -1,13 +1,13 @@
-﻿using SQLite.Net.Attributes;
+﻿using ArtApp.Model.Interfaces;
+using SQLite.Net.Attributes;
 
 namespace ArtApp.Model
 {
-    public class TodoItem
+    public class TodoItem : IEntity
     {
 
-
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
         public bool Done { get; set; }

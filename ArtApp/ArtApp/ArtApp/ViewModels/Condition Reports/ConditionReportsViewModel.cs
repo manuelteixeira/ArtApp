@@ -115,7 +115,7 @@ namespace ArtApp.ViewModels
                 {
                     ConditionReports.Add(new ConditionReportViewModel()
                     {
-                        ConditionReportId = item.ConditionReportId,
+                        ConditionReportId = item.Id,
                         Title = item.Title,
                         Date = item.Date,
                         MadeBy = item.MadeBy

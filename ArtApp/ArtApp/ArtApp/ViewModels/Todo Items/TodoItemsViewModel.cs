@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using ArtApp.Database;
 using ArtApp.Model;
+using ArtApp.Repositories.Database;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -15,7 +16,7 @@ namespace ArtApp.ViewModels
         #region Services
         private IPageDialogService _pageDialogService;
         private INavigationService _navigationService;
-        private readonly TodoDatabase _todoDatabase;
+        private readonly TodoItemRepository _todoRepository;
         #endregion
 
 
@@ -63,7 +64,7 @@ namespace ArtApp.ViewModels
             _pageDialogService = pageDialogService;
             _navigationService = navigationService;
 
-            _todoDatabase = new TodoDatabase();
+            _todoRepository = new  TodoItemRepository();
 
             this.CreateTodoItemCommand = new DelegateCommand(CreateTodoItem);
             this.ResfreshTodoItemsListCommand = new DelegateCommand(GetTodoItems);
@@ -87,7 +88,7 @@ namespace ArtApp.ViewModels
 
             this.isBusy = true;
 
-            TodoItems = _todoDatabase.GetItems();
+            TodoItems = _todoRepository.GetTodoItems();
 
             this.isBusy = false;
         }
@@ -95,7 +96,7 @@ namespace ArtApp.ViewModels
         private void DetailsTodoItem()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.TodoItemSelected.ID);
+            parameters.Add("id", this.TodoItemSelected.Id);
             this._navigationService.Navigate("DetailsTodoItemView", parameters);
         }
 

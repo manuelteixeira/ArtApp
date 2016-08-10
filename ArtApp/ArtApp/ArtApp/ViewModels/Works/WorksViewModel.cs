@@ -21,7 +21,7 @@ namespace ArtApp.ViewModels
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
         protected readonly WorkRepository _workRepository;
-        private readonly WorkDatabase _workDatabase;
+        private readonly Repositories.Database.WorkRepository _workDatabase;
         #endregion
 
         #region Properties
@@ -80,7 +80,7 @@ namespace ArtApp.ViewModels
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
             this._workRepository = new WorkRepository();
-            this._workDatabase = new WorkDatabase();
+            this._workDatabase = new Repositories.Database.WorkRepository();
 
             this.SearchWorkCommand = new DelegateCommand(this.SearchWork);
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
@@ -158,7 +158,7 @@ namespace ArtApp.ViewModels
         private void DetailsWork()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.WorkSelected.ID);
+            parameters.Add("id", this.WorkSelected.Id);
             this._navigationService.Navigate("DetailsWorkView", parameters);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
@@ -10,12 +11,17 @@ namespace ArtApp.ViewModels
 {
     public class DetailsWorkViewModel : BindableBase, INavigationAware
     {
+        #region Services
         private INavigationService _navigationService;
         private IPageDialogService _pageDialogService;
         private readonly WorkRepository _workRepository;
+        private readonly Repositories.Database.WorkRepository _workDatabase;
+        #endregion
 
         #region Properties
         //Need to be completed with the rest of the work attributes
+        private int Id { get; set; }
+
         private string _title;
         public string Title
         {
@@ -30,20 +36,30 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
-        private string _workId;
+        private IEnumerable<Author> _authors;
+        public IEnumerable<Author> Authors
+        {
+            get { return _authors; }
+            set { SetProperty(ref _authors, value); }
+        }
+
         #endregion
+
+        #region Commands
 
         public DelegateCommand CreateWorkCommand { get; private set; }
         public DelegateCommand EditWorkCommand { get; private set; }
         public DelegateCommand DeleteWorkCommand { get; private set; }
 
-        public DelegateCommand DisplayWorkActionSheetCommand { get; private set; }
+        public DelegateCommand DisplayWorkActionSheetCommand { get; private set; } 
+        #endregion
 
         public DetailsWorkViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             this._workRepository = new WorkRepository();
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
+            this._workDatabase = new Repositories.Database.WorkRepository();
 
             this.EditWorkCommand = new DelegateCommand(this.EditWork);
             this.DeleteWorkCommand = new DelegateCommand(this.DeleteWork);
@@ -72,24 +88,31 @@ namespace ArtApp.ViewModels
 
             if (result == true) //the user confirms 
             {
-                //await this._workRepository.DeleteWorkAsync(this._workId);
-                //Confirm if was delete see StatusCode?
-                this._pageDialogService.DisplayAlert("Work", "Work was deleted successfully", "ok");
-                this._navigationService.GoBack();
-                //Force worklist refresh?
+                if (this._workDatabase.DeleteWork(this.Id) != 0)
+                {
+                    this._pageDialogService.DisplayAlert("Work", "Work was deleted successfully", "ok");
+                    this._navigationService.GoBack();
+                    //Force worklist refresh?
+                }
+                else
+                {
+                    this._pageDialogService.DisplayAlert("Work", "Failed to delete", "ok");
+                    this._navigationService.GoBack();
+                }
             }
 
         }
 
         private void EditWork()
         {
-            this._navigationService.Navigate("EditWorkView");
+            var parameters = new NavigationParameters();
+            parameters.Add("id", this.Id);
+            this._navigationService.Navigate("EditWorkView", parameters);
         }
 
         private void CreateWork()
         {
             this._navigationService.Navigate("CreateWorkView");
-
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -101,6 +124,13 @@ namespace ArtApp.ViewModels
         {
             if (parameters.ContainsKey("id"))
             {
+                Work work = _workDatabase.GetWork((int) parameters["id"]);
+
+                this.Id = work.Id;
+                this.Title = work.Title;
+                this.Description = work.Description;
+                this.Authors = work.Authors;
+
                 //Pedir ao repositorio API
                 //Work work = new Work();
                 //work = this._workRepository.GetWorkAsync((string)parameters["id"]).Result;

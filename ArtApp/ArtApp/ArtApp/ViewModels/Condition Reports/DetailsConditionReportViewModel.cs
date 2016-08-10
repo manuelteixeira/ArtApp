@@ -160,7 +160,7 @@ namespace ArtApp.ViewModels
 
             if (result == true) //the user confirms 
             {
-                //await this._conditionReportRepository.DeleteConditionReportAsync(this.ID);
+                //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
                 //Confirm if was delete see StatusCode?
                 this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
                 this._navigationService.GoBack();
@@ -190,7 +190,7 @@ namespace ArtApp.ViewModels
                 ConditionReport conditionReport =
                     await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
 
-                this.ConditionReportId = conditionReport.ConditionReportId;
+                this.ConditionReportId = conditionReport.Id;
                 this.Title = conditionReport.Title;
                 this.Rh = conditionReport.RH;
                 this.Lux = conditionReport.Lux;
@@ -209,7 +209,7 @@ namespace ArtApp.ViewModels
                 //ConditionReport conditionReport = new ConditionReport();
                 //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
                 ////update attributes
-                //this.ConditionReportId = conditionReport.ConditionReportId;
+                //this.Id = conditionReport.Id;
                 //this.Title = ConditionReport.Title;
             }
         }

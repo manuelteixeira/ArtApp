@@ -103,7 +103,7 @@ namespace ArtApp.ViewModels
 
             if (result == true) //the user confirms 
             {
-                //await this._conditionReportRepository.DeleteConditionReportAsync(this.ID);
+                //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
                 //Confirm if was delete see StatusCode?
                 this._pageDialogService.DisplayAlert("Project", "Project was deleted successfully", "ok");
                 this._navigationService.GoBack();
@@ -131,7 +131,7 @@ namespace ArtApp.ViewModels
                 Project project =
                     await this._projectMockRepository.GetProjectAsync((int)parameters["id"]);
 
-                this.ProjectId = project.ProjectId;
+                this.ProjectId = project.Id;
                 this.Name = project.Name;
                 this.BeginDate = project.BeginDate;
                 this.EndDate = project.EndDate;
@@ -142,7 +142,7 @@ namespace ArtApp.ViewModels
                 //ConditionReport conditionReport = new ConditionReport();
                 //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
                 ////update attributes
-                //this.ConditionReportId = conditionReport.ConditionReportId;
+                //this.Id = conditionReport.Id;
                 //this.Title = ConditionReport.Title;
             }
         }

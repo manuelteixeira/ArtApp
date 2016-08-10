@@ -5,6 +5,8 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ArtApp.Model.Interfaces;
+using SQLite.Net.Attributes;
 
 namespace ArtApp.Model
 {
@@ -24,10 +26,11 @@ namespace ArtApp.Model
     }
 
     //Confirmar atributos que faltam
-    public class ConditionReport
+    public class ConditionReport : IEntity
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
 
-        public int ConditionReportId { get; set; }
         public string Title { get; set; }
         public float RH { get; set; }
         public float Lux { get; set; }

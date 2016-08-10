@@ -13,7 +13,7 @@ namespace ArtApp.Repositories
             {
                 new ConditionReport()
                 {
-                    ConditionReportId = 1,
+                    Id = 1,
                     Title = "CR1",
                     Date = DateTime.Now,
                     Lux = 1,
@@ -32,7 +32,7 @@ namespace ArtApp.Repositories
                 },
                 new ConditionReport()
                 {
-                    ConditionReportId = 1,
+                    Id = 1,
                     Title = "CR2",
                     Date = DateTime.Now,
                     Lux = 1,
@@ -51,7 +51,7 @@ namespace ArtApp.Repositories
                 },
                 new ConditionReport()
                 {
-                    ConditionReportId = 1,
+                    Id = 1,
                     Title = "CR3",
                     Date = DateTime.Now,
                     Lux = 1,
@@ -75,7 +75,7 @@ namespace ArtApp.Repositories
         {
             ConditionReport conditionReport = new ConditionReport()
             {
-                ConditionReportId = 1,
+                Id = 1,
                 Title = "CR1",
                 Date = DateTime.Now,
                 Lux = 1,
@@ -102,7 +102,7 @@ namespace ArtApp.Repositories
             {
                 return new ConditionReport()
                 {
-                    ConditionReportId = 1,
+                    Id = 1,
                     Title = "CR1",
                     Date = DateTime.Now,
                     Lux = 1,
@@ -130,7 +130,7 @@ namespace ArtApp.Repositories
             {
                 return new ConditionReport()
                 {
-                    ConditionReportId = 1,
+                    Id = 1,
                     Title = "CR1",
                     Date = DateTime.Now,
                     Lux = 1,

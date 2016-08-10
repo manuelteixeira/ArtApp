@@ -1,12 +1,13 @@
-﻿using SQLite.Net.Attributes;
+﻿using ArtApp.Model.Interfaces;
+using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
 namespace ArtApp.Model
 {
-    public class WorkAuthor
+    public class WorkAuthor : IEntity
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey(typeof(Work))]
         public int WorkId { get; set; }

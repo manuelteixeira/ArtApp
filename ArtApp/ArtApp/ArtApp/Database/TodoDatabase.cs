@@ -44,7 +44,7 @@ namespace ArtApp.Database
         {
             lock (locker)
             {
-                return database.Table<TodoItem>().FirstOrDefault(x => x.ID == id);
+                return database.Table<TodoItem>().FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -60,10 +60,10 @@ namespace ArtApp.Database
         {
             lock (locker)
             {
-                if (todoItem.ID != 0)
+                if (todoItem.Id != 0)
                 {
                     database.Update(todoItem);
-                    return todoItem.ID;
+                    return todoItem.Id;
                 }
                 else
                 {
