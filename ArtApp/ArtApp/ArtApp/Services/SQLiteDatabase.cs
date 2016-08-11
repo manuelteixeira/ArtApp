@@ -86,16 +86,19 @@ namespace ArtApp.Services
         {
             lock (Locker)
             {
-                if (item.Id != 0)
-                {
-                    database.UpdateWithChildren(item);
-                    return item.Id;
-                }
-                else
-                {
-                    database.InsertOrReplaceWithChildren(item);
-                    return item.Id;
-                }
+                database.InsertOrReplaceWithChildren(item);
+                return item.Id;
+
+                //if (item.Id != 0)
+                //{
+                //    database.UpdateWithChildren(item);
+                //    return item.Id;
+                //}
+                //else
+                //{
+                //    database.InsertOrReplaceWithChildren(item);
+                //    return item.Id;
+                //}
             }
         }
 

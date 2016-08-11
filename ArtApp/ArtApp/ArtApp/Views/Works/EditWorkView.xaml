@@ -17,6 +17,20 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Vertical">
+          <Button Text="Add Author" Command="{Binding AddAuthorCommand}"/>
+          <ListView ItemsSource="{Binding Authors}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <StackLayout>
+                    <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="{Binding Name}"/>
+                  </StackLayout>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
         <Button Text="Edit" Command="{Binding EditWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
     </ScrollView>
