@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ArtApp.Database;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
 using ArtApp.Model;
@@ -19,6 +19,7 @@ namespace ArtApp.ViewModels
         #endregion
 
         #region Properties
+        private int Id { get; set; }
 
         //Need to be completed with the rest of the work attributes
         private string _title;
@@ -35,18 +36,18 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
-        private string _authorName;
-        public string AuthorName
+        private ObservableCollection<Author> _authors;
+        public ObservableCollection<Author> Authors
         {
-            get { return _authorName; }
-            set { SetProperty(ref _authorName, value); }
+            get { return _authors; }
+            set { SetProperty(ref _authors, value); }
         }
-
-
         #endregion
 
         #region Commands
         public DelegateCommand CreateWorkCommand { get; private set; }
+
+        public DelegateCommand AddAuthorCommand { get; private set; }
         #endregion
 
 
@@ -58,7 +59,9 @@ namespace ArtApp.ViewModels
             this._workDatabase = new Repositories.Database.WorkRepository();
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
+            this.AddAuthorCommand = new DelegateCommand(this.AddAuthor);
 
+            this.Authors = new ObservableCollection<Author>();
         }
 
         #region Command methods
@@ -84,18 +87,15 @@ namespace ArtApp.ViewModels
 
         private async void CreateWork()
         {
+            RemoveAuthors();
 
             Work work = new Work()
             {
+                Id = this.Id,
                 Title = this.Title,
                 Description = this.Description,
-                Authors = new List<Author>()
-                {
-                    new Author()
-                    {
-                        Name = this.AuthorName
-                    }
-                }
+                Authors = this.Authors.ToList()
+                //The rest of the work attributes 
             };
 
 
@@ -111,6 +111,26 @@ namespace ArtApp.ViewModels
             }
 
 
+        }
+
+        private void RemoveAuthors()
+        {
+            ObservableCollection<Author> temp = new ObservableCollection<Author>();
+
+            foreach (var author in Authors)
+            {
+                if (!string.IsNullOrEmpty(author.Name))
+                {
+                    temp.Add(author);
+                }
+            }
+            this.Authors = temp;
+        }
+
+        private void AddAuthor()
+        {
+
+            this.Authors.Add(new Author() { Name = "New author" });
         }
 
         #endregion

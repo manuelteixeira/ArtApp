@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using ArtApp.Model;
 using ArtApp.Repositories;
@@ -45,18 +43,11 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _authors, value); }
         }
 
-        private ObservableCollection<string> _authorsNames;
-        public ObservableCollection<string> AuthorsNames
-        {
-            get { return _authorsNames; }
-            set { SetProperty(ref _authorsNames, value); }
-        }
-
         #endregion
 
         #region Commands
         public DelegateCommand EditWorkCommand { get; private set; }
-        public DelegateCommand AddAuthorCommand { get; private set; } 
+        public DelegateCommand AddAuthorCommand { get; private set; }
 
         #endregion
 
@@ -67,33 +58,19 @@ namespace ArtApp.ViewModels
             this._pageDialogService = pageDialogService;
             this._workRepository = new WorkRepository();
             this._workDatabase = new Repositories.Database.WorkRepository();
-            
+
             this.EditWorkCommand = new DelegateCommand(this.EditWork);
             this.AddAuthorCommand = new DelegateCommand(this.AddAuthor);
 
-
         }
 
-        private void GetAuthors()
-        {
-            this.AuthorsNames = new ObservableCollection<string>();
-            foreach (var author in Authors)
-            {
-                this.AuthorsNames.Add(author.Name);
-            }
-        }
-
-        private void AddAuthor()
-        {
-            //this.AuthorsNames.Add("Author Name");
-            this.Authors.Add(new Author() {Name = "new Author"});
-        }
 
         #region Commands Methods
+
         private async void EditWork()
         {
 
-            UpdateAuthors();
+            RemoveAuthors();
 
             Work work = new Work()
             {
@@ -117,23 +94,23 @@ namespace ArtApp.ViewModels
 
         }
 
-        private void UpdateAuthors()
+        private void RemoveAuthors()
         {
-            foreach (var authorName in AuthorsNames)
-            {
-                if (!string.IsNullOrEmpty(authorName))
-                {
-                    if (this.Authors.All(x => x.Name != authorName))
-                    {
-                        Author author = new Author()
-                        {
-                            Name = authorName
-                        };
+            ObservableCollection<Author> temp = new ObservableCollection<Author>();
 
-                        this.Authors.Add(author);
-                    }
+            foreach (var author in Authors)
+            {
+                if (!string.IsNullOrEmpty(author.Name))
+                {
+                    temp.Add(author);
                 }
             }
+            this.Authors = temp;
+        }
+
+        private void AddAuthor()
+        {
+            this.Authors.Add(new Author() { Name = "New author" });
         }
 
         #endregion
@@ -152,7 +129,6 @@ namespace ArtApp.ViewModels
                 this.Title = work.Title;
                 this.Description = work.Description;
                 this.Authors = new ObservableCollection<Author>(work.Authors);
-                GetAuthors();
             }
         }
     }
