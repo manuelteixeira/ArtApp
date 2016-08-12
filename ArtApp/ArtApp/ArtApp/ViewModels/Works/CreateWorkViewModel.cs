@@ -3,10 +3,11 @@ using System.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
 using ArtApp.Model;
-using ArtApp.Repositories;
+using ArtApp.Repositories.Database;
 using Plugin.Media;
 using Prism.Navigation;
 using Prism.Services;
+using WorkRepository = ArtApp.Repositories.WorkRepository;
 
 namespace ArtApp.ViewModels
 {
@@ -17,6 +18,7 @@ namespace ArtApp.ViewModels
         private IPageDialogService _pageDialogService;
         private readonly WorkRepository _workRepository;
         private readonly Repositories.Database.WorkRepository _workDatabase;
+        private readonly ClassificationRepository _classificationRepository;
         #endregion
 
         #region Properties
@@ -44,6 +46,20 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _photoPath, value); }
         }
 
+        private Classification _selectedClassification;
+        public Classification SelectedClassification
+        {
+            get { return _selectedClassification; }
+            set { SetProperty(ref _selectedClassification, value); }
+        }
+
+        private ObservableCollection<Classification> _classifications;
+        public ObservableCollection<Classification> Classifications
+        {
+            get { return _classifications; }
+            set { SetProperty(ref _classifications, value); }
+        }
+
         private ObservableCollection<Author> _authors;
         public ObservableCollection<Author> Authors
         {
@@ -69,6 +85,7 @@ namespace ArtApp.ViewModels
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
             this._workDatabase = new Repositories.Database.WorkRepository();
+            this._classificationRepository = new ClassificationRepository();
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
             this.AddAuthorCommand = new DelegateCommand(this.AddAuthor);
@@ -76,9 +93,14 @@ namespace ArtApp.ViewModels
             this.PickPhotoCommand = new DelegateCommand(this.PickPhoto);
 
             this.Authors = new ObservableCollection<Author>();
+
+            GetClassifications();
         }
 
-
+        private void GetClassifications()
+        {
+            this._classifications = new ObservableCollection<Classification>(this._classificationRepository.GetClassifications());
+        }
 
         #region Command methods
         //private async void CreateWork()
@@ -111,7 +133,8 @@ namespace ArtApp.ViewModels
                 Title = this.Title,
                 Description = this.Description,
                 Authors = this.Authors.ToList(),
-                PhotoPath = this.PhotoPath
+                PhotoPath = this.PhotoPath,
+                Classification = this.SelectedClassification
                 //The rest of the work attributes 
             };
 

@@ -31,6 +31,7 @@ namespace ArtApp.Services
             database.CreateTable<Work>();
             database.CreateTable<WorkAuthor>();
             database.CreateTable<TodoItem>();
+            database.CreateTable<Classification>();
         }
 
         //Get all items in the database method
@@ -117,5 +118,14 @@ namespace ArtApp.Services
                 return database.Query<T>(query, args);
             }
         }
+
+        public int CountElements<T>() where T : class
+        {
+            lock (Locker)
+            {
+                return database.Table<T>().Count();
+            }
+        }
+
     }
 }
