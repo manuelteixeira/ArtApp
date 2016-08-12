@@ -194,7 +194,7 @@ namespace ArtApp.ViewModels
             if (await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "New condition report created", "Ok");
-                this._navigationService.GoBack();
+                await this._navigationService.GoBack();
             }
             else
             {

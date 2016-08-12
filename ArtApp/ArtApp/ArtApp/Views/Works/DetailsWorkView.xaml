@@ -16,6 +16,9 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Image Source="{Binding PhotoPath}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
           <Label Text="Authors"/>
           <ListView ItemsSource="{Binding Authors}">

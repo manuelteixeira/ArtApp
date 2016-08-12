@@ -194,7 +194,7 @@ namespace ArtApp.ViewModels
                 await
                     this._pageDialogService.DisplayAlert("Condition Report", "Failed to edit the condition report", "Ok");
             }
-            this._navigationService.GoBack();
+            await this._navigationService.GoBack();
 
             ////IMPLEMENTAR
             //if (await this._conditionReportRepository.PutConditionReportAsync(conditionReport.Id.ToString(), conditionReport) != null)

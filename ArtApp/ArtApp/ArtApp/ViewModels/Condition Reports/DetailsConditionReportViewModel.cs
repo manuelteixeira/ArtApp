@@ -148,9 +148,9 @@ namespace ArtApp.ViewModels
                     DeleteAction, CancelAction);
         }
 
-        private void CreateConditionReport()
+        private async void CreateConditionReport()
         {
-            this._navigationService.Navigate("CreateConditionReportView");
+            await this._navigationService.Navigate("CreateConditionReportView");
         }
 
         private async void DeleteConditionReport()
@@ -162,17 +162,17 @@ namespace ArtApp.ViewModels
             {
                 //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
                 //Confirm if was delete see StatusCode?
-                this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
-                this._navigationService.GoBack();
+                await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
+                await this._navigationService.GoBack();
                 //Force conditionReportlist refresh?
             }
         }
 
-        private void EditConditionReport()
+        private async void EditConditionReport()
         {
             var parameters = new NavigationParameters();
             parameters.Add("id", this.ConditionReportId);
-            this._navigationService.Navigate("EditConditionReportView", parameters);
+            await this._navigationService.Navigate("EditConditionReportView", parameters);
         } 
         #endregion
 

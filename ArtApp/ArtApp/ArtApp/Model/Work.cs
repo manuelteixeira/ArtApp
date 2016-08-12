@@ -21,6 +21,7 @@ namespace ArtApp.Model
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string PhotoPath { get; set; }
 
         //public DateTime Date { get; set; }
         //public string Technique { get; set; }
@@ -31,6 +32,8 @@ namespace ArtApp.Model
 
         [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.All)]
         public List<Author> Authors { get; set; }
+
+
 
 
 

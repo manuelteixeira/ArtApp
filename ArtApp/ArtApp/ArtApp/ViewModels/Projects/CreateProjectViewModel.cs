@@ -86,7 +86,7 @@ namespace ArtApp.ViewModels
             if (await this._projectMockRepository.PostProjectAsync(project) != null)
             {
                 await this._pageDialogService.DisplayAlert("Project", "New project created", "Ok");
-                this._navigationService.GoBack();
+                await this._navigationService.GoBack();
             }
             else
             {

@@ -105,8 +105,8 @@ namespace ArtApp.ViewModels
             {
                 //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
                 //Confirm if was delete see StatusCode?
-                this._pageDialogService.DisplayAlert("Project", "Project was deleted successfully", "ok");
-                this._navigationService.GoBack();
+                await this._pageDialogService.DisplayAlert("Project", "Project was deleted successfully", "ok");
+                await this._navigationService.GoBack();
                 //Force conditionReportlist refresh?
             }
         }

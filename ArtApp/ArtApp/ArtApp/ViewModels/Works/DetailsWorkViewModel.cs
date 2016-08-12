@@ -36,6 +36,13 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
+        private string _photoPath;
+        public string PhotoPath
+        {
+            get { return _photoPath; }
+            set { SetProperty(ref _photoPath, value); }
+        }
+
         private IEnumerable<Author> _authors;
         public IEnumerable<Author> Authors
         {
@@ -69,6 +76,7 @@ namespace ArtApp.ViewModels
 
         }
 
+        #region Command Methods
         private async void DisplayWorkActionSheet()
         {
             IActionSheetButton AddAction = ActionSheetButton.CreateButton("Add", this.CreateWorkCommand);
@@ -90,14 +98,14 @@ namespace ArtApp.ViewModels
             {
                 if (this._workDatabase.DeleteWork(this.Id) != 0)
                 {
-                    this._pageDialogService.DisplayAlert("Work", "Work was deleted successfully", "ok");
-                    this._navigationService.GoBack();
+                    await this._pageDialogService.DisplayAlert("Work", "Work was deleted successfully", "ok");
+                    await this._navigationService.GoBack();
                     //Force worklist refresh?
                 }
                 else
                 {
-                    this._pageDialogService.DisplayAlert("Work", "Failed to delete", "ok");
-                    this._navigationService.GoBack();
+                    await this._pageDialogService.DisplayAlert("Work", "Failed to delete", "ok");
+                    await this._navigationService.GoBack();
                 }
             }
 
@@ -113,14 +121,15 @@ namespace ArtApp.ViewModels
         private void CreateWork()
         {
             this._navigationService.Navigate("CreateWorkView");
-        }
+        } 
+        #endregion
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
 
         }
 
-        public async void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("id"))
             {
@@ -130,6 +139,7 @@ namespace ArtApp.ViewModels
                 this.Title = work.Title;
                 this.Description = work.Description;
                 this.Authors = work.Authors;
+                this.PhotoPath = work.PhotoPath;
 
                 //Pedir ao repositorio API
                 //Work work = new Work();

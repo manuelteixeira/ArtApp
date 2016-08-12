@@ -1,5 +1,9 @@
-﻿using Prism.Unity;
+﻿using ArtApp.Model;
+using ArtApp.Services.Interfaces;
+using Prism.Unity;
 using ArtApp.Views;
+using SQLite.Net;
+using Xamarin.Forms;
 
 namespace ArtApp
 {
@@ -8,6 +12,14 @@ namespace ArtApp
         protected override void OnInitialized()
         {
             InitializeComponent();
+
+
+            #region CLEAN DB - REMOVE AFTER TESTING!
+            //SQLiteConnection database = DependencyService.Get<ISQLite>().GetConnection();
+            //database.DropTable<Work>();
+            //database.DropTable<Author>();
+            //database.DropTable<WorkAuthor>();
+            #endregion
 
             //NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");
             NavigationService.Navigate("LoginView");

@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using ArtApp.Model;
 using ArtApp.Repositories;
+using Plugin.Media;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -36,6 +37,13 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
+        private string _photoPath;
+        public string PhotoPath
+        {
+            get { return _photoPath; }
+            set { SetProperty(ref _photoPath, value); }
+        }
+
         private ObservableCollection<Author> _authors;
         public ObservableCollection<Author> Authors
         {
@@ -48,6 +56,10 @@ namespace ArtApp.ViewModels
         public DelegateCommand CreateWorkCommand { get; private set; }
 
         public DelegateCommand AddAuthorCommand { get; private set; }
+
+        public DelegateCommand TakePhotoCommand { get; private set; }
+
+        public DelegateCommand PickPhotoCommand { get; private set; } 
         #endregion
 
 
@@ -60,9 +72,13 @@ namespace ArtApp.ViewModels
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
             this.AddAuthorCommand = new DelegateCommand(this.AddAuthor);
+            this.TakePhotoCommand = new DelegateCommand(this.TakePhoto);
+            this.PickPhotoCommand = new DelegateCommand(this.PickPhoto);
 
             this.Authors = new ObservableCollection<Author>();
         }
+
+
 
         #region Command methods
         //private async void CreateWork()
@@ -94,7 +110,8 @@ namespace ArtApp.ViewModels
                 Id = this.Id,
                 Title = this.Title,
                 Description = this.Description,
-                Authors = this.Authors.ToList()
+                Authors = this.Authors.ToList(),
+                PhotoPath = this.PhotoPath
                 //The rest of the work attributes 
             };
 
@@ -124,13 +141,54 @@ namespace ArtApp.ViewModels
                     temp.Add(author);
                 }
             }
-            this.Authors = temp;
+
+            if (temp.Count == 0)
+            {
+                this.Authors = new ObservableCollection<Author>();
+                this.Authors.Add(new Author() {Name = "No Authors"});
+            }
+            else
+            {
+                this.Authors = temp;
+            }
         }
 
         private void AddAuthor()
         {
 
-            this.Authors.Add(new Author() { Name = "New author" });
+            this.Authors.Add(new Author() { Name = "" });
+        }
+
+        private async void TakePhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await this._pageDialogService.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                SaveToAlbum = true
+            });
+
+            if (file == null)
+                return;
+
+            this.PhotoPath = file.Path;
+
+            await this._pageDialogService.DisplayAlert("File Location", file.Path, "OK");
+        }
+
+        private async void PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var file = await CrossMedia.Current.PickPhotoAsync();
+
+            this.PhotoPath = file.Path;
         }
 
         #endregion

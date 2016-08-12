@@ -24,7 +24,7 @@
               <DataTemplate>
                 <ViewCell>
                   <StackLayout>
-                    <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="{Binding Name}"/>
+                    <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="New Author"/>
                   </StackLayout>
                 </ViewCell>
               </DataTemplate>

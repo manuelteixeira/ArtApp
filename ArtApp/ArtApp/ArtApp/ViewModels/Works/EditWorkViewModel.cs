@@ -105,12 +105,22 @@ namespace ArtApp.ViewModels
                     temp.Add(author);
                 }
             }
-            this.Authors = temp;
+
+            if (temp.Count == 0)
+            {
+                this.Authors = new ObservableCollection<Author>();
+                this.Authors.Add(new Author() { Name = "No Authors" });
+            }
+            else
+            {
+                this.Authors = temp;
+            }
         }
 
         private void AddAuthor()
         {
-            this.Authors.Add(new Author() { Name = "New author" });
+
+            this.Authors.Add(new Author() { Name = "" });
         }
 
         #endregion
