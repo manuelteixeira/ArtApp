@@ -19,15 +19,15 @@ namespace ArtApp.Repositories
                     Lux = 1,
                     RH = 1,
                     Temperature = 23,
-                    FrontProtection = Protection.Glass,
-                    BackProtection = Protection.Tablex,
-                    Handling = Handling.Cotton_gloves,
-                    HandlingPosition = HandlingPosition.Horizontal,
+                    //FrontProtection = Protection.Glass,
+                    //BackProtection = Protection.Tablex,
+                    //Handling = Handling.Cotton_gloves,
+                    //HandlingPosition = HandlingPosition.Horizontal,
                     MadeBy = "Manel",
-                    Work = new Work()
-                    {
-                        Title = "Guernica"
-                    },
+                    //Work = new Work()
+                    //{
+                    //    Title = "Guernica"
+                    //},
                     Notes = "None"
                 },
                 new ConditionReport()
@@ -38,15 +38,15 @@ namespace ArtApp.Repositories
                     Lux = 1,
                     RH = 1,
                     Temperature = 23,
-                    FrontProtection = Protection.Glass,
-                    BackProtection = Protection.Tablex,
-                    Handling = Handling.Cotton_gloves,
-                    HandlingPosition = HandlingPosition.Horizontal,
+                    //FrontProtection = Protection.Glass,
+                    //BackProtection = Protection.Tablex,
+                    //Handling = Handling.Cotton_gloves,
+                    //HandlingPosition = HandlingPosition.Horizontal,
                     MadeBy = "Manel",
-                    Work = new Work()
-                    {
-                        Title = "Lilly Pads"
-                    },
+                    //Work = new Work()
+                    //{
+                    //    Title = "Lilly Pads"
+                    //},
                     Notes = "None"
                 },
                 new ConditionReport()
@@ -57,15 +57,15 @@ namespace ArtApp.Repositories
                     Lux = 1,
                     RH = 1,
                     Temperature = 23,
-                    FrontProtection = Protection.Glass,
-                    BackProtection = Protection.Tablex,
-                    Handling = Handling.Cotton_gloves,
-                    HandlingPosition = HandlingPosition.Horizontal,
+                    //FrontProtection = Protection.Glass,
+                    //BackProtection = Protection.Tablex,
+                    //Handling = Handling.Cotton_gloves,
+                    //HandlingPosition = HandlingPosition.Horizontal,
                     MadeBy = "Manel",
-                    Work = new Work()
-                    {
-                        Title = "Mona"
-                    },
+                    //Work = new Work()
+                    //{
+                    //    Title = "Mona"
+                    //},
                     Notes = "None"
                 },
             };
@@ -81,15 +81,15 @@ namespace ArtApp.Repositories
                 Lux = 1,
                 RH = 1,
                 Temperature = 23,
-                FrontProtection = Protection.Glass,
-                BackProtection = Protection.Tablex,
-                Handling = Handling.Cotton_gloves,
-                HandlingPosition = HandlingPosition.Horizontal,
+                //FrontProtection = Protection.Glass,
+                //BackProtection = Protection.Tablex,
+                //Handling = Handling.Cotton_gloves,
+                //HandlingPosition = HandlingPosition.Horizontal,
                 MadeBy = "Manel",
-                Work = new Work()
-                {
-                    Title = "Guernica"
-                },
+                //Work = new Work()
+                //{
+                //    Title = "Guernica"
+                //},
                 Notes = "None"
             };
 
@@ -108,15 +108,15 @@ namespace ArtApp.Repositories
                     Lux = 1,
                     RH = 1,
                     Temperature = 23,
-                    FrontProtection = Protection.Glass,
-                    BackProtection = Protection.Tablex,
-                    Handling = Handling.Cotton_gloves,
-                    HandlingPosition = HandlingPosition.Horizontal,
+                    //FrontProtection = Protection.Glass,
+                    //BackProtection = Protection.Tablex,
+                    //Handling = Handling.Cotton_gloves,
+                    //HandlingPosition = HandlingPosition.Horizontal,
                     MadeBy = "Manel",
-                    Work = new Work()
-                    {
-                        Title = "Guernica"
-                    },
+                    //Work = new Work()
+                    //{
+                    //    Title = "Guernica"
+                    //},
                     Notes = "None"
                 };
             }
@@ -136,15 +136,15 @@ namespace ArtApp.Repositories
                     Lux = 1,
                     RH = 1,
                     Temperature = 23,
-                    FrontProtection = Protection.Glass,
-                    BackProtection = Protection.Tablex,
-                    Handling = Handling.Cotton_gloves,
-                    HandlingPosition = HandlingPosition.Horizontal,
+                    //FrontProtection = Protection.Glass,
+                    //BackProtection = Protection.Tablex,
+                    //Handling = Handling.Cotton_gloves,
+                    //HandlingPosition = HandlingPosition.Horizontal,
                     MadeBy = "Manel",
-                    Work = new Work()
-                    {
-                        Title = "Guernica"
-                    },
+                    //Work = new Work()
+                    //{
+                    //    Title = "Guernica"
+                    //},
                     Notes = "None"
                 };
             }

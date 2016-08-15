@@ -33,6 +33,11 @@ namespace ArtApp.Services
             database.CreateTable<TodoItem>();
             database.CreateTable<Classification>();
             database.CreateTable<ArtType>();
+            database.CreateTable<Pathology>();
+            database.CreateTable<ConditionReport>();
+            database.CreateTable<ConditionReportPathology>();
+            database.CreateTable<ConditionReportPhoto>();
+            database.CreateTable<Photo>();
         }
 
         //Get all items in the database method

@@ -45,7 +45,12 @@
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Classification.cs" />
     <Compile Include="Model\ConditionReport.cs" />
+    <Compile Include="Model\ConditionReportOLD.cs" />
+    <Compile Include="Model\ConditionReportPathology.cs" />
+    <Compile Include="Model\ConditionReportPhoto.cs" />
     <Compile Include="Model\Interfaces\IEntity.cs" />
+    <Compile Include="Model\Pathology.cs" />
+    <Compile Include="Model\Photo.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\TodoItem.cs" />
     <Compile Include="Model\Work.cs" />
@@ -53,6 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Database\ArtTypeRepository.cs" />
     <Compile Include="Repositories\Database\ClassificationRepository.cs" />
+    <Compile Include="Repositories\Database\ConditionReportRepository.cs" />
+    <Compile Include="Repositories\Database\PathologyRepository.cs" />
     <Compile Include="Repositories\Database\TodoItemRepository.cs" />
     <Compile Include="Repositories\Database\WorkRepository.cs" />
     <Compile Include="Repositories\Mock\ConditionReportMockRepository.cs" />
@@ -65,7 +72,6 @@
     <Compile Include="Services\RestApiService.cs" />
     <Compile Include="Services\SQLiteDatabase.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
-    <Compile Include="ViewModels\Condition Reports\ConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
     <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Todo Items\CreateTodoItemViewModel.cs" />

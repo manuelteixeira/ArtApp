@@ -54,33 +54,33 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _temperature, value); }
         }
 
-        private Handling _handling;
-        public Handling Handling
-        {
-            get { return _handling; }
-            set { SetProperty(ref _handling, value); }
-        }
+        //private Handling _handling;
+        //public Handling Handling
+        //{
+        //    get { return _handling; }
+        //    set { SetProperty(ref _handling, value); }
+        //}
 
-        private HandlingPosition _handlingPosition;
-        public HandlingPosition HandlingPosition
-        {
-            get { return _handlingPosition; }
-            set { SetProperty(ref _handlingPosition, value); }
-        }
+        //private HandlingPosition _handlingPosition;
+        //public HandlingPosition HandlingPosition
+        //{
+        //    get { return _handlingPosition; }
+        //    set { SetProperty(ref _handlingPosition, value); }
+        //}
 
-        private Protection _frontProtection;
-        public Protection FrontProtection
-        {
-            get { return _frontProtection; }
-            set { SetProperty(ref _frontProtection, value); }
-        }
+        //private Protection _frontProtection;
+        //public Protection FrontProtection
+        //{
+        //    get { return _frontProtection; }
+        //    set { SetProperty(ref _frontProtection, value); }
+        //}
 
-        private Protection _backProtection;
-        public Protection BackProtection
-        {
-            get { return _backProtection; }
-            set { SetProperty(ref _backProtection, value); }
-        }
+        //private Protection _backProtection;
+        //public Protection BackProtection
+        //{
+        //    get { return _backProtection; }
+        //    set { SetProperty(ref _backProtection, value); }
+        //}
 
         private DateTime _date;
         public DateTime Date
@@ -195,14 +195,14 @@ namespace ArtApp.ViewModels
                 this.Rh = conditionReport.RH;
                 this.Lux = conditionReport.Lux;
                 this.Temperature = conditionReport.Temperature;
-                this.Handling = conditionReport.Handling.Value;
-                this.HandlingPosition = conditionReport.HandlingPosition.Value;
-                this.FrontProtection = conditionReport.FrontProtection.Value;
-                this.BackProtection = conditionReport.BackProtection.Value;
+                //this.Handling = conditionReport.Handling.Value;
+                //this.HandlingPosition = conditionReport.HandlingPosition.Value;
+                //this.FrontProtection = conditionReport.FrontProtection.Value;
+                //this.BackProtection = conditionReport.BackProtection.Value;
                 this.Date = conditionReport.Date;
                 this.MadeBy = conditionReport.MadeBy;
                 this.Notes = conditionReport.Notes;
-                this.Work = conditionReport.Work;
+                //this.Work = conditionReport.Work;
 
 
                 ////Pedir ao repositorio API

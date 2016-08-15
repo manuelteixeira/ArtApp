@@ -29,8 +29,8 @@ namespace ArtApp.ViewModels
         protected readonly ConditionReportMockRepository _conditionReportMockRepository;
 
 
-        private ObservableCollection<ConditionReportViewModel> _conditionReportSearch;
-        public ObservableCollection<ConditionReportViewModel> ConditionReportSearch
+        private ObservableCollection<ConditionReport> _conditionReportSearch;
+        public ObservableCollection<ConditionReport> ConditionReportSearch
         {
             get { return _conditionReportSearch; }
             set { SetProperty(ref _conditionReportSearch, value); }
@@ -47,8 +47,8 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private ConditionReportViewModel _conditionReportSelected;
-        public ConditionReportViewModel ConditionReportSelected
+        private ConditionReport _conditionReportSelected;
+        public ConditionReport ConditionReportSelected
         {
             get { return _conditionReportSelected; }
             set
@@ -61,7 +61,7 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private List<ConditionReportViewModel> ConditionReports { get; set; }
+        private List<ConditionReport> ConditionReports { get; set; }
         #endregion
 
 
@@ -101,7 +101,7 @@ namespace ArtApp.ViewModels
 
             this.isBusy = true;
 
-            this.ConditionReports = new List<ConditionReportViewModel>();
+            this.ConditionReports = new List<ConditionReport>();
 
             //For API objects
             //var list = await this._conditionReportRepository.GetConditionReportsAsync();
@@ -113,9 +113,9 @@ namespace ArtApp.ViewModels
                 //Talvez nºao seja necessario verificar o null, a API verifica.
                 if (!string.IsNullOrEmpty(item.Title))
                 {
-                    ConditionReports.Add(new ConditionReportViewModel()
+                    ConditionReports.Add(new ConditionReport()
                     {
-                        ConditionReportId = item.Id,
+                        Id = item.Id,
                         Title = item.Title,
                         Date = item.Date,
                         MadeBy = item.MadeBy
@@ -125,14 +125,14 @@ namespace ArtApp.ViewModels
 
             }
 
-            this.ConditionReportSearch = new ObservableCollection<ConditionReportViewModel>(ConditionReports);
+            this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
             this.isBusy = false;
         }
 
         private void DetailsConditionReport()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.ConditionReportSelected.ConditionReportId);
+            parameters.Add("id", this.ConditionReportSelected.Id);
             this._navigationService.Navigate("DetailsConditionReportView", parameters);
         }
 
@@ -147,13 +147,13 @@ namespace ArtApp.ViewModels
 
             if (string.IsNullOrEmpty(this.SearchText))
             {
-                this.ConditionReportSearch = new ObservableCollection<ConditionReportViewModel>(ConditionReports);
+                this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
             }
             else
             {
                 //Pesquisa pelo titulo
                 //Oferecer outras opçoes de pesquisa? autor? data?
-                this.ConditionReportSearch = new ObservableCollection<ConditionReportViewModel>
+                this.ConditionReportSearch = new ObservableCollection<ConditionReport>
                     (ConditionReports.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower())));
             }
         } 

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
+using ArtApp.Repositories.Database;
 using Plugin.Media;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+using ConditionReportRepository = ArtApp.Repositories.ConditionReportRepository;
 
 namespace ArtApp.ViewModels
 {
@@ -21,7 +24,9 @@ namespace ArtApp.ViewModels
         //For API objects
         //private readonly ConditionReportRepository _conditionReportRepository;
         //For Mock Objects
-        private readonly ConditionReportMockRepository _conditionReportMockRepository; 
+        private readonly ConditionReportMockRepository _conditionReportMockRepository;
+        private readonly Repositories.Database.ConditionReportRepository _conditionReportRepository;
+        private readonly PathologyRepository _pathologyRepository;
         #endregion
 
 
@@ -55,32 +60,46 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _temperature, value); }
         }
 
-        private Handling _handling;
-        public Handling Handling
+        //private Handling _handling;
+        //public Handling Handling
+        //{
+        //    get { return _handling; }
+        //    set { SetProperty(ref _handling, value); }
+        //}
+
+        //private HandlingPosition _handlingPosition;
+        //public HandlingPosition HandlingPosition
+        //{
+        //    get { return _handlingPosition; }
+        //    set { SetProperty(ref _handlingPosition, value); }
+        //}
+
+        //private Protection _frontProtection;
+        //public Protection FrontProtection
+        //{
+        //    get { return _frontProtection; }
+        //    set { SetProperty(ref _frontProtection, value); }
+        //}
+
+        //private Protection _backProtection;
+        //public Protection BackProtection
+        //{
+        //    get { return _backProtection; }
+        //    set { SetProperty(ref _backProtection, value); }
+        //}
+
+        private ObservableCollection<Pathology> _pathologies;
+        public ObservableCollection<Pathology> Pathologies
         {
-            get { return _handling; }
-            set { SetProperty(ref _handling, value); }
+            get { return _pathologies; }
+            set { SetProperty(ref _pathologies, value); }
         }
 
-        private HandlingPosition _handlingPosition;
-        public HandlingPosition HandlingPosition
+        private ObservableCollection<string> _photosPath;
+        public ObservableCollection<string> PhotosPath
         {
-            get { return _handlingPosition; }
-            set { SetProperty(ref _handlingPosition, value); }
-        }
-
-        private Protection _frontProtection;
-        public Protection FrontProtection
-        {
-            get { return _frontProtection; }
-            set { SetProperty(ref _frontProtection, value); }
-        }
-
-        private Protection _backProtection;
-        public Protection BackProtection
-        {
-            get { return _backProtection; }
-            set { SetProperty(ref _backProtection, value); }
+            get { return _photosPath; }
+            set { SetProperty(ref _photosPath, value); }
         }
 
         private DateTime _date;
@@ -148,7 +167,9 @@ namespace ArtApp.ViewModels
             //For API objects
             //this._conditionReportRepository = new ConditionReportRepository();
             //For mock objects
-            this._conditionReportMockRepository = new ConditionReportMockRepository();
+            //this._conditionReportMockRepository = new ConditionReportMockRepository();
+            this._conditionReportRepository = new Repositories.Database.ConditionReportRepository();
+            this._pathologyRepository = new PathologyRepository();
 
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
@@ -157,16 +178,26 @@ namespace ArtApp.ViewModels
             this.TakePhotoCommand = new DelegateCommand(TakePhoto);
             this.PickPhotoCommand = new DelegateCommand(PickPhoto);
 
+            this.PhotosPath = new ObservableCollection<string>();
+
+            //Pathologies
+            GetPathologies();
+
             //Populate Pickers
             PopulatePickers();
 
         }
 
+        private void GetPathologies()
+        {
+            this.Pathologies = new ObservableCollection<Pathology>(this._pathologyRepository.GetPathologies());
+        }
+
         private void PopulatePickers()
         {
-            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
-            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
-            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
+            //this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
+            //this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
+            //this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
         }
 
         #region Command methods
@@ -178,20 +209,23 @@ namespace ArtApp.ViewModels
                 RH = this.Rh,
                 Lux = this.Lux,
                 Temperature = this.Temperature,
-                Handling = this.Handling,
-                HandlingPosition = this.HandlingPosition,
-                FrontProtection = this.FrontProtection,
-                BackProtection = this.BackProtection,
+                //Handling = this.Handling,
+                //HandlingPosition = this.HandlingPosition,
+                //FrontProtection = this.FrontProtection,
+                //BackProtection = this.BackProtection,
                 Date = this.Date,
                 MadeBy = this.MadeBy,
                 Notes = this.Notes,
-                Work = this.Work,
+                //Work = this.Work,
+                //Pathologies = this.Pathologies.ToList(),
+                //PhotosPath = this.PhotosPath.ToList(),
             };
 
 
             //For API objects
             //if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
-            if (await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
+            //if (await this._conditionReportMockRepository.PostConditionReportAsync(conditionReport) != null)
+            if(this._conditionReportRepository.SaveConditionReport(conditionReport) != 0)
             {
                 await this._pageDialogService.DisplayAlert("Condition Report", "New condition report created", "Ok");
                 await this._navigationService.GoBack();
@@ -220,6 +254,8 @@ namespace ArtApp.ViewModels
             if (file == null)
                 return;
 
+            this.PhotosPath.Add(file.Path);
+
             await this._pageDialogService.DisplayAlert("File Location", file.Path, "OK");
         }
 
@@ -229,7 +265,7 @@ namespace ArtApp.ViewModels
 
             var file = await CrossMedia.Current.PickPhotoAsync();
 
-            await this._pageDialogService.DisplayAlert("Teste", file.Path, "ok");
+            this.PhotosPath.Add(file.Path);
 
         }
         #endregion

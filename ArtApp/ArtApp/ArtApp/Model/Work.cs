@@ -26,7 +26,6 @@ namespace ArtApp.Model
         public float Length { get; set; }
         public float Width { get; set; }
         public float Heigth { get; set; }
-        //public Classification Classification { get; set; }
 
         [ManyToMany(typeof(WorkAuthor), CascadeOperations = CascadeOperation.All)]
         public List<Author> Authors { get; set; }
