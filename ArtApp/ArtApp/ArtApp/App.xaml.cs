@@ -15,11 +15,12 @@ namespace ArtApp
 
 
             #region CLEAN DB - REMOVE AFTER TESTING!
-            SQLiteConnection database = DependencyService.Get<ISQLite>().GetConnection();
-            database.DropTable<Work>();
-            database.DropTable<Author>();
-            database.DropTable<WorkAuthor>();
-            database.DropTable<Classification>();
+            //SQLiteConnection database = DependencyService.Get<ISQLite>().GetConnection();
+            //database.DropTable<Work>();
+            //database.DropTable<Author>();
+            //database.DropTable<WorkAuthor>();
+            //database.DropTable<Classification>();
+            //database.DropTable<ArtType>();
             #endregion
 
             //NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");

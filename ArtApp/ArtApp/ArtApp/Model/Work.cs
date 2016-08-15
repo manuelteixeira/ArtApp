@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using Android.Gms.Common.Data;
 using ArtApp.Model.Interfaces;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
@@ -38,6 +36,12 @@ namespace ArtApp.Model
 
         [ManyToOne(CascadeOperations = CascadeOperation.All)]
         public Classification Classification { get; set; }
+
+        [ForeignKey(typeof(ArtType))]
+        public int ArtTypeId { get; set; }
+
+        [ManyToOne(CascadeOperations = CascadeOperation.All)]
+        public ArtType ArtType { get; set; }
 
     }
 }

@@ -41,6 +41,7 @@
     <Compile Include="Converters\ProtectionEnumConverter.cs" />
     <Compile Include="Database\TodoDatabase.cs" />
     <Compile Include="Database\WorkDatabase.cs" />
+    <Compile Include="Model\ArtType.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Classification.cs" />
     <Compile Include="Model\ConditionReport.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Model\Work.cs" />
     <Compile Include="Model\WorkAuthor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Database\ArtTypeRepository.cs" />
     <Compile Include="Repositories\Database\ClassificationRepository.cs" />
     <Compile Include="Repositories\Database\TodoItemRepository.cs" />
     <Compile Include="Repositories\Database\WorkRepository.cs" />

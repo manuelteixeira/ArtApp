@@ -24,6 +24,10 @@
           <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"/>
           <controls:BindablePicker Title="Classification Options" ItemsSource="{Binding Classifications}" SelectedItem="{Binding SelectedClassification}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Art Types" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Art Types Options" ItemsSource="{Binding ArtTypes}" SelectedItem="{Binding SelectedArtType}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
           <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
           <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>

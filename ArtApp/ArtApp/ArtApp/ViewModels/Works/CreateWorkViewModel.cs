@@ -19,6 +19,7 @@ namespace ArtApp.ViewModels
         private readonly WorkRepository _workRepository;
         private readonly Repositories.Database.WorkRepository _workDatabase;
         private readonly ClassificationRepository _classificationRepository;
+        private readonly ArtTypeRepository _artTypeRepository;
         #endregion
 
         #region Properties
@@ -60,6 +61,20 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _classifications, value); }
         }
 
+        private ArtType _selectedArtType;
+        public ArtType SelectedArtType
+        {
+            get { return _selectedArtType; }
+            set { SetProperty(ref _selectedArtType, value); }
+        }
+
+        private ObservableCollection<ArtType> _artTypes;
+        public ObservableCollection<ArtType> ArtTypes
+        {
+            get { return _artTypes; }
+            set { SetProperty(ref _artTypes, value); }
+        }
+
         private ObservableCollection<Author> _authors;
         public ObservableCollection<Author> Authors
         {
@@ -86,6 +101,7 @@ namespace ArtApp.ViewModels
             this._navigationService = navigationService;
             this._workDatabase = new Repositories.Database.WorkRepository();
             this._classificationRepository = new ClassificationRepository();
+            this._artTypeRepository = new ArtTypeRepository();
 
             this.CreateWorkCommand = new DelegateCommand(CreateWork);
             this.AddAuthorCommand = new DelegateCommand(this.AddAuthor);
@@ -95,6 +111,12 @@ namespace ArtApp.ViewModels
             this.Authors = new ObservableCollection<Author>();
 
             GetClassifications();
+            GetArtTypes();
+        }
+
+        private void GetArtTypes()
+        {
+            this._artTypes = new ObservableCollection<ArtType>(this._artTypeRepository.GetArtTypes());
         }
 
         private void GetClassifications()
@@ -134,7 +156,8 @@ namespace ArtApp.ViewModels
                 Description = this.Description,
                 Authors = this.Authors.ToList(),
                 PhotoPath = this.PhotoPath,
-                Classification = this.SelectedClassification
+                Classification = this.SelectedClassification,
+                ArtType = this.SelectedArtType
                 //The rest of the work attributes 
             };
 

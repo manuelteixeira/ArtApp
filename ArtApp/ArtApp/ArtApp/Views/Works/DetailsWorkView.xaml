@@ -19,6 +19,14 @@
         <StackLayout Orientation="Horizontal">
           <Image Source="{Binding PhotoPath}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding Classification.Name}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="ArtType" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding ArtType.Name}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
           <Label Text="Authors"/>
           <ListView ItemsSource="{Binding Authors}">

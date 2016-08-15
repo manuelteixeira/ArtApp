@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:ArtApp.Controls;assembly=ArtApp"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArtApp.Views.EditWorkView">
 
@@ -17,7 +18,22 @@
           <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Image Source="{Binding PhotoPath}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding SelectedClassification.Name}" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Classification Options" ItemsSource="{Binding Classifications}" SelectedItem="{Binding SelectedClassification}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label Text="Art Types" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="{Binding SelectedArtType.Name}" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <controls:BindablePicker Title="Art Types Options" ItemsSource="{Binding ArtTypes}" SelectedItem="{Binding SelectedArtType}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
+          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
           <Button Text="Add Author" Command="{Binding AddAuthorCommand}"/>
           <ListView ItemsSource="{Binding Authors}">
             <ListView.ItemTemplate>

@@ -32,6 +32,7 @@ namespace ArtApp.Services
             database.CreateTable<WorkAuthor>();
             database.CreateTable<TodoItem>();
             database.CreateTable<Classification>();
+            database.CreateTable<ArtType>();
         }
 
         //Get all items in the database method

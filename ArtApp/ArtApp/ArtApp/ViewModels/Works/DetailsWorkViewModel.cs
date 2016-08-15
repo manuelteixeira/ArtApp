@@ -50,6 +50,20 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _authors, value); }
         }
 
+        private ArtType _artType;
+        public ArtType ArtType
+        {
+            get { return _artType; }
+            set { SetProperty(ref _artType, value); }
+        }
+
+        private Classification _classification;
+        public Classification Classification
+        {
+            get { return _classification; }
+            set { SetProperty(ref _classification, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -140,6 +154,8 @@ namespace ArtApp.ViewModels
                 this.Description = work.Description;
                 this.Authors = work.Authors;
                 this.PhotoPath = work.PhotoPath;
+                this.Classification = work.Classification;
+                this.ArtType = work.ArtType;
 
                 //Pedir ao repositorio API
                 //Work work = new Work();
