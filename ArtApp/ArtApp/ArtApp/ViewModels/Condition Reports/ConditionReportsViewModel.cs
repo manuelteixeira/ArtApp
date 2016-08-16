@@ -1,16 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ArtApp.Model;
-using ArtApp.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
+using ConditionReportRepository = ArtApp.Repositories.Database.ConditionReportRepository;
 
 namespace ArtApp.ViewModels
 {
     public class ConditionReportsViewModel : BindableBase
     {
+
+        #region Services
+        private INavigationService _navigationService;
+        private IPageDialogService _pageDialogService;
+
+        //For API objects
+        //protected readonly ConditionReportRepository _conditionReportRepository;
+        //For mock objects
+        //protected readonly ConditionReportMockRepository _conditionReportMockRepository; 
+        private readonly ConditionReportRepository _conditionReportRepository;
+        #endregion
 
         #region Properties
         private bool _isBusy;
@@ -19,15 +31,6 @@ namespace ArtApp.ViewModels
             get { return _isBusy; }
             set { SetProperty(ref _isBusy, value); }
         }
-
-        private INavigationService _navigationService;
-        private IPageDialogService _pageDialogService;
-
-        //For API objects
-        //protected readonly ConditionReportRepository _conditionReportRepository;
-        //For mock objects
-        protected readonly ConditionReportMockRepository _conditionReportMockRepository;
-
 
         private ObservableCollection<ConditionReport> _conditionReportSearch;
         public ObservableCollection<ConditionReport> ConditionReportSearch
@@ -80,7 +83,8 @@ namespace ArtApp.ViewModels
 
             //For API objects
             //this._conditionReportRepository = new ConditionReportRepository();
-            this._conditionReportMockRepository = new ConditionReportMockRepository();
+            //this._conditionReportMockRepository = new ConditionReportMockRepository();
+            this._conditionReportRepository = new ConditionReportRepository();
 
             this.SearchConditionReportCommand = new DelegateCommand(this.SearchConditionReport);
             this.CreateConditionReportCommand = new DelegateCommand(this.CreateConditionReport);
@@ -92,7 +96,7 @@ namespace ArtApp.ViewModels
         }
 
         #region Command Methods
-        private async void GetConditionReports()
+        private void GetConditionReports()
         {
             if (this.isBusy)
             {
@@ -105,25 +109,26 @@ namespace ArtApp.ViewModels
 
             //For API objects
             //var list = await this._conditionReportRepository.GetConditionReportsAsync();
-            var list = await this._conditionReportMockRepository.GetConditionReportsAsync();
+            //var list = await this._conditionReportMockRepository.GetConditionReportsAsync();
+            this.ConditionReports = this._conditionReportRepository.GetConditionReports().ToList();
 
             //Populate the list in the mainview
-            foreach (var item in list)
-            {
-                //Talvez nºao seja necessario verificar o null, a API verifica.
-                if (!string.IsNullOrEmpty(item.Title))
-                {
-                    ConditionReports.Add(new ConditionReport()
-                    {
-                        Id = item.Id,
-                        Title = item.Title,
-                        Date = item.Date,
-                        MadeBy = item.MadeBy
-                        //... the rest of the needed attributes
-                    });
-                }
+            //foreach (var item in list)
+            //{
+            //    //Talvez nºao seja necessario verificar o null, a API verifica.
+            //    if (!string.IsNullOrEmpty(item.Title))
+            //    {
+            //        ConditionReports.Add(new ConditionReport()
+            //        {
+            //            Id = item.Id,
+            //            Title = item.Title,
+            //            Date = item.Date,
+            //            MadeBy = item.MadeBy
+            //            //... the rest of the needed attributes
+            //        });
+            //    }
 
-            }
+            //}
 
             this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
             this.isBusy = false;

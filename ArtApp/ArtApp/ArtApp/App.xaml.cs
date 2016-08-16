@@ -1,5 +1,6 @@
 ﻿using ArtApp.Model;
 using ArtApp.Services.Interfaces;
+using ArtApp.ViewModels;
 using Prism.Unity;
 using ArtApp.Views;
 using SQLite.Net;
@@ -55,6 +56,8 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<CreateTodoItemView>();
             Container.RegisterTypeForNavigation<EditTodoItemView>();
             Container.RegisterTypeForNavigation<DetailsTodoItemView>();
+            Container.RegisterTypeForNavigation<CreatePathologyView>();
+            Container.RegisterTypeForNavigation<PathologiesView>();
 
 
         }

@@ -12,7 +12,6 @@ namespace ArtApp.Model
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public float Grade { get; set; }
         public string Icon { get; set; }
 
         [ManyToMany(typeof(ConditionReportPathology), CascadeOperations = CascadeOperation.CascadeRead, ReadOnly = true)]

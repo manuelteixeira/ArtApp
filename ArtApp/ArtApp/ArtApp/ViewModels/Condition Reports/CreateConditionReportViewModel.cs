@@ -60,33 +60,33 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _temperature, value); }
         }
 
-        //private Handling _handling;
-        //public Handling Handling
-        //{
-        //    get { return _handling; }
-        //    set { SetProperty(ref _handling, value); }
-        //}
+        private Handling _handling;
+        public Handling Handling
+        {
+            get { return _handling; }
+            set { SetProperty(ref _handling, value); }
+        }
 
-        //private HandlingPosition _handlingPosition;
-        //public HandlingPosition HandlingPosition
-        //{
-        //    get { return _handlingPosition; }
-        //    set { SetProperty(ref _handlingPosition, value); }
-        //}
+        private HandlingPosition _handlingPosition;
+        public HandlingPosition HandlingPosition
+        {
+            get { return _handlingPosition; }
+            set { SetProperty(ref _handlingPosition, value); }
+        }
 
-        //private Protection _frontProtection;
-        //public Protection FrontProtection
-        //{
-        //    get { return _frontProtection; }
-        //    set { SetProperty(ref _frontProtection, value); }
-        //}
+        private Protection _frontProtection;
+        public Protection FrontProtection
+        {
+            get { return _frontProtection; }
+            set { SetProperty(ref _frontProtection, value); }
+        }
 
-        //private Protection _backProtection;
-        //public Protection BackProtection
-        //{
-        //    get { return _backProtection; }
-        //    set { SetProperty(ref _backProtection, value); }
-        //}
+        private Protection _backProtection;
+        public Protection BackProtection
+        {
+            get { return _backProtection; }
+            set { SetProperty(ref _backProtection, value); }
+        }
 
         private ObservableCollection<Pathology> _pathologies;
         public ObservableCollection<Pathology> Pathologies
@@ -95,8 +95,8 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _pathologies, value); }
         }
 
-        private ObservableCollection<string> _photosPath;
-        public ObservableCollection<string> PhotosPath
+        private ObservableCollection<Photo> _photosPath;
+        public ObservableCollection<Photo> PhotosPath
         {
             get { return _photosPath; }
             set { SetProperty(ref _photosPath, value); }
@@ -123,12 +123,6 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _notes, value); }
         }
 
-        private Work _work;
-        public Work Work
-        {
-            get { return _work; }
-            set { SetProperty(ref _work, value); }
-        }
 
         //Pickers Data
         private ObservableCollection<string> _handlingOptions;
@@ -158,7 +152,8 @@ namespace ArtApp.ViewModels
         #region Commands
         public DelegateCommand CreateConditionReportCommand { get; private set; }
         public DelegateCommand TakePhotoCommand { get; private set; }
-        public DelegateCommand PickPhotoCommand { get; private set; } 
+        public DelegateCommand PickPhotoCommand { get; private set; }
+        public DelegateCommand AddPathologyCommand { get; private set; } 
         #endregion
 
 
@@ -177,8 +172,9 @@ namespace ArtApp.ViewModels
             this.CreateConditionReportCommand = new DelegateCommand(CreateConditionReport);
             this.TakePhotoCommand = new DelegateCommand(TakePhoto);
             this.PickPhotoCommand = new DelegateCommand(PickPhoto);
+            this.AddPathologyCommand = new DelegateCommand(AddPathology);
 
-            this.PhotosPath = new ObservableCollection<string>();
+            this.PhotosPath = new ObservableCollection<Photo>();
 
             //Pathologies
             GetPathologies();
@@ -188,6 +184,11 @@ namespace ArtApp.ViewModels
 
         }
 
+        private void AddPathology()
+        {
+            this._navigationService.Navigate("NavigationView/PathologiesView");
+        }
+
         private void GetPathologies()
         {
             this.Pathologies = new ObservableCollection<Pathology>(this._pathologyRepository.GetPathologies());
@@ -195,9 +196,9 @@ namespace ArtApp.ViewModels
 
         private void PopulatePickers()
         {
-            //this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
-            //this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
-            //this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
+            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
+            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
+            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
         }
 
         #region Command methods
@@ -209,16 +210,15 @@ namespace ArtApp.ViewModels
                 RH = this.Rh,
                 Lux = this.Lux,
                 Temperature = this.Temperature,
-                //Handling = this.Handling,
-                //HandlingPosition = this.HandlingPosition,
-                //FrontProtection = this.FrontProtection,
-                //BackProtection = this.BackProtection,
+                Handling = this.Handling,
+                HandlingPosition = this.HandlingPosition,
+                FrontProtection = this.FrontProtection,
+                BackProtection = this.BackProtection,
                 Date = this.Date,
                 MadeBy = this.MadeBy,
                 Notes = this.Notes,
-                //Work = this.Work,
-                //Pathologies = this.Pathologies.ToList(),
-                //PhotosPath = this.PhotosPath.ToList(),
+                Pathologies = this.Pathologies.ToList(),
+                Photos = this.PhotosPath.ToList(),
             };
 
 
@@ -254,7 +254,7 @@ namespace ArtApp.ViewModels
             if (file == null)
                 return;
 
-            this.PhotosPath.Add(file.Path);
+            this.PhotosPath.Add(new Photo() { PhotoPath = file.Path });
 
             await this._pageDialogService.DisplayAlert("File Location", file.Path, "OK");
         }
@@ -265,7 +265,7 @@ namespace ArtApp.ViewModels
 
             var file = await CrossMedia.Current.PickPhotoAsync();
 
-            this.PhotosPath.Add(file.Path);
+            this.PhotosPath.Add(new Photo() { PhotoPath = file.Path });
 
         }
         #endregion

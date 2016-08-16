@@ -24,13 +24,11 @@ namespace ArtApp.Repositories.Database
                 {
                     Name = "Abrasion",
                     Description = "Pathology caused by abrasion",
-                    Grade = 12,
                 });
                 _database.SaveItem(new Pathology()
                 {
                     Name = "Water",
                     Description = "Pathology caused by Water",
-                    Grade = 20,
                 });
             }
         }
