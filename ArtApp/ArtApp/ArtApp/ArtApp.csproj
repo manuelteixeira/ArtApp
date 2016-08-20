@@ -36,6 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls\BindablePicker.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
+    <Compile Include="Controls\PathologySelectableCell.cs" />
+    <Compile Include="Controls\SelectableItemWrapper.cs" />
     <Compile Include="Converters\HandlingEnumConverter.cs" />
     <Compile Include="Converters\HandlingPositionEnumConverter.cs" />
     <Compile Include="Converters\ProtectionEnumConverter.cs" />
@@ -73,6 +76,8 @@
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
     <Compile Include="ViewModels\CreatePathologyViewModel.cs" />
+    <Compile Include="ViewModels\NavWithArrowViewModel.cs" />
+    <Compile Include="ViewModels\PathologiesMultiSelectViewModel.cs" />
     <Compile Include="ViewModels\PathologiesViewModel.cs" />
     <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Todo Items\CreateTodoItemViewModel.cs" />
@@ -105,6 +110,9 @@
     </Compile>
     <Compile Include="Views\CreatePathologyView.xaml.cs">
       <DependentUpon>CreatePathologyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PathologiesMultiSelectView.xaml.cs">
+      <DependentUpon>PathologiesMultiSelectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PathologiesView.xaml.cs">
       <DependentUpon>PathologiesView.xaml</DependentUpon>
@@ -368,6 +376,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\PathologiesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PathologiesMultiSelectView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -58,6 +58,7 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<DetailsTodoItemView>();
             Container.RegisterTypeForNavigation<CreatePathologyView>();
             Container.RegisterTypeForNavigation<PathologiesView>();
+            Container.RegisterTypeForNavigation<PathologiesMultiSelectView>();
 
 
         }

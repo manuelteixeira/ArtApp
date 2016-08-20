@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ArtApp.Views.PathologiesMultiSelectView"
+             xmlns:c="clr-namespace:ArtApp.Controls;assembly=ArtApp">
+
+  <ListView ItemsSource="{Binding PathologiesA}" HasUnevenRows="True"
+                  SeparatorVisibility="Default">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <c:PathologySelectableCell Name="{Binding Item.Name}"/>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+
+</ContentPage>

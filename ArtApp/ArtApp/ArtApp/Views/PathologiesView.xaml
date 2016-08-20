@@ -6,7 +6,8 @@
              x:Class="ArtApp.Views.PathologiesView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreatePathologyCommand}"></ToolbarItem>
+    <ToolbarItem Text="Back" Command="{Binding GoBackCommand}"/>
+    <ToolbarItem Text="Add" Command="{Binding CreatePathologyCommand}"/>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>

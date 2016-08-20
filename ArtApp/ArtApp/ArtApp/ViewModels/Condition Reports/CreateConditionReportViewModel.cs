@@ -6,10 +6,12 @@ using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
 using ArtApp.Repositories.Database;
+using ArtApp.Views;
 using Plugin.Media;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+using Xamarin.Forms;
 using ConditionReportRepository = ArtApp.Repositories.ConditionReportRepository;
 
 namespace ArtApp.ViewModels
@@ -185,8 +187,8 @@ namespace ArtApp.ViewModels
         }
 
         private void AddPathology()
-        {
-            this._navigationService.Navigate("NavigationView/PathologiesView");
+        {          
+            this._navigationService.Navigate("NavigationView/PathologiesMultiSelectView");
         }
 
         private void GetPathologies()

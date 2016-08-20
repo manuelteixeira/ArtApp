@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using Prism.Commands;
+using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ArtApp.Controls;
 using ArtApp.Model;
 using ArtApp.Repositories.Database;
-using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 
 namespace ArtApp.ViewModels
 {
-    public class PathologiesViewModel : BindableBase
+    public class PathologiesMultiSelectViewModel : BindableBase
     {
 
         #region Services
         protected readonly IPageDialogService _pageDialogService;
         protected readonly INavigationService _navigationService;
-        private readonly PathologyRepository _pathologyRepository; 
+        private readonly PathologyRepository _pathologyRepository;
         #endregion
 
 
@@ -83,11 +84,11 @@ namespace ArtApp.ViewModels
         public DelegateCommand CreatePathologyCommand { get; private set; }
         public DelegateCommand DetailsPathologyCommand { get; private set; }
         public DelegateCommand ResfreshPathologyListCommand { get; private set; }
-        public DelegateCommand GoBackCommand { get; private set; } 
+        public DelegateCommand GoBackCommand { get; private set; }
         #endregion
 
 
-        public PathologiesViewModel(IPageDialogService pageDialogService, INavigationService navigationService)
+        public PathologiesMultiSelectViewModel(IPageDialogService pageDialogService, INavigationService navigationService)
         {
             this._navigationService = navigationService;
             this._pageDialogService = pageDialogService;
@@ -99,7 +100,7 @@ namespace ArtApp.ViewModels
             this.ResfreshPathologyListCommand = new DelegateCommand(this.GetPathologies);
             this.GoBackCommand = new DelegateCommand(this.GoBack);
 
-            this.PathologiesA = new ObservableCollection<SelectableItemWrapper<Pathology>>(this._pathologyRepository.GetPathologies().ToList().Select(pathology => new SelectableItemWrapper<Pathology>() {Item = pathology}));
+            this.PathologiesA = new ObservableCollection<SelectableItemWrapper<Pathology>>(this._pathologyRepository.GetPathologies().ToList().Select(pathology => new SelectableItemWrapper<Pathology>() { Item = pathology }));
 
             this.GetPathologies();
         }
@@ -152,9 +153,7 @@ namespace ArtApp.ViewModels
             this.PathologiesSearch = new ObservableCollection<Pathology>(Pathologies);
 
             this.isBusy = false;
-        } 
+        }
         #endregion
-
-
     }
 }
