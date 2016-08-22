@@ -8,19 +8,30 @@
              x:Class="ArtApp.Views.EditConditionReportView">
 
   <ContentPage>
-    <ScrollView>
-      <StackLayout>
-        <Label Text="Condition Report Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Work" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Work}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+    <ContentPage.Content>
+      <ScrollView>
+        <StackLayout>
+          <Label Text="Condition Report Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          </StackLayout>
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Work Currently Selected: " HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Text="{Binding Work.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          </StackLayout>
+          <StackLayout Orientation="Vertical">
+            <ListView ItemsSource="{Binding Works}" SelectedItem="{Binding WorkSelected}">
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}"/>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </StackLayout>
         </StackLayout>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-        </StackLayout>
-      </StackLayout>
-    </ScrollView>
+      </ScrollView>
+    </ContentPage.Content>
   </ContentPage>
 
   <ContentPage>
@@ -39,8 +50,34 @@
           <Label Text="Temperature" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Stepper Increment="0.1" Maximum="200" Minimum="-200" Value="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Vertical">
+          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <ListView ItemsSource="{Binding PhotosPath}">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ImageCell ImageSource="{Binding PhotoPath}"/>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
       </StackLayout>
     </ScrollView>
+  </ContentPage>
+
+  <ContentPage>
+    <ContentPage.Content>
+      <ScrollView>
+        <ListView ItemsSource="{Binding PathologiesA}" HasUnevenRows="True"
+                        SeparatorVisibility="Default">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <controls:PathologySelectableCell Name="{Binding Item.Name}"/>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </ScrollView>
+    </ContentPage.Content>
   </ContentPage>
 
   <ContentPage>

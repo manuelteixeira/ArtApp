@@ -16,17 +16,17 @@ namespace ArtApp
 
 
             #region CLEAN DB - REMOVE AFTER TESTING!
-            SQLiteConnection database = DependencyService.Get<ISQLite>().GetConnection();
-            database.DropTable<Work>();
-            database.DropTable<Author>();
-            database.DropTable<WorkAuthor>();
-            database.DropTable<Classification>();
-            database.DropTable<ArtType>();
-            database.DropTable<ConditionReport>();
-            database.DropTable<Pathology>();
-            database.DropTable<ConditionReportPathology>();
-            database.DropTable<ConditionReportPhoto>();
-            database.DropTable<Photo>();
+            //SQLiteConnection database = DependencyService.Get<ISQLite>().GetConnection();
+            //database.DropTable<Work>();
+            //database.DropTable<Author>();
+            //database.DropTable<WorkAuthor>();
+            //database.DropTable<Classification>();
+            //database.DropTable<ArtType>();
+            //database.DropTable<ConditionReport>();
+            //database.DropTable<Pathology>();
+            //database.DropTable<ConditionReportPathology>();
+            //database.DropTable<ConditionReportPhoto>();
+            //database.DropTable<Photo>();
             #endregion
 
             //NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");
@@ -59,6 +59,8 @@ namespace ArtApp
             Container.RegisterTypeForNavigation<CreatePathologyView>();
             Container.RegisterTypeForNavigation<PathologiesView>();
             Container.RegisterTypeForNavigation<PathologiesMultiSelectView>();
+            Container.RegisterTypeForNavigation<EditPathologyView>();
+            Container.RegisterTypeForNavigation<DetailsPathologyView>();
 
 
         }

@@ -44,6 +44,7 @@ namespace ArtApp.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
+                DetailsPathology();
 
             }
         }
@@ -57,6 +58,7 @@ namespace ArtApp.ViewModels
                 if (value != null)
                 {
                     SetProperty(ref _pathologySelected, value);
+                    DetailsPathology();
                 }
             }
         }

@@ -30,6 +30,13 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
+        private bool _select;
+        public bool Select
+        {
+            get { return _select; }
+            set { SetProperty(ref _select, value); }
+        }
+
 
         private ObservableCollection<Pathology> _pathologiesSearch;
         public ObservableCollection<Pathology> PathologiesSearch
@@ -85,6 +92,9 @@ namespace ArtApp.ViewModels
         public DelegateCommand DetailsPathologyCommand { get; private set; }
         public DelegateCommand ResfreshPathologyListCommand { get; private set; }
         public DelegateCommand GoBackCommand { get; private set; }
+        public DelegateCommand GetSelectedPathologiesCommand { get; private set; }
+        public DelegateCommand SelectAllCommand { get; private set; } 
+        public DelegateCommand SelectNoneCommand { get; private set; } 
         #endregion
 
 
@@ -99,10 +109,34 @@ namespace ArtApp.ViewModels
             this.SearchPathologyCommand = new DelegateCommand(this.SearchPathology);
             this.ResfreshPathologyListCommand = new DelegateCommand(this.GetPathologies);
             this.GoBackCommand = new DelegateCommand(this.GoBack);
+            this.GetSelectedPathologiesCommand = new DelegateCommand(GetSelectedPathologies);
+            this.SelectAllCommand = new DelegateCommand(SelectAll);
+            this.SelectNoneCommand = new DelegateCommand(SelectNone);
 
-            this.PathologiesA = new ObservableCollection<SelectableItemWrapper<Pathology>>(this._pathologyRepository.GetPathologies().ToList().Select(pathology => new SelectableItemWrapper<Pathology>() { Item = pathology }));
 
             this.GetPathologies();
+        }
+
+        private void SelectAll()
+        {
+            foreach (var pathology in PathologiesA)
+            {
+                pathology.IsSelected = true;
+            }
+        }
+
+        private void SelectNone()
+        {
+            foreach (var pathology in PathologiesA)
+            {
+                pathology.IsSelected = false;
+            }
+            
+        }
+
+        private void GetSelectedPathologies()
+        {
+            var selected = PathologiesA.Where(p => p.IsSelected).Select(p => p.Item).ToList();
         }
 
         private void GoBack()
@@ -149,6 +183,8 @@ namespace ArtApp.ViewModels
             this.isBusy = true;
 
             Pathologies = _pathologyRepository.GetPathologies().ToList();
+
+            this.PathologiesA = new ObservableCollection<SelectableItemWrapper<Pathology>>(Pathologies.Select(pathology => new SelectableItemWrapper<Pathology>() {Item = pathology}));
 
             this.PathologiesSearch = new ObservableCollection<Pathology>(Pathologies);
 

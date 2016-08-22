@@ -42,5 +42,12 @@ namespace ArtApp.Model
         [ManyToOne(CascadeOperations = CascadeOperation.All)]
         public ArtType ArtType { get; set; }
 
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
+        public List<ConditionReport> ConditionReports { get; set; }
+
+        public override string ToString()
+        {
+            return Title + " Description: " + Description;
+        }
     }
 }

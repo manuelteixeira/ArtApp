@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArtApp.Controls;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
 using ArtApp.Repositories.Database;
-using ArtApp.Views;
 using Plugin.Media;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
-using Xamarin.Forms;
-using ConditionReportRepository = ArtApp.Repositories.ConditionReportRepository;
 
 namespace ArtApp.ViewModels
 {
@@ -29,6 +27,7 @@ namespace ArtApp.ViewModels
         private readonly ConditionReportMockRepository _conditionReportMockRepository;
         private readonly Repositories.Database.ConditionReportRepository _conditionReportRepository;
         private readonly PathologyRepository _pathologyRepository;
+        private readonly Repositories.Database.WorkRepository _workRepository;
         #endregion
 
 
@@ -90,8 +89,8 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _backProtection, value); }
         }
 
-        private ObservableCollection<Pathology> _pathologies;
-        public ObservableCollection<Pathology> Pathologies
+        private List<Pathology> _pathologies;
+        public List<Pathology> Pathologies
         {
             get { return _pathologies; }
             set { SetProperty(ref _pathologies, value); }
@@ -125,6 +124,40 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _notes, value); }
         }
 
+        private ObservableCollection<SelectableItemWrapper<Pathology>> _pathologiesA;
+        public ObservableCollection<SelectableItemWrapper<Pathology>> PathologiesA
+        {
+            get { return _pathologiesA; }
+            set { SetProperty(ref _pathologiesA, value); }
+        }
+
+        private ObservableCollection<Pathology> _selectedPathologiesA;
+        public ObservableCollection<Pathology> SelectedPathologiesA
+        {
+            get { return _selectedPathologiesA ?? new ObservableCollection<Pathology>(); }
+            set { SetProperty(ref _selectedPathologiesA, value); }
+        }
+
+        private Work _workSelected;
+        public Work WorkSelected
+        {
+            get { return _workSelected; }
+            set
+            {
+                if (value != null)
+                {
+                    SetProperty(ref _workSelected, value);
+                }
+            }
+        }
+
+        private ObservableCollection<Work> _works;
+        public ObservableCollection<Work> Works
+        {
+            get { return _works ?? new ObservableCollection<Work>(); }
+            set { SetProperty(ref _works, value); }
+        }
+
 
         //Pickers Data
         private ObservableCollection<string> _handlingOptions;
@@ -148,6 +181,8 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _protectionOptions, value); }
         }
 
+
+
         #endregion
 
 
@@ -155,7 +190,10 @@ namespace ArtApp.ViewModels
         public DelegateCommand CreateConditionReportCommand { get; private set; }
         public DelegateCommand TakePhotoCommand { get; private set; }
         public DelegateCommand PickPhotoCommand { get; private set; }
-        public DelegateCommand AddPathologyCommand { get; private set; } 
+        public DelegateCommand AddPathologyCommand { get; private set; }
+        public DelegateCommand SelectAllCommand { get; private set; }
+        public DelegateCommand SelectNoneCommand { get; private set; }
+        public DelegateCommand CreatePathologyCommand { get; private set; }
         #endregion
 
 
@@ -167,6 +205,7 @@ namespace ArtApp.ViewModels
             //this._conditionReportMockRepository = new ConditionReportMockRepository();
             this._conditionReportRepository = new Repositories.Database.ConditionReportRepository();
             this._pathologyRepository = new PathologyRepository();
+            this._workRepository = new Repositories.Database.WorkRepository();
 
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
@@ -175,37 +214,34 @@ namespace ArtApp.ViewModels
             this.TakePhotoCommand = new DelegateCommand(TakePhoto);
             this.PickPhotoCommand = new DelegateCommand(PickPhoto);
             this.AddPathologyCommand = new DelegateCommand(AddPathology);
+            this.SelectAllCommand = new DelegateCommand(SelectAll);
+            this.SelectNoneCommand = new DelegateCommand(SelectNone);
+            this.CreatePathologyCommand = new DelegateCommand(this.CreatePathology);
+
 
             this.PhotosPath = new ObservableCollection<Photo>();
 
             //Pathologies
             GetPathologies();
 
+            //Works
+            GetWorks();
+
             //Populate Pickers
             PopulatePickers();
 
         }
 
-        private void AddPathology()
-        {          
-            this._navigationService.Navigate("NavigationView/PathologiesMultiSelectView");
-        }
-
-        private void GetPathologies()
+        private void GetWorks()
         {
-            this.Pathologies = new ObservableCollection<Pathology>(this._pathologyRepository.GetPathologies());
-        }
-
-        private void PopulatePickers()
-        {
-            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
-            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
-            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
+            this.Works = new ObservableCollection<Work>(this._workRepository.GetWorks());
         }
 
         #region Command methods
         private async void CreateConditionReport()
         {
+            GetSelectedPathologies();
+
             ConditionReport conditionReport = new ConditionReport()
             {
                 Title = this.Title,
@@ -221,6 +257,7 @@ namespace ArtApp.ViewModels
                 Notes = this.Notes,
                 Pathologies = this.Pathologies.ToList(),
                 Photos = this.PhotosPath.ToList(),
+                Work = this.WorkSelected,
             };
 
 
@@ -269,6 +306,51 @@ namespace ArtApp.ViewModels
 
             this.PhotosPath.Add(new Photo() { PhotoPath = file.Path });
 
+        }
+
+        private void PopulatePickers()
+        {
+            this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
+            this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
+            this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
+        }
+
+        //Pathology
+        private void SelectAll()
+        {
+            foreach (var pathology in PathologiesA)
+            {
+                pathology.IsSelected = true;
+            }
+        }
+
+        private void SelectNone()
+        {
+            foreach (var pathology in PathologiesA)
+            {
+                pathology.IsSelected = false;
+            }
+
+        }
+
+        private void AddPathology()
+        {
+            this._navigationService.Navigate("PathologiesMultiSelectView");
+        }
+
+        private void CreatePathology()
+        {
+            this._navigationService.Navigate("CreatePathologyView");
+        }
+
+        private void GetSelectedPathologies()
+        {
+            this.Pathologies = PathologiesA.Where(p => p.IsSelected).Select(p => p.Item).ToList();
+        }
+
+        private void GetPathologies()
+        {
+            this.PathologiesA = new ObservableCollection<SelectableItemWrapper<Pathology>>(this._pathologyRepository.GetPathologies().Select(pathology => new SelectableItemWrapper<Pathology>() { Item = pathology }));
         }
         #endregion
     }

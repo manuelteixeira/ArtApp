@@ -5,6 +5,7 @@ using ArtApp.Repositories;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+using ConditionReportRepository = ArtApp.Repositories.Database.ConditionReportRepository;
 
 namespace ArtApp.ViewModels
 {
@@ -20,11 +21,13 @@ namespace ArtApp.ViewModels
 
         //For mock objects
         private readonly ConditionReportMockRepository _conditionReportMockRepository;
+
+        private readonly ConditionReportRepository _conditionReportRepository;
         #endregion
 
         #region Properties
         //Need to be completed with the rest of the condition Report attributes
-        private int ConditionReportId { get; set; }
+        private int Id { get; set; }
 
         private string _title;
         public string Title
@@ -54,33 +57,33 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _temperature, value); }
         }
 
-        //private Handling _handling;
-        //public Handling Handling
-        //{
-        //    get { return _handling; }
-        //    set { SetProperty(ref _handling, value); }
-        //}
+        private Handling _handling;
+        public Handling Handling
+        {
+            get { return _handling; }
+            set { SetProperty(ref _handling, value); }
+        }
 
-        //private HandlingPosition _handlingPosition;
-        //public HandlingPosition HandlingPosition
-        //{
-        //    get { return _handlingPosition; }
-        //    set { SetProperty(ref _handlingPosition, value); }
-        //}
+        private HandlingPosition _handlingPosition;
+        public HandlingPosition HandlingPosition
+        {
+            get { return _handlingPosition; }
+            set { SetProperty(ref _handlingPosition, value); }
+        }
 
-        //private Protection _frontProtection;
-        //public Protection FrontProtection
-        //{
-        //    get { return _frontProtection; }
-        //    set { SetProperty(ref _frontProtection, value); }
-        //}
+        private Protection _frontProtection;
+        public Protection FrontProtection
+        {
+            get { return _frontProtection; }
+            set { SetProperty(ref _frontProtection, value); }
+        }
 
-        //private Protection _backProtection;
-        //public Protection BackProtection
-        //{
-        //    get { return _backProtection; }
-        //    set { SetProperty(ref _backProtection, value); }
-        //}
+        private Protection _backProtection;
+        public Protection BackProtection
+        {
+            get { return _backProtection; }
+            set { SetProperty(ref _backProtection, value); }
+        }
 
         private DateTime _date;
         public DateTime Date
@@ -124,6 +127,7 @@ namespace ArtApp.ViewModels
             //For API objects
             //this._conditionReportRepository = new ConditionReportRepository();
             this._conditionReportMockRepository = new ConditionReportMockRepository();
+            this._conditionReportRepository = new ConditionReportRepository();
 
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
@@ -160,18 +164,24 @@ namespace ArtApp.ViewModels
 
             if (result == true) //the user confirms 
             {
-                //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
-                //Confirm if was delete see StatusCode?
-                await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
-                await this._navigationService.GoBack();
-                //Force conditionReportlist refresh?
+                if (this._conditionReportRepository.DeleteConditionReport(this.Id) != 0)
+                {
+                    await this._pageDialogService.DisplayAlert("Condition Report", "Condition Report was deleted successfully", "ok");
+                    await this._navigationService.GoBack();
+                    //Force worklist refresh?
+                }
+                else
+                {
+                    await this._pageDialogService.DisplayAlert("Condition Report", "Failed to delete", "ok");
+                    await this._navigationService.GoBack();
+                }
             }
         }
 
         private async void EditConditionReport()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.ConditionReportId);
+            parameters.Add("id", this.Id);
             await this._navigationService.Navigate("EditConditionReportView", parameters);
         } 
         #endregion
@@ -186,31 +196,21 @@ namespace ArtApp.ViewModels
         {
             if (parameters.ContainsKey("id"))
             {
-                //Mock objects
-                ConditionReport conditionReport =
-                    await this._conditionReportMockRepository.GetConditionReportAsync((int)parameters["id"]);
+                ConditionReport conditionReport = _conditionReportRepository.GetConditionReport((int)parameters["id"]);
 
-                this.ConditionReportId = conditionReport.Id;
-                this.Title = conditionReport.Title;
-                this.Rh = conditionReport.RH;
-                this.Lux = conditionReport.Lux;
-                this.Temperature = conditionReport.Temperature;
-                //this.Handling = conditionReport.Handling.Value;
-                //this.HandlingPosition = conditionReport.HandlingPosition.Value;
-                //this.FrontProtection = conditionReport.FrontProtection.Value;
-                //this.BackProtection = conditionReport.BackProtection.Value;
+                this.Id = conditionReport.Id;
+                this.Work = conditionReport.Work;
+                this.BackProtection = conditionReport.BackProtection.Value;
+                this.FrontProtection = conditionReport.FrontProtection.Value;
                 this.Date = conditionReport.Date;
+                this.Handling = conditionReport.Handling.Value;
+                this.HandlingPosition = conditionReport.HandlingPosition.Value;
+                this.Lux = conditionReport.Lux;
                 this.MadeBy = conditionReport.MadeBy;
                 this.Notes = conditionReport.Notes;
-                //this.Work = conditionReport.Work;
-
-
-                ////Pedir ao repositorio API
-                //ConditionReport conditionReport = new ConditionReport();
-                //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
-                ////update attributes
-                //this.Id = conditionReport.Id;
-                //this.Title = ConditionReport.Title;
+                this.Rh = conditionReport.RH;
+                this.Temperature = conditionReport.Temperature;
+                this.Title = conditionReport.Title;
             }
         }
 

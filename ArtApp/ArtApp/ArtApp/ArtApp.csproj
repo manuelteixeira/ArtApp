@@ -75,10 +75,10 @@
     <Compile Include="Services\SQLiteDatabase.cs" />
     <Compile Include="ViewModels\Condition Reports\ConditionReportsViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\CreateConditionReportViewModel.cs" />
-    <Compile Include="ViewModels\CreatePathologyViewModel.cs" />
-    <Compile Include="ViewModels\NavWithArrowViewModel.cs" />
-    <Compile Include="ViewModels\PathologiesMultiSelectViewModel.cs" />
-    <Compile Include="ViewModels\PathologiesViewModel.cs" />
+    <Compile Include="ViewModels\Pathologies\DetailsPathologyViewModel.cs" />
+    <Compile Include="ViewModels\Pathologies\CreatePathologyViewModel.cs" />
+    <Compile Include="ViewModels\Pathologies\PathologiesMultiSelectViewModel.cs" />
+    <Compile Include="ViewModels\Pathologies\PathologiesViewModel.cs" />
     <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Todo Items\CreateTodoItemViewModel.cs" />
     <Compile Include="ViewModels\Projects\DetailsProjectViewModel.cs" />
@@ -108,13 +108,20 @@
     <Compile Include="Views\Condition Reports\EditConditionReportView.xaml.cs">
       <DependentUpon>EditConditionReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreatePathologyView.xaml.cs">
+    <Compile Include="Views\Pathologies\DetailsPathologyView.xaml.cs">
+      <DependentUpon>DetailsPathologyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Pathologies\EditPathologyViewModel.cs" />
+    <Compile Include="Views\Pathologies\EditPathologyView.xaml.cs">
+      <DependentUpon>EditPathologyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pathologies\CreatePathologyView.xaml.cs">
       <DependentUpon>CreatePathologyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PathologiesMultiSelectView.xaml.cs">
+    <Compile Include="Views\Pathologies\PathologiesMultiSelectView.xaml.cs">
       <DependentUpon>PathologiesMultiSelectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PathologiesView.xaml.cs">
+    <Compile Include="Views\Pathologies\PathologiesView.xaml.cs">
       <DependentUpon>PathologiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects\CreateProjectView.xaml.cs">
@@ -369,19 +376,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CreatePathologyView.xaml">
+    <EmbeddedResource Include="Views\Pathologies\CreatePathologyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\PathologiesView.xaml">
+    <EmbeddedResource Include="Views\Pathologies\PathologiesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\PathologiesMultiSelectView.xaml">
+    <EmbeddedResource Include="Views\Pathologies\PathologiesMultiSelectView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Pathologies\DetailsPathologyView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Pathologies\EditPathologyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

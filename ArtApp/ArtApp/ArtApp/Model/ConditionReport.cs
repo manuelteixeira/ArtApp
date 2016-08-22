@@ -47,5 +47,11 @@ namespace ArtApp.Model
 
         [ManyToMany(typeof(ConditionReportPathology), CascadeOperations = CascadeOperation.All)]
         public List<Pathology> Pathologies { get; set; }
+
+        [ForeignKey(typeof(Work))]
+        public int WorkId { get; set; }
+
+        [ManyToOne(CascadeOperations = CascadeOperation.All)]
+        public Work Work { get; set; }
     }
 }

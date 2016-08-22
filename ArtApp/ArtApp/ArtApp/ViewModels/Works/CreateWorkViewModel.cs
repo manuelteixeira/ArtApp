@@ -201,7 +201,6 @@ namespace ArtApp.ViewModels
 
         private void AddAuthor()
         {
-
             this.Authors.Add(new Author() { Name = "" });
         }
 

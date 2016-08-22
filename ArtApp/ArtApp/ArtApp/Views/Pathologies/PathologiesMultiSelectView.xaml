@@ -5,6 +5,15 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArtApp.Views.PathologiesMultiSelectView"
              xmlns:c="clr-namespace:ArtApp.Controls;assembly=ArtApp">
+  
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Back" Command="{Binding GoBackCommand}"/>
+    <ToolbarItem Text="All" Command="{Binding SelectAllCommand}"/>
+    <ToolbarItem Text="None" Command="{Binding SelectNoneCommand}"/>
+    <ToolbarItem Text="Add" Command="{Binding CreatePathologyCommand}"/>
+  </ContentPage.ToolbarItems>
+  
+<ContentPage.Content>
 
   <ListView ItemsSource="{Binding PathologiesA}" HasUnevenRows="True"
                   SeparatorVisibility="Default">
@@ -14,5 +23,6 @@
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
-
+</ContentPage.Content>
+  
 </ContentPage>
