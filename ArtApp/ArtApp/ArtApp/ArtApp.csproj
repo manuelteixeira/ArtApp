@@ -39,11 +39,10 @@
     <Compile Include="Controls\CheckBox.cs" />
     <Compile Include="Controls\PathologySelectableCell.cs" />
     <Compile Include="Controls\SelectableItemWrapper.cs" />
+    <Compile Include="Controls\WorkSelectableCell.cs" />
     <Compile Include="Converters\HandlingEnumConverter.cs" />
     <Compile Include="Converters\HandlingPositionEnumConverter.cs" />
     <Compile Include="Converters\ProtectionEnumConverter.cs" />
-    <Compile Include="Database\TodoDatabase.cs" />
-    <Compile Include="Database\WorkDatabase.cs" />
     <Compile Include="Model\ArtType.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Classification.cs" />
@@ -57,11 +56,13 @@
     <Compile Include="Model\TodoItem.cs" />
     <Compile Include="Model\Work.cs" />
     <Compile Include="Model\WorkAuthor.cs" />
+    <Compile Include="Model\WorkProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Database\ArtTypeRepository.cs" />
     <Compile Include="Repositories\Database\ClassificationRepository.cs" />
     <Compile Include="Repositories\Database\ConditionReportRepository.cs" />
     <Compile Include="Repositories\Database\PathologyRepository.cs" />
+    <Compile Include="Repositories\Database\ProjectRepository.cs" />
     <Compile Include="Repositories\Database\TodoItemRepository.cs" />
     <Compile Include="Repositories\Database\WorkRepository.cs" />
     <Compile Include="Repositories\Mock\ConditionReportMockRepository.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="ViewModels\Projects\EditProjectViewModel.cs" />
     <Compile Include="ViewModels\Todo Items\EditTodoItemViewModel.cs" />
     <Compile Include="ViewModels\Projects\ProjectsViewModel.cs" />
-    <Compile Include="ViewModels\Projects\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Todo Items\TodoItemsViewModel.cs" />
     <Compile Include="ViewModels\Works\CreateWorkViewModel.cs" />
     <Compile Include="ViewModels\Condition Reports\DetailsConditionReportViewModel.cs" />

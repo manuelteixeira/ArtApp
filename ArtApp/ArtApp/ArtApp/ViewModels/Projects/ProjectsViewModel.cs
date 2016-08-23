@@ -2,14 +2,29 @@
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Commands;
 using Prism.Services;
+using ProjectRepository = ArtApp.Repositories.Database.ProjectRepository;
 
 namespace ArtApp.ViewModels
 {
     public class ProjectsViewModel : BindableBase
     {
+        #region Services
+        private INavigationService _navigationService;
+        private IPageDialogService _pageDialogService;
+
+        //For API objects
+        //protected readonly ProjectRepository _projectRepository;
+        //For mock objects
+        protected readonly ProjectMockRepository _projectMockRepository;
+        private readonly ProjectRepository _projectRepository;
+        #endregion
+
+
         #region Properties
         private bool _isBusy;
         public bool isBusy
@@ -18,17 +33,9 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
-        private INavigationService _navigationService;
-        private IPageDialogService _pageDialogService;
 
-        //For API objects
-        //protected readonly ProjectRepository _projectRepository;
-        //For mock objects
-        protected readonly ProjectMockRepository _projectMockRepository;
-
-
-        private ObservableCollection<ProjectViewModel> _projectSearch;
-        public ObservableCollection<ProjectViewModel> ProjectSearch
+        private ObservableCollection<Project> _projectSearch;
+        public ObservableCollection<Project> ProjectSearch
         {
             get { return _projectSearch; }
             set { SetProperty(ref _projectSearch, value); }
@@ -45,8 +52,8 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private ProjectViewModel _projectSelected;
-        public ProjectViewModel ProjectSelected
+        private Project _projectSelected;
+        public Project ProjectSelected
         {
             get { return _projectSelected; }
             set
@@ -59,7 +66,7 @@ namespace ArtApp.ViewModels
             }
         }
 
-        private List<ProjectViewModel> Projects { get; set; }
+        private List<Project> Projects { get; set; }
         #endregion
 
         #region Commands
@@ -77,18 +84,18 @@ namespace ArtApp.ViewModels
             //For API objects
             //this._projectRepository = new ProjectRepository();
             this._projectMockRepository = new ProjectMockRepository();
+            this._projectRepository = new ProjectRepository();
 
             this.SearchProjectCommand = new DelegateCommand(this.SearchProject);
             this.CreateProjectCommand = new DelegateCommand(this.CreateProject);
             this.DetailsProjectCommand = new DelegateCommand(this.DetailsProject);
             this.RefreshProjectListCommand = new DelegateCommand(this.GetProjects);
-
             //creating the projects list
             this.GetProjects();
         }
 
         #region Command Methods
-        private async void GetProjects()
+        private void GetProjects()
         {
             if (this.isBusy)
             {
@@ -97,39 +104,16 @@ namespace ArtApp.ViewModels
 
             this.isBusy = true;
 
-            this.Projects = new List<ProjectViewModel>();
+            this.Projects = this._projectRepository.GetProjects().ToList();
 
-            //For API objects
-            //var list = await this._projectRepository.GetProjectsAsync();
-            var list = await this._projectMockRepository.GetProjectsAsync();
-
-            //Populate the list in the mainview
-            foreach (var item in list)
-            {
-                //Talvez nºao seja necessario verificar o null, a API verifica.
-                if (!string.IsNullOrEmpty(item.Name))
-                {
-                    Projects.Add(new ProjectViewModel()
-                    {
-                        ProjectId = item.Id,
-                        Name = item.Name,
-                        BeginDate = item.BeginDate,
-                        EndDate = item.EndDate,
-                        Works = item.Works
-                        //... the rest of the needed attributes
-                    });
-                }
-
-            }
-
-            this.ProjectSearch = new ObservableCollection<ProjectViewModel>(Projects);
+            this.ProjectSearch = new ObservableCollection<Project>(Projects);
             this.isBusy = false;
         }
 
         private void DetailsProject()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.ProjectSelected.ProjectId);
+            parameters.Add("id", this.ProjectSelected.Id);
             this._navigationService.Navigate("DetailsProjectView", parameters);
         }
 
@@ -144,13 +128,13 @@ namespace ArtApp.ViewModels
 
             if (string.IsNullOrEmpty(this.SearchText))
             {
-                this.ProjectSearch = new ObservableCollection<ProjectViewModel>(Projects);
+                this.ProjectSearch = new ObservableCollection<Project>(Projects);
             }
             else
             {
                 //Pesquisa pelo titulo
                 //Oferecer outras opçoes de pesquisa? autor? data?
-                this.ProjectSearch = new ObservableCollection<ProjectViewModel>
+                this.ProjectSearch = new ObservableCollection<Project>
                     (Projects.FindAll(p => p.Name.ToLower().Contains(this.SearchText.ToLower())));
             }
         } 

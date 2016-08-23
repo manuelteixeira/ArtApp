@@ -14,19 +14,16 @@
       <Label Text="Projects" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
       <ListView ItemsSource="{Binding ProjectSearch}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding ProjectSelected}"
-                IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshProjectsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
-        <ListView.ItemTemplate>
+                IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshProjectListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
+          <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <!-- Problems in the toolbar
-              <ViewCell.ContextActions>
-                <MenuItem Text="Edit" Command="{Binding EditWorkCommand}"></MenuItem>
-                <MenuItem Text="Delete" Command="{Binding DeleteWorkCommand}"></MenuItem>
-              </ViewCell.ContextActions>-->
               <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Name}"/>
-                <Label Text="{Binding BeginDate}"/>
-                <Label Text="{Binding EndDate}"/>
+                <Label Text="{Binding BeginDate, StringFormat='{0:dd-MM-yyyy}'}"/>
+                <Label Text="{Binding EndDate,  StringFormat='{0:dd-MM-yyyy}'}"/>
+                <Label Text="Works: "/>
+                <Label Text="{Binding Works.Count}"/>
               </StackLayout>
             </ViewCell>
           </DataTemplate>

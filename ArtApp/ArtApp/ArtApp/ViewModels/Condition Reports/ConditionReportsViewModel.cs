@@ -105,30 +105,8 @@ namespace ArtApp.ViewModels
 
             this.isBusy = true;
 
-            this.ConditionReports = new List<ConditionReport>();
-
-            //For API objects
-            //var list = await this._conditionReportRepository.GetConditionReportsAsync();
-            //var list = await this._conditionReportMockRepository.GetConditionReportsAsync();
             this.ConditionReports = this._conditionReportRepository.GetConditionReports().ToList();
 
-            //Populate the list in the mainview
-            //foreach (var item in list)
-            //{
-            //    //Talvez nºao seja necessario verificar o null, a API verifica.
-            //    if (!string.IsNullOrEmpty(item.Title))
-            //    {
-            //        ConditionReports.Add(new ConditionReport()
-            //        {
-            //            Id = item.Id,
-            //            Title = item.Title,
-            //            Date = item.Date,
-            //            MadeBy = item.MadeBy
-            //            //... the rest of the needed attributes
-            //        });
-            //    }
-
-            //}
 
             this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
             this.isBusy = false;

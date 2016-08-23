@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using ArtApp.Database;
 using ArtApp.Model;
 using ArtApp.Repositories.Database;
 using Prism.Commands;

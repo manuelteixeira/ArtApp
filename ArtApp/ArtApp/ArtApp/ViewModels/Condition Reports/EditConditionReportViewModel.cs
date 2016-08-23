@@ -223,6 +223,43 @@ namespace ArtApp.ViewModels
             PopulatePickers();
         }
 
+        #region Command Methods
+
+        private async void EditConditionReport()
+        {
+            GetSelectedPathologies();
+
+            ConditionReport conditionReport = new ConditionReport()
+            {
+                Id = this.Id,
+                Title = this.Title,
+                RH = this.Rh,
+                Lux = this.Lux,
+                Temperature = this.Temperature,
+                Handling = this.Handling,
+                HandlingPosition = this.HandlingPosition,
+                FrontProtection = this.FrontProtection,
+                BackProtection = this.BackProtection,
+                Date = this.Date,
+                MadeBy = this.MadeBy,
+                Notes = this.Notes,
+                Work = this.WorkSelected,
+                Pathologies = this.Pathologies
+            };
+
+            if (this._conditionReportRepository.SaveConditionReport(conditionReport) != 0)
+            {
+                await this._pageDialogService.DisplayAlert("Condition Report",
+                    "Condition Report edited: New Title: " + conditionReport.Title, "Ok");
+            }
+            else
+            {
+                await
+                    this._pageDialogService.DisplayAlert("Condition Report", "Failed to edit the condition report", "Ok");
+            }
+            await this._navigationService.GoBack();
+        }
+
         private void GetWorks()
         {
             this.Works = new ObservableCollection<Work>(this._workRepository.GetWorks());
@@ -307,43 +344,6 @@ namespace ArtApp.ViewModels
             this.HandlingOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Handling)));
             this.HandlingPositionsOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.HandlingPosition)));
             this.ProtectionOptions = new ObservableCollection<string>(Enum.GetNames(typeof(Model.Protection)));
-        }
-
-        #region Command Methods
-
-        private async void EditConditionReport()
-        {
-            GetSelectedPathologies();
-
-            ConditionReport conditionReport = new ConditionReport()
-            {
-                Id = this.Id,
-                Title = this.Title,
-                RH = this.Rh,
-                Lux = this.Lux,
-                Temperature = this.Temperature,
-                Handling = this.Handling,
-                HandlingPosition = this.HandlingPosition,
-                FrontProtection = this.FrontProtection,
-                BackProtection = this.BackProtection,
-                Date = this.Date,
-                MadeBy = this.MadeBy,
-                Notes = this.Notes,
-                Work = this.WorkSelected,
-                Pathologies = this.Pathologies
-            };
-
-            if (this._conditionReportRepository.SaveConditionReport(conditionReport) != 0)
-            {
-                await this._pageDialogService.DisplayAlert("Condition Report",
-                    "Condition Report edited: New Title: " + conditionReport.Title, "Ok");
-            }
-            else
-            {
-                await
-                    this._pageDialogService.DisplayAlert("Condition Report", "Failed to edit the condition report", "Ok");
-            }
-            await this._navigationService.GoBack();
         }
 
         #endregion

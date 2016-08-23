@@ -157,13 +157,7 @@ namespace ArtApp.ViewModels
                 this.Classification = work.Classification;
                 this.ArtType = work.ArtType;
 
-                //Pedir ao repositorio API
-                //Work work = new Work();
-                //work = this._workRepository.GetWorkAsync((string)parameters["id"]).Result;
-                ////update attributes
-                //this._workId = work.Id;
-                //this.Title = work.Title;
-                //this.Description = work.Description;
+
             }
         }
     }

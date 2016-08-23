@@ -21,6 +21,16 @@
           <Label Text="End Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
           <Label Text="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Vertical">
+          <ListView ItemsSource="{Binding Works}" HasUnevenRows="True"
+                  SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}" />
+              </DataTemplate>
+            </ListView.ItemTemplate>          
+          </ListView>
+        </StackLayout>
         <Button Text="Actions" Command="{Binding DisplayProjectActionSheetCommand}"></Button>
       </StackLayout>
     </ScrollView>

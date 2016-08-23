@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using ArtApp.Controls;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
@@ -7,6 +10,8 @@ using Microsoft.Practices.Unity.ObjectBuilder;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+using ProjectRepository = ArtApp.Repositories.Database.ProjectRepository;
+using WorkRepository = ArtApp.Repositories.Database.WorkRepository;
 
 namespace ArtApp.ViewModels
 {
@@ -21,6 +26,8 @@ namespace ArtApp.ViewModels
         //private readonly ProjectRepository _projectRepository;
         //For Mock Objects
         private readonly ProjectMockRepository _projectMockRepository;
+        private readonly ProjectRepository _projectRepository;
+        private readonly WorkRepository _workRepository;
         #endregion
 
         #region Properties
@@ -45,12 +52,20 @@ namespace ArtApp.ViewModels
             set { SetProperty(ref _endDate, value); }
         }
 
-        private ICollection<Work> _works;
-        public ICollection<Work> Works
+        private List<Work> _works;
+        public List<Work> Works
         {
             get { return _works; }
             set { SetProperty(ref _works, value); }
         }
+
+        private ObservableCollection<SelectableItemWrapper<Work>> _workItems;
+        public ObservableCollection<SelectableItemWrapper<Work>> WorkItems
+        {
+            get { return _workItems; }
+            set { SetProperty(ref _workItems, value); }
+        }
+
         #endregion
 
         #region Commands
@@ -63,27 +78,46 @@ namespace ArtApp.ViewModels
             //this._projectRepository = new ProjectRepository();
             //For mock objects
             this._projectMockRepository = new ProjectMockRepository();
+            this._projectRepository = new ProjectRepository();
+            this._workRepository = new WorkRepository();
+            
 
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
 
             this.CreateProjectCommand = new DelegateCommand(CreateProject);
 
+            this.GetWorks();
+
         }
 
+        private void GetSelectedWorks()
+        {
+            this.Works = WorkItems.Where(p => p.IsSelected).Select(p => p.Item).ToList();
+        }
+
+        private void GetWorks()
+        {
+            this.WorkItems = new ObservableCollection<SelectableItemWrapper<Work>>(this._workRepository.GetWorks().Select(work => new SelectableItemWrapper<Work>() { Item = work }));
+        }
 
         #region Command methods
         private async void CreateProject()
         {
+            GetSelectedWorks();
+
             Project project = new Project()
             {
-
+                Name = this.Name,
+                BeginDate = this.BeginDate,
+                EndDate = this.EndDate,
+                Works = this.Works
             };
 
 
             //For API objects
             //if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
-            if (await this._projectMockRepository.PostProjectAsync(project) != null)
+            if (this._projectRepository.SaveProject(project) != 0)
             {
                 await this._pageDialogService.DisplayAlert("Project", "New project created", "Ok");
                 await this._navigationService.GoBack();

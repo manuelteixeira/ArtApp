@@ -1,10 +1,8 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ArtApp.Database;
 using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Navigation;

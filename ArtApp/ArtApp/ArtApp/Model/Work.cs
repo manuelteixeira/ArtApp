@@ -6,14 +6,6 @@ using SQLiteNetExtensions.Attributes;
 
 namespace ArtApp.Model
 {
-    //public enum Classification
-    //{
-    //    Extremelly_Fragile,
-    //    Fragile,
-    //    Regular,
-    //    Good,
-    //    Extremelly_Good,
-    //};
 
     public class Work : IEntity
     {
@@ -44,6 +36,9 @@ namespace ArtApp.Model
 
         [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
         public List<ConditionReport> ConditionReports { get; set; }
+
+        [ManyToMany(typeof(WorkProject), CascadeOperations = CascadeOperation.CascadeRead)]
+        public List<Project> Projects { get; set; }
 
         public override string ToString()
         {

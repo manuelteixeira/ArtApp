@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using ArtApp.Model;
 using ArtApp.Repositories;
+using ArtApp.Repositories.Database;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -21,11 +22,12 @@ namespace ArtApp.ViewModels
 
         //For mock objects
         private readonly ProjectMockRepository _projectMockRepository;
+        private readonly Repositories.Database.ProjectRepository _projectRepository;
         #endregion
 
         #region Properties
 
-        private int ProjectId { get; set; }
+        private int Id { get; set; }
         private string _name;
         public string Name
         {
@@ -67,6 +69,7 @@ namespace ArtApp.ViewModels
             //For API objects
             //this._projectRepository = new ProjectRepository();
             this._projectMockRepository = new ProjectMockRepository();
+            this._projectRepository = new Repositories.Database.ProjectRepository();
 
             this._pageDialogService = pageDialogService;
             this._navigationService = navigationService;
@@ -103,18 +106,24 @@ namespace ArtApp.ViewModels
 
             if (result == true) //the user confirms 
             {
-                //await this._conditionReportRepository.DeleteConditionReportAsync(this.Id);
-                //Confirm if was delete see StatusCode?
-                await this._pageDialogService.DisplayAlert("Project", "Project was deleted successfully", "ok");
-                await this._navigationService.GoBack();
-                //Force conditionReportlist refresh?
+                if (this._projectRepository.DeleteProject(this.Id) != 0)
+                {
+                    await this._pageDialogService.DisplayAlert("Project", "Project was deleted successfully", "ok");
+                    await this._navigationService.GoBack();
+                    //Force worklist refresh?
+                }
+                else
+                {
+                    await this._pageDialogService.DisplayAlert("Project", "Failed to delete", "ok");
+                    await this._navigationService.GoBack();
+                }
             }
         }
 
         private void EditProject()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("id", this.ProjectId);
+            parameters.Add("id", this.Id);
             this._navigationService.Navigate("EditProjectView", parameters);
         }
         #endregion
@@ -123,27 +132,19 @@ namespace ArtApp.ViewModels
         {
         }
 
-        public async void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("id"))
             {
                 //Mock objects
-                Project project =
-                    await this._projectMockRepository.GetProjectAsync((int)parameters["id"]);
+                Project project = this._projectRepository.GetProject((int)parameters["id"]);
 
-                this.ProjectId = project.Id;
+                this.Id = project.Id;
                 this.Name = project.Name;
                 this.BeginDate = project.BeginDate;
                 this.EndDate = project.EndDate;
                 this.Works = project.Works;
 
-
-                ////Pedir ao repositorio API
-                //ConditionReport conditionReport = new ConditionReport();
-                //conditionReport = this._conditionReportRepository.GetConditionReportAsync((string)parameters["id"]).Result;
-                ////update attributes
-                //this.Id = conditionReport.Id;
-                //this.Title = ConditionReport.Title;
             }
         }
     }

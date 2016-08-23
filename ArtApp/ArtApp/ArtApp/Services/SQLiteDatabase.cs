@@ -38,6 +38,8 @@ namespace ArtApp.Services
             database.CreateTable<ConditionReportPathology>();
             database.CreateTable<ConditionReportPhoto>();
             database.CreateTable<Photo>();
+            database.CreateTable<WorkProject>();
+            database.CreateTable<Project>();
         }
 
         //Get all items in the database method

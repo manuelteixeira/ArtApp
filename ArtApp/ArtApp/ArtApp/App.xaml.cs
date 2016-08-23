@@ -27,6 +27,8 @@ namespace ArtApp
             //database.DropTable<ConditionReportPathology>();
             //database.DropTable<ConditionReportPhoto>();
             //database.DropTable<Photo>();
+            //database.DropTable<Project>();
+            //database.DropTable<WorkProject>();
             #endregion
 
             //NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");

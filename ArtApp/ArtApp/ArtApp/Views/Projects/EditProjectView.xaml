@@ -2,6 +2,7 @@
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:ArtApp.Controls;assembly=ArtApp"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArtApp.Views.EditProjectView">
 
@@ -20,6 +21,16 @@
         <StackLayout Orientation="Horizontal">
           <Label Text="End Date" HorizontalOptions="Start" VerticalOptions="Center"/>
           <DatePicker Date="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
+          <ListView ItemsSource="{Binding WorkItems}" HasUnevenRows="True"
+                  SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <controls:WorkSelectableCell Name="{Binding Item.Title}"/>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
         </StackLayout>
         <Button Text="Edit" Command="{Binding EditProjectCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>

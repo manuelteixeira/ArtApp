@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using ArtApp.Database;
 using ArtApp.Model;
 using ArtApp.Repositories.Database;
 using Prism.Navigation;
