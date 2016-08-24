@@ -1,8 +1,10 @@
-﻿using Prism.Commands;
+﻿using System;
+using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArtApp.Controls;
 using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Navigation;
@@ -64,13 +66,20 @@ namespace ArtApp.ViewModels
         }
 
         private List<Work> Works { get; set; }
+
+        private IEnumerable<GroupList<char,Work>> _worksGroupList;
+        public IEnumerable<GroupList<char, Work>> WorksGroupList
+        {
+            get { return _worksGroupList; }
+            set { SetProperty(ref _worksGroupList, value); }
+        }
         #endregion
 
         #region Commands
         public DelegateCommand SearchWorkCommand { get; private set; }
         public DelegateCommand CreateWorkCommand { get; private set; }
         public DelegateCommand DetailsWorkCommand { get; private set; }
-        public DelegateCommand ResfreshWorkListCommand { get; private set; }  
+        public DelegateCommand RefreshWorkListCommand { get; private set; }  
         #endregion
 
         public WorksViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
@@ -83,11 +92,14 @@ namespace ArtApp.ViewModels
             this.SearchWorkCommand = new DelegateCommand(this.SearchWork);
             this.CreateWorkCommand = new DelegateCommand(this.CreateWork);
             this.DetailsWorkCommand = new DelegateCommand(this.DetailsWork);
-            this.ResfreshWorkListCommand = new DelegateCommand(this.GetWorks);
+            this.RefreshWorkListCommand = new DelegateCommand(this.GetWorks);
             //creating the works list
             this.GetWorks();
 
+
         }
+
+
 
         #region Command method
         private void SearchWork()
@@ -97,11 +109,13 @@ namespace ArtApp.ViewModels
             if (string.IsNullOrEmpty(this.SearchText))
             {
                 this.WorksSearch = new ObservableCollection<Work>(Works);
+                this.CreateWorkGroup();
             }
             else
             {
                 this.WorksSearch = new ObservableCollection<Work>
                     (Works.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower())));
+                this.CreateWorkGroup();
             }
         }
 
@@ -150,6 +164,8 @@ namespace ArtApp.ViewModels
 
             this.WorksSearch = new ObservableCollection<Work>(Works);
 
+            this.CreateWorkGroup();
+
             this.isBusy = false;
         }
 
@@ -163,6 +179,16 @@ namespace ArtApp.ViewModels
         private void CreateWork()
         {
             this._navigationService.Navigate("CreateWorkView");
+        }
+
+        private void CreateWorkGroup()
+        {
+            IEnumerable<Work> works = this.WorksSearch;
+            this.WorksGroupList = from work in works
+                                  orderby work.Title
+                                  group work by work.Title[0]
+                into groups
+                                  select new GroupList<char, Work>(Char.ToUpper(groups.Key), groups);
         }
         #endregion
     }

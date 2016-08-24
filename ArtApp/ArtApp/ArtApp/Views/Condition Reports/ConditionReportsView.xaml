@@ -13,23 +13,18 @@
     <StackLayout>
       <Label Text="Condition Reports" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
-      <ListView ItemsSource="{Binding ConditionReportSearch}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding ConditionReportSelected}" 
-                IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshConditionReportsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
+      <ListView ItemsSource="{Binding ConditionReportsGroupList}" HasUnevenRows="True"
+                SeparatorVisibility="Default"
+                SelectedItem="{Binding ConditionReportSelected}"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshConditionReportsListCommand}"
+                IsRefreshing="{Binding isBusy, Mode=OneWay}"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding Key}"
+                GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-            <ViewCell>
-              <!-- Problems in the toolbar
-              <ViewCell.ContextActions>
-                <MenuItem Text="Edit" Command="{Binding EditWorkCommand}"></MenuItem>
-                <MenuItem Text="Delete" Command="{Binding DeleteWorkCommand}"></MenuItem>
-              </ViewCell.ContextActions>-->
-              <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Title}"/>
-                <Label Text="{Binding Date}"/>
-                <Label Text="{Binding MadeBy}"/>
-                <Label Text="{Binding Work.Title}"/>
-              </StackLayout>
-            </ViewCell>
+            <TextCell Text="{Binding Title}" Detail="{Binding Work.Title}"></TextCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
@@ -37,3 +32,4 @@
   </ContentPage.Content>
 
 </ContentPage>
+

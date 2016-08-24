@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArtApp.Controls;
 using ArtApp.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -65,6 +67,13 @@ namespace ArtApp.ViewModels
         }
 
         private List<ConditionReport> ConditionReports { get; set; }
+
+        private IEnumerable<GroupList<char, ConditionReport>> _conditionReportsGroupList;
+        public IEnumerable<GroupList<char, ConditionReport>> ConditionReportsGroupList
+        {
+            get { return _conditionReportsGroupList; }
+            set { SetProperty(ref _conditionReportsGroupList, value); }
+        }
         #endregion
 
 
@@ -72,7 +81,7 @@ namespace ArtApp.ViewModels
         public DelegateCommand SearchConditionReportCommand { get; private set; }
         public DelegateCommand CreateConditionReportCommand { get; private set; }
         public DelegateCommand DetailsConditionReportCommand { get; private set; }
-        public DelegateCommand ResfreshConditionReportsListCommand { get; private set; } 
+        public DelegateCommand RefreshConditionReportsListCommand { get; private set; } 
         #endregion
 
 
@@ -89,7 +98,7 @@ namespace ArtApp.ViewModels
             this.SearchConditionReportCommand = new DelegateCommand(this.SearchConditionReport);
             this.CreateConditionReportCommand = new DelegateCommand(this.CreateConditionReport);
             this.DetailsConditionReportCommand = new DelegateCommand(this.DetailsConditionReport);
-            this.ResfreshConditionReportsListCommand = new DelegateCommand(this.GetConditionReports);
+            this.RefreshConditionReportsListCommand = new DelegateCommand(this.GetConditionReports);
             
             //creating the condition report list
             this.GetConditionReports();
@@ -109,6 +118,8 @@ namespace ArtApp.ViewModels
 
 
             this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
+            this.CreateConditionReportGroup();
+
             this.isBusy = false;
         }
 
@@ -131,6 +142,7 @@ namespace ArtApp.ViewModels
             if (string.IsNullOrEmpty(this.SearchText))
             {
                 this.ConditionReportSearch = new ObservableCollection<ConditionReport>(ConditionReports);
+                this.CreateConditionReportGroup();
             }
             else
             {
@@ -138,8 +150,19 @@ namespace ArtApp.ViewModels
                 //Oferecer outras opçoes de pesquisa? autor? data?
                 this.ConditionReportSearch = new ObservableCollection<ConditionReport>
                     (ConditionReports.FindAll(p => p.Title.ToLower().Contains(this.SearchText.ToLower())));
+                this.CreateConditionReportGroup();
             }
-        } 
+        }
+
+        private void CreateConditionReportGroup()
+        {
+            IEnumerable<ConditionReport> conditionReports = this.ConditionReportSearch;
+            this.ConditionReportsGroupList = from conditionReport in conditionReports
+                                  orderby conditionReport.Title
+                                  group conditionReport by conditionReport.Title[0]
+                                  into groups
+                                  select new GroupList<char, ConditionReport>(Char.ToUpper(groups.Key), groups);
+        }
         #endregion
     }
 }

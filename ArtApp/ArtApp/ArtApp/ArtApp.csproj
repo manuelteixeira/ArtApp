@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Controls\BindablePicker.cs" />
     <Compile Include="Controls\CheckBox.cs" />
+    <Compile Include="Controls\GroupList.cs" />
     <Compile Include="Controls\PathologySelectableCell.cs" />
     <Compile Include="Controls\SelectableItemWrapper.cs" />
     <Compile Include="Controls\WorkSelectableCell.cs" />

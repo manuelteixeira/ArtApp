@@ -13,16 +13,23 @@
     <StackLayout>
       <Label Text="Works" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
-      <ListView ItemsSource="{Binding WorksSearch}" HasUnevenRows="True"
-                SeparatorVisibility="Default" SelectedItem="{Binding WorkSelected}"
-                IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshWorkListCommand}"
-                IsRefreshing="{Binding isBusy, Mode=OneWay}">
+      <ListView ItemsSource="{Binding WorksGroupList}" HasUnevenRows="True"
+                SeparatorVisibility="Default"
+                SelectedItem="{Binding WorkSelected}"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshWorkListCommand}"
+                IsRefreshing="{Binding isBusy, Mode=OneWay}"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding Key}"
+                GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-            <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Authors[0].Name}" />
+            <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Authors[0].Name}"></ImageCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
+
+          
