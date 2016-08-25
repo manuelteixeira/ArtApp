@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ArtApp.Views.LoginView">
+             x:Class="ArtApp.Views.LoginView"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
   <ContentPage.Content>
-    <StackLayout Padding="20">
-      <Entry Text="{Binding Email}" Keyboard="Email" Placeholder="email@server.com"/>
-      <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password"/>
-      <Button Text="Login" Command="{Binding LoginCommand}"/>
-      <Button Text="Register" Command="{Binding RegisterCommand}"/>
+    <StackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="Center">
+      <Entry TextColor="{StaticResource FontColor}" Text="{Binding Email}" Keyboard="Email" Placeholder="email@server.com"/>
+      <Entry TextColor="{StaticResource FontColor}" Text="{Binding Password}" IsPassword="True" Placeholder="Password"/>
+      <Button BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}" Text="Login" Command="{Binding LoginCommand}"/>
+      <Button BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}" Text="Register" Command="{Binding RegisterCommand}"/>
     </StackLayout>
   </ContentPage.Content>
 

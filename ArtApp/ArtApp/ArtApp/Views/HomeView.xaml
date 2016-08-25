@@ -4,7 +4,29 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArtApp.Views.HomeView">
+
   
-  <Label Text="HOME" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+  <ContentPage.Content>
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor1}">
+      <Label Text="To do Items" TextColor="{StaticResource FontColor}" HorizontalOptions="Center" FontSize="20" VerticalOptions="EndAndExpand"/>
+      <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default" 
+                SelectedItem="{Binding TodoItemSelected}" IsPullToRefreshEnabled="True" 
+                RefreshCommand="{Binding ResfreshTodoItemsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Name}" TextColor="{StaticResource FontColor}"/>
+                <Label Text="{Binding Notes}" TextColor="{StaticResource FontColor}"/>
+                <!--<Image Source="check" IsVisible="{Binding Done}"/>-->
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </ContentPage.Content>
 
 </ContentPage>

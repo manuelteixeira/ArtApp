@@ -1,8 +1,10 @@
-﻿using Prism.Mvvm;
+﻿using System;
+using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ArtApp.Controls;
 using ArtApp.Model;
 using ArtApp.Repositories;
 using Prism.Commands;
@@ -67,6 +69,13 @@ namespace ArtApp.ViewModels
         }
 
         private List<Project> Projects { get; set; }
+
+        private IEnumerable<GroupList<char, Project>> _projectsGroupList;
+        public IEnumerable<GroupList<char, Project>> ProjectssGroupList
+        {
+            get { return _projectsGroupList; }
+            set { SetProperty(ref _projectsGroupList, value); }
+        }
         #endregion
 
         #region Commands
@@ -107,6 +116,8 @@ namespace ArtApp.ViewModels
             this.Projects = this._projectRepository.GetProjects().ToList();
 
             this.ProjectSearch = new ObservableCollection<Project>(Projects);
+            this.CreateProjectGroup();
+
             this.isBusy = false;
         }
 
@@ -129,6 +140,7 @@ namespace ArtApp.ViewModels
             if (string.IsNullOrEmpty(this.SearchText))
             {
                 this.ProjectSearch = new ObservableCollection<Project>(Projects);
+                this.CreateProjectGroup();
             }
             else
             {
@@ -136,8 +148,20 @@ namespace ArtApp.ViewModels
                 //Oferecer outras opçoes de pesquisa? autor? data?
                 this.ProjectSearch = new ObservableCollection<Project>
                     (Projects.FindAll(p => p.Name.ToLower().Contains(this.SearchText.ToLower())));
+                this.CreateProjectGroup();
             }
-        } 
+        }
+
+        private void CreateProjectGroup()
+        {
+            IEnumerable<Project> projects = this.ProjectSearch;
+            this.ProjectssGroupList = from project in projects
+                                  orderby project.Name
+                                  group project by project.Name[0]
+                into groups
+                                  select new GroupList<char, Project>(Char.ToUpper(groups.Key), groups);
+        }
+
         #endregion
     }
 }

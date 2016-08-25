@@ -6,7 +6,7 @@
              x:Class="ArtApp.Views.TodoItemsView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreateTodoItemCommand}"></ToolbarItem>
+    <ToolbarItem Text="Add" Command="{Binding CreateTodoItemCommand}" Icon="ic_action_add.png"></ToolbarItem>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>

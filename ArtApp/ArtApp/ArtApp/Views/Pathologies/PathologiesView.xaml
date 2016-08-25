@@ -13,13 +13,18 @@
     <StackLayout>
       <Label Text="Pathologies" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Name" TextChanged="SearchBar_OnTextChanged"/>
-      <ListView ItemsSource="{Binding PathologiesSearch}" HasUnevenRows="True"
-                SeparatorVisibility="Default" SelectedItem="{Binding PathologySelected}"
-                IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshPathologyListCommand}"
-                IsRefreshing="{Binding isBusy, Mode=OneWay}">
+      <ListView ItemsSource="{Binding PathologiesGroupList}" HasUnevenRows="True"
+                SeparatorVisibility="Default"
+                SelectedItem="{Binding PathologySelected}"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding ResfreshPathologyListCommand}"
+                IsRefreshing="{Binding isBusy, Mode=OneWay}"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding Key}"
+                GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-           <TextCell Text="{Binding Name}"/>
+            <TextCell Text="{Binding Name}" Detail="{Binding Description}"></TextCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>

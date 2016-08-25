@@ -13,9 +13,16 @@
     <StackLayout>
       <Label Text="Projects" HorizontalOptions="Center" FontSize="20"/>
       <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
-      <ListView ItemsSource="{Binding ProjectSearch}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding ProjectSelected}"
-                IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshProjectListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
-          <ListView.ItemTemplate>
+      <ListView ItemsSource="{Binding ProjectssGroupList}" HasUnevenRows="True"
+                SeparatorVisibility="Default"
+                SelectedItem="{Binding ProjectSelected}"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshProjectListCommand}"
+                IsRefreshing="{Binding isBusy, Mode=OneWay}"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding Key}"
+                GroupShortNameBinding="{Binding Key}">
+        <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Horizontal">

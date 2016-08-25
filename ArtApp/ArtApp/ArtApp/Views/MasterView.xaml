@@ -3,17 +3,18 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   prism:ViewModelLocator.AutowireViewModel="True"
-                  x:Class="ArtApp.Views.MasterView">
+                  x:Class="ArtApp.Views.MasterView"
+                  BackgroundColor="{StaticResource BackgroundColor}">
   
   <MasterDetailPage.Master>
-    <ContentPage Title ="Menu">
+    <ContentPage Title ="Menu" BackgroundColor="{StaticResource BackgroundColor}" Padding="10,30,10,10">
       <StackLayout>
-        <Button Text="Home" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/HomeView"/>
-        <Button Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
-        <Button Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
-        <Button Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
-        <Button Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
-        <Button Text="Pathologies" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/PathologiesView"/>
+        <Button BorderWidth="0" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Home" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/HomeView"/>
+        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
+        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
+        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
+        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
+        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Pathologies" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/PathologiesView"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>
