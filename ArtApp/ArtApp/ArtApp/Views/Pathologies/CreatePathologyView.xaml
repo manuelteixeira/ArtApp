@@ -7,16 +7,21 @@
 
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <StackLayout Orientation="Horizontal">
-          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Description:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
-        <Button Text="Create" Command="{Binding CreatePathologyCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Create" Command="{Binding CreatePathologyCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

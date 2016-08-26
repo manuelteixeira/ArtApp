@@ -8,30 +8,38 @@
 
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <StackLayout Orientation="Horizontal">
-          <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Begin Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding BeginDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Begin Date:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding BeginDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="End Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="End Date:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Vertical">
           <ListView ItemsSource="{Binding Works}" HasUnevenRows="True"
                   SeparatorVisibility="Default">
             <ListView.ItemTemplate>
               <DataTemplate>
-                <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}" />
+                <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}"
+                           TextColor="{StaticResource FontColor}"/>
               </DataTemplate>
             </ListView.ItemTemplate>          
           </ListView>
         </StackLayout>
-        <Button Text="Actions" Command="{Binding DisplayProjectActionSheetCommand}"></Button>
+        <Button Text="Actions" Command="{Binding DisplayProjectActionSheetCommand}"
+                TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

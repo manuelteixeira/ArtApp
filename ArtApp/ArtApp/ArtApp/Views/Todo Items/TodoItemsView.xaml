@@ -10,16 +10,17 @@
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Todo Items" HorizontalOptions="Center" FontSize="20"/>
-      <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding TodoItemSelected}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshTodoItemsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">>
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor1}" Padding="10">
+      <Label Text="To do Items" TextColor="{StaticResource FontColor}" HorizontalOptions="Center" FontSize="20"/>
+      <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding TodoItemSelected}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshTodoItemsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Name}"/>
-                <Label Text="{Binding Notes}"/>
-                <!--<Image Source="check" IsVisible="{Binding Done}"/>-->
+                <Label Text="{Binding Name}" TextColor="{StaticResource FontColor}"/>
+                <Label Text=" - " TextColor="{StaticResource FontColor}"/>
+                <Label Text="{Binding Notes}" TextColor="{StaticResource FontColor}"/>
+                <Image Source="ic_action_check" IsVisible="{Binding Done}" HorizontalOptions="EndAndExpand"/>
               </StackLayout>
             </ViewCell>
           </DataTemplate>

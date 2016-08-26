@@ -8,34 +8,42 @@
 
   <ContentPage>
     <ScrollView>
-      <StackLayout>
-        <Label Text="Project Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+        <Label Text="Project Data" VerticalOptions="Center" HorizontalOptions="Center"
+               Font="Large" TextColor="{StaticResource FontColor}"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Begin Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Begin Date" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <DatePicker Date="{Binding BeginDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="End Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="End Date" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <DatePicker Date="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Vertical">
-          <ListView ItemsSource="{Binding WorkItems}" HasUnevenRows="True"
-                  SeparatorVisibility="Default">
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <controls:WorkSelectableCell Name="{Binding Item.Title}"/>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
+          <ScrollView>
+            <ListView ItemsSource="{Binding WorkItems}" HasUnevenRows="True"
+                    SeparatorVisibility="Default">
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <controls:WorkSelectableCell Name="{Binding Item.Title}"/>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </ScrollView>
         </StackLayout>
-        <Button Text="Create" Command="{Binding CreateProjectCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Create" Command="{Binding CreateProjectCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>
 
-  
+
 </CarouselPage>

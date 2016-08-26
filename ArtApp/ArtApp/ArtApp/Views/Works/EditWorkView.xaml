@@ -9,45 +9,54 @@
 
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <StackLayout Orientation="Horizontal">
-          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Large" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Large" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Image Source="{Binding PhotoPath}" HorizontalOptions="Center" VerticalOptions="Center"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding SelectedClassification.Name}" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Classification" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Large" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Classification Options" ItemsSource="{Binding Classifications}" SelectedItem="{Binding SelectedClassification}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Art Types" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding SelectedArtType.Name}" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Art Types" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Large" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Art Types Options" ItemsSource="{Binding ArtTypes}" SelectedItem="{Binding SelectedArtType}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+          <Image Source="{Binding PhotoPath}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
         <StackLayout Orientation="Vertical">
-          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-          <Button Text="Add Author" Command="{Binding AddAuthorCommand}"/>
+          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
+          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
+          <Button Text="Add Author" Command="{Binding AddAuthorCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
           <ListView ItemsSource="{Binding Authors}">
             <ListView.ItemTemplate>
               <DataTemplate>
                 <ViewCell>
                   <StackLayout>
-                    <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="New Author"/>
+                    <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="New Author"
+                           TextColor="{StaticResource FontColor}"/>
                   </StackLayout>
                 </ViewCell>
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
         </StackLayout>
-        <Button Text="Edit" Command="{Binding EditWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Edit" Command="{Binding EditWorkCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

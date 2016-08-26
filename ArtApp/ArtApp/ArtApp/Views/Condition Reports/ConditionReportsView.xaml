@@ -6,13 +6,15 @@
              x:Class="ArtApp.Views.ConditionReportsView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreateConditionReportCommand}"></ToolbarItem>
+    <ToolbarItem Text="Add" Command="{Binding CreateConditionReportCommand}" Icon="ic_action_add.png"></ToolbarItem>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Condition Reports" HorizontalOptions="Center" FontSize="20"/>
-      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor1}">
+      <Label Text="Condition Reports" Font="Large" HorizontalOptions="Center" FontSize="20"
+             TextColor="{StaticResource FontColor}"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"
+                 TextColor="{StaticResource FontColor}"/>
       <ListView ItemsSource="{Binding ConditionReportsGroupList}" HasUnevenRows="True"
                 SeparatorVisibility="Default"
                 SelectedItem="{Binding ConditionReportSelected}"
@@ -24,7 +26,8 @@
                 GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-            <TextCell Text="{Binding Title}" Detail="{Binding Work.Title}"></TextCell>
+            <TextCell Text="{Binding Title}" Detail="{Binding Work.Title}"
+                      TextColor="{StaticResource FontColor}"/>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>

@@ -6,13 +6,15 @@
              x:Class="ArtApp.Views.PathologiesView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreatePathologyCommand}"/>
+    <ToolbarItem Text="Add" Command="{Binding CreatePathologyCommand}" Icon="ic_action_add.png"/>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Pathologies" HorizontalOptions="Center" FontSize="20"/>
-      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Name" TextChanged="SearchBar_OnTextChanged"/>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor1}">
+      <Label Text="Pathologies" Font="Large" HorizontalOptions="Center" FontSize="20"
+             TextColor="{StaticResource FontColor}"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Name" TextChanged="SearchBar_OnTextChanged"
+                 TextColor="{StaticResource FontColor}"/>
       <ListView ItemsSource="{Binding PathologiesGroupList}" HasUnevenRows="True"
                 SeparatorVisibility="Default"
                 SelectedItem="{Binding PathologySelected}"
@@ -24,7 +26,8 @@
                 GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-            <TextCell Text="{Binding Name}" Detail="{Binding Description}"></TextCell>
+            <TextCell Text="{Binding Name}" Detail="{Binding Description}"
+                      TextColor="{StaticResource FontColor}"/>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>

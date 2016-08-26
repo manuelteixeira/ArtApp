@@ -8,18 +8,23 @@
 
   <ContentPage>
     <ScrollView>
-      <StackLayout>
-        <Label Text="Project Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+        <Label Text="Project Data" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Begin Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Begin Date" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <DatePicker Date="{Binding BeginDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="End Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="End Date" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <DatePicker Date="{Binding EndDate}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Vertical">
@@ -32,7 +37,8 @@
             </ListView.ItemTemplate>
           </ListView>
         </StackLayout>
-        <Button Text="Edit" Command="{Binding EditProjectCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Edit" Command="{Binding EditProjectCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>

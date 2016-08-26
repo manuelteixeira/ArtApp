@@ -9,12 +9,12 @@
   <MasterDetailPage.Master>
     <ContentPage Title ="Menu" BackgroundColor="{StaticResource BackgroundColor}" Padding="10,30,10,10">
       <StackLayout>
-        <Button BorderWidth="0" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Home" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/HomeView"/>
-        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
-        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
-        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
-        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
-        <Button BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Pathologies" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/PathologiesView"/>
+        <Button Image="ic_action_home.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Home" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/HomeView"/>
+        <Button Image="ic_action_works.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
+        <Button Image="ic_action_cr.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
+        <Button Image="ic_action_projects.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
+        <Button Image="ic_action_todolist.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
+        <Button Image="ic_action_pathology.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Pathologies" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/PathologiesView"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

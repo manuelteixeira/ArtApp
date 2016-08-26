@@ -7,21 +7,22 @@
 
 
   <ScrollView>
-    <StackLayout>
-      <Label Text="Todo Item" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+    <StackLayout BackgroundColor="{StaticResource BackgroundColor}" Padding="10">
+      <Label Text="To do Item" Font="Large" TextColor="{StaticResource FontColor}" VerticalOptions="Center" HorizontalOptions="Center"/>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-        <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Label Text="Name:" Font="Bold" TextColor="{StaticResource FontColor}" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Text="{Binding Name}" TextColor="{StaticResource FontColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Notes" HorizontalOptions="Start" VerticalOptions="Center"/>
-        <Entry Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Label Text="Notes:" Font="Bold" TextColor="{StaticResource FontColor}" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Text="{Binding Notes}" TextColor="{StaticResource FontColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Done" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Label Text="Done:" Font="Bold" TextColor="{StaticResource FontColor}" HorizontalOptions="Start" VerticalOptions="Center"/>
         <Switch IsToggled="{Binding Done}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
-      <Button Text="Create" Command="{Binding CreateTodoItemCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+      <Button Text="Create" Command="{Binding CreateTodoItemCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+              BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
     </StackLayout>
   </ScrollView>
 

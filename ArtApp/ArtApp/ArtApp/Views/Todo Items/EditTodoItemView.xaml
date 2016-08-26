@@ -7,21 +7,28 @@
 
 
   <ScrollView>
-    <StackLayout>
-      <Label Text="Todo Item" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+      <Label Text="To do Item" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+             TextColor="{StaticResource FontColor}"/>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-        <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Label Text="Name" Font="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
+        <Entry Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
       </StackLayout>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Notes" HorizontalOptions="Start" VerticalOptions="Center"/>
-        <Entry Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Label Text="Notes" Font="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
+        <Entry Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
       </StackLayout>
       <StackLayout Orientation="Horizontal">
-        <Label Text="Done" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Label Text="Done" Font="Bold" HorizontalOptions="Start" VerticalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
         <Switch IsToggled="{Binding Done}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
       </StackLayout>
-      <Button Text="Edit" Command="{Binding EditTodoItemCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+      <Button Text="Edit" Command="{Binding EditTodoItemCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+              TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
     </StackLayout>
   </ScrollView>
 

@@ -6,13 +6,15 @@
              x:Class="ArtApp.Views.ProjectsView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreateProjectCommand}"></ToolbarItem>
+    <ToolbarItem Text="Add" Command="{Binding CreateProjectCommand}" Icon="ic_action_add.png"/>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Projects" HorizontalOptions="Center" FontSize="20"/>
-      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor1}">
+      <Label Text="Projects" HorizontalOptions="Center" FontSize="20"
+             Font="Large" TextColor="{StaticResource FontColor}"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"
+                 TextColor="{StaticResource FontColor}"/>
       <ListView ItemsSource="{Binding ProjectssGroupList}" HasUnevenRows="True"
                 SeparatorVisibility="Default"
                 SelectedItem="{Binding ProjectSelected}"
@@ -26,11 +28,12 @@
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Name}"/>
-                <Label Text="{Binding BeginDate, StringFormat='{0:dd-MM-yyyy}'}"/>
-                <Label Text="{Binding EndDate,  StringFormat='{0:dd-MM-yyyy}'}"/>
-                <Label Text="Works: "/>
-                <Label Text="{Binding Works.Count}"/>
+                <Label Text="{Binding Name}" TextColor="{StaticResource BackgroundColor}" Font="Bold"/>
+                <Label Text="{Binding BeginDate, StringFormat='{0:dd-MM-yyyy}'}" TextColor="{StaticResource FontColor}"/>
+                <Label Text="to" TextColor="{StaticResource FontColor}"/>
+                <Label Text="{Binding EndDate,  StringFormat='{0:dd-MM-yyyy}'}" TextColor="{StaticResource FontColor}"/>
+                <Label Text="Works: " TextColor="{StaticResource FontColor}" Font="Bold"/>
+                <Label Text="{Binding Works.Count}" TextColor="{StaticResource MainColor}"/>
               </StackLayout>
             </ViewCell>
           </DataTemplate>

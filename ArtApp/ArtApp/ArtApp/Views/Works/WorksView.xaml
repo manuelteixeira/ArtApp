@@ -6,13 +6,15 @@
              x:Class="ArtApp.Views.WorksView">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Add" Command="{Binding CreateWorkCommand}"></ToolbarItem>
+    <ToolbarItem Text="Add" Command="{Binding CreateWorkCommand}" Icon="ic_action_add.png"/>
   </ContentPage.ToolbarItems>
 
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Works" HorizontalOptions="Center" FontSize="20"/>
-      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"/>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor1}">
+      <Label Text="Works" HorizontalOptions="Center" FontSize="20"
+             Font="Large" TextColor="{StaticResource FontColor}"/>
+      <SearchBar Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search By Title" TextChanged="SearchBar_OnTextChanged"
+                 TextColor="{StaticResource FontColor}"/>
       <ListView ItemsSource="{Binding WorksGroupList}" HasUnevenRows="True"
                 SeparatorVisibility="Default"
                 SelectedItem="{Binding WorkSelected}"
@@ -24,7 +26,8 @@
                 GroupShortNameBinding="{Binding Key}">
         <ListView.ItemTemplate>
           <DataTemplate>
-            <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Authors[0].Name}"></ImageCell>
+            <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Authors[0].Name}"
+                       TextColor="{StaticResource FontColor}"/>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>

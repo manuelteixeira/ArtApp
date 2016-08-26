@@ -7,56 +7,81 @@
 
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <StackLayout Orientation="Horizontal">
-          <Label Text="Title:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Title:" HorizontalOptions="Start" VerticalOptions="Center"
+                Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="RH:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding RH}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="RH:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding RH}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Lux:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Lux}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Lux:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Lux}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Temperature:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Temperature:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Handling:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Handling}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Handling:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Handling}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Handling Position:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding HandlingPosition}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Handling Position:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding HandlingPosition}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Front Protection:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding FrontProtection}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Front Protection:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding FrontProtection}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Back Protection:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding BackProtection}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Back Protection:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding BackProtection}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Made By:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding MadeBy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Made By:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding MadeBy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Notes:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Notes:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Date}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Date:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Date}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Work Title:" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Work.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Work Title:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Work.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
-        <Button Text="Actions" Command="{Binding DisplayConditionReportActionSheetCommand}"></Button>
+        <Button Text="Actions" Command="{Binding DisplayConditionReportActionSheetCommand}"
+                TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

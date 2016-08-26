@@ -7,24 +7,31 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ArtApp.Views.EditConditionReportView">
 
+
   <ContentPage>
     <ContentPage.Content>
       <ScrollView>
-        <StackLayout>
-          <Label Text="Condition Report Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+          <Label Text="Condition Report Data" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
           <StackLayout Orientation="Horizontal">
-            <Label Text="Title" HorizontalOptions="Start" VerticalOptions="Center"/>
-            <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Label Text="Title:" HorizontalOptions="Start" VerticalOptions="Center"
+                   Font="Bold" TextColor="{StaticResource FontColor}"/>
+            <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                   TextColor="{StaticResource FontColor}"/>
           </StackLayout>
           <StackLayout Orientation="Horizontal">
-            <Label Text="Work Currently Selected: " HorizontalOptions="Start" VerticalOptions="Center"/>
-            <Label Text="{Binding Work.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Label Text="Work Currently Selected: " HorizontalOptions="Start" VerticalOptions="Center"
+                   Font="Bold" TextColor="{StaticResource FontColor}"/>
+            <Label Text="{Binding Work.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                   TextColor="{StaticResource FontColor}"/>
           </StackLayout>
           <StackLayout Orientation="Vertical">
             <ListView ItemsSource="{Binding Works}" SelectedItem="{Binding WorkSelected}">
               <ListView.ItemTemplate>
                 <DataTemplate>
-                  <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}"/>
+                  <ImageCell ImageSource="{Binding PhotoPath}" Text="{Binding Title}" Detail="{Binding Description}"
+                             TextColor="{StaticResource FontColor}"/>
                 </DataTemplate>
               </ListView.ItemTemplate>
             </ListView>
@@ -36,24 +43,33 @@
 
   <ContentPage>
     <ScrollView>
-      <StackLayout>
-        <Label Text="Room Conditions Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+        <Label Text="Room Conditions Data" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Rh" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Rh}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Rh:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Rh}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 Keyboard="Numeric" TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Lux" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding Lux}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Lux:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Lux}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 Keyboard="Numeric" TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Temperature" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Stepper Increment="0.1" Maximum="200" Minimum="-200" Value="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Temperature:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding Temperature}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 Keyboard="Numeric" TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Vertical">
-          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-          <ListView ItemsSource="{Binding PhotosPath}">
+          <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
+          <Button Text="Pick Photo" Command="{Binding PickPhotoCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
+          <ListView ItemsSource="{Binding PhotosPath}" HorizontalOptions="Center" VerticalOptions="Center">
             <ListView.ItemTemplate>
               <DataTemplate>
                 <ImageCell ImageSource="{Binding PhotoPath}"/>
@@ -67,7 +83,7 @@
 
   <ContentPage>
     <ContentPage.Content>
-      <ScrollView>
+      <ScrollView Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <ListView ItemsSource="{Binding PathologiesA}" HasUnevenRows="True"
                         SeparatorVisibility="Default">
           <ListView.ItemTemplate>
@@ -89,22 +105,27 @@
       </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-      <StackLayout>
-        <Label Text="Handling Conditions" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+        <Label Text="Handling Conditions" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Handling" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Handling:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Handling Options" ItemsSource="{Binding HandlingOptions}" SelectedItem="{Binding Handling, Converter={StaticResource HandlingEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Handling Position" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Handling Position:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Handling Position Options" ItemsSource="{Binding HandlingPositionsOptions}" SelectedItem="{Binding HandlingPosition, Converter={StaticResource HandlingPositionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Front Protection" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Front Protection:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Front Protection Options" ItemsSource="{Binding ProtectionOptions}" SelectedItem="{Binding FrontProtection, Converter={StaticResource ProtectionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Back Protection" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Back Protection:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <controls:BindablePicker Title="Back Protection Options" ItemsSource="{Binding ProtectionOptions}" SelectedItem="{Binding BackProtection, Converter={StaticResource ProtectionEnumConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
       </StackLayout>
@@ -113,21 +134,28 @@
 
   <ContentPage>
     <ScrollView>
-      <StackLayout>
-        <Label Text="Reviewer Data" Font="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
+        <Label Text="Reviewer Data" Font="Large" VerticalOptions="Center" HorizontalOptions="Center"
+               TextColor="{StaticResource FontColor}"/>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Made By" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Entry Text="{Binding MadeBy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Made By:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Entry Text="{Binding MadeBy}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Notes" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Editor Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Notes:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Editor Text="{Binding Notes}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                  TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Date" HorizontalOptions="Start" VerticalOptions="Center"/>
+          <Label Text="Date:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
           <DatePicker Date="{Binding Date}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
         </StackLayout>
-        <Button Text="Edit" Command="{Binding EditConditionReportCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+        <Button Text="Edit" Command="{Binding EditConditionReportCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                BackgroundColor="{StaticResource AccentColor}" TextColor="{StaticResource FontColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage>

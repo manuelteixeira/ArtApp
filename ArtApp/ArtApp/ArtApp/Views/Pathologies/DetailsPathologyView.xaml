@@ -7,16 +7,21 @@
   
  <ContentPage.Content>
     <ScrollView>
-      <StackLayout>
+      <StackLayout Padding="10" BackgroundColor="{StaticResource BackgroundColor}">
         <StackLayout Orientation="Horizontal">
-          <Label Text="Name" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Name:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-          <Label Text="Description" HorizontalOptions="Start" VerticalOptions="Center"/>
-          <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+          <Label Text="Description:" HorizontalOptions="Start" VerticalOptions="Center"
+                 Font="Bold" TextColor="{StaticResource FontColor}"/>
+          <Label Text="{Binding Description}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                 TextColor="{StaticResource FontColor}"/>
         </StackLayout>
-        <Button Text="Actions" Command="{Binding DisplayPathologyActionSheetCommand}"></Button>
+        <Button Text="Actions" Command="{Binding DisplayPathologyActionSheetCommand}"
+                TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>
