@@ -41,6 +41,8 @@
                   TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
           <Button Text="Add Author" Command="{Binding AddAuthorCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                   TextColor="{StaticResource FontColor}" BackgroundColor="{StaticResource AccentColor}"/>
+        </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand">
           <ListView ItemsSource="{Binding Authors}">
             <ListView.ItemTemplate>
               <DataTemplate>

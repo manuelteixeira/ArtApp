@@ -10,6 +10,12 @@ namespace ArtApp.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((WorksViewModel)this.BindingContext).RefreshWorkListCommand.Execute();
+        }
+
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             ((WorksViewModel)this.BindingContext).SearchWorkCommand.Execute();

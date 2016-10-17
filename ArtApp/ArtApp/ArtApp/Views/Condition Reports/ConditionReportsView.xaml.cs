@@ -10,6 +10,12 @@ namespace ArtApp.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((ConditionReportsViewModel)this.BindingContext).RefreshConditionReportsListCommand.Execute();
+        }
+
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             ((ConditionReportsViewModel)this.BindingContext).SearchConditionReportCommand.Execute();

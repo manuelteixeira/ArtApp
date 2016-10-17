@@ -78,11 +78,11 @@ namespace ArtApp.ViewModels
             if (this._todoRepository.SaveTodoItem(todoItem) == 0)
             {
                 await this._pageDialogService.DisplayAlert("Todo Item", "The todo item wasn't edited", "Ok");
-                await this._navigationService.Navigate("TodoItemsView");
+                await this._navigationService.GoBack();
             }
 
             await this._pageDialogService.DisplayAlert("Todo Item", "The " + this.Name + " was edited successfully", "Ok");
-            await this._navigationService.Navigate("TodoItemsView");
+            await this._navigationService.GoBack();
 
         }
         #endregion

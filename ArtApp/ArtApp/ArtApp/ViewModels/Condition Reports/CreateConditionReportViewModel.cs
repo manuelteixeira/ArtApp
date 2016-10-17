@@ -230,6 +230,9 @@ namespace ArtApp.ViewModels
             //Populate Pickers
             PopulatePickers();
 
+            //default date value
+            this.Date = DateTime.Now;
+
         }
 
         private void GetWorks()

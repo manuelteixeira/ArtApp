@@ -78,11 +78,11 @@ namespace ArtApp.ViewModels
             {
                 _pageDialogService.DisplayAlert("Todo Item", "The todo item wasn't created, please try again later",
                     "Ok");
-                _navigationService.Navigate("TodoItemsView");
+                _navigationService.GoBack();
             }
 
             _pageDialogService.DisplayAlert("Todo Item", "The todo item was created", "Ok");
-            _navigationService.Navigate("TodoItemsView");
+            _navigationService.GoBack();
 
         }
 

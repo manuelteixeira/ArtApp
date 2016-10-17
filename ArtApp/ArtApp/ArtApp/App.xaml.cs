@@ -32,7 +32,8 @@ namespace ArtApp
             #endregion
 
             //NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");
-            NavigationService.Navigate("LoginView");
+            //NavigationService.Navigate("LoginView");
+            NavigationService.Navigate("MasterView/NavigationView/HomeView");
         }
 
         protected override void RegisterTypes()

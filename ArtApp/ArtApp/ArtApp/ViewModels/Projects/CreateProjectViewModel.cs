@@ -89,6 +89,10 @@ namespace ArtApp.ViewModels
 
             this.GetWorks();
 
+            //default date value
+            this.BeginDate = DateTime.Now;
+            this.EndDate = DateTime.Now;
+
         }
 
         private void GetSelectedWorks()

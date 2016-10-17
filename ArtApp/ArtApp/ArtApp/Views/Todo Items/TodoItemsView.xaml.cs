@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ArtApp.ViewModels;
+using Xamarin.Forms;
 
 namespace ArtApp.Views
 {
@@ -7,6 +8,12 @@ namespace ArtApp.Views
         public TodoItemsView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((TodoItemsViewModel)this.BindingContext).ResfreshTodoItemsListCommand.Execute();
         }
     }
 }

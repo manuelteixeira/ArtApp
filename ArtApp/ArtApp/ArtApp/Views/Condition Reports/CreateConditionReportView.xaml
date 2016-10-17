@@ -19,7 +19,7 @@
             <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                    TextColor="{StaticResource FontColor}"/>
           </StackLayout>
-          <StackLayout Orientation="Vertical">
+          <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <ListView ItemsSource="{Binding Works}" SelectedItem="{Binding WorkSelected}">
               <ListView.ItemTemplate>
                 <DataTemplate>

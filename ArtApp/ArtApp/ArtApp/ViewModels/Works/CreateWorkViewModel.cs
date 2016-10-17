@@ -112,6 +112,7 @@ namespace ArtApp.ViewModels
 
             GetClassifications();
             GetArtTypes();
+
         }
 
         private void GetArtTypes()

@@ -85,10 +85,10 @@ namespace ArtApp.ViewModels
                 if (this._todoRepository.DeleteTodoItem(this.ID) == 0)
                 {
                     await this._pageDialogService.DisplayAlert("Todo Item", "Todo Item wasn't deleted", "ok");
-                    await this._navigationService.Navigate("TodoItemsView");
+                    await this._navigationService.GoBack();
                 }
                 await this._pageDialogService.DisplayAlert("Todo Item", "Todo Item was deleted successfully", "ok");
-                await this._navigationService.Navigate("TodoItemsView");
+                await this._navigationService.GoBack();
             }
         }
 

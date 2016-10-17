@@ -13,7 +13,7 @@
         <Button Image="ic_action_works.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Works" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/WorksView"/>
         <Button Image="ic_action_cr.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Condition Reports" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ConditionReportsView"/>
         <Button Image="ic_action_projects.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Projects" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/ProjectsView"/>
-        <Button Image="ic_action_todolist.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Todo Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
+        <Button Image="ic_action_todolist.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="To do Items" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/TodoItemsView"/>
         <Button Image="ic_action_pathology.png" BackgroundColor="{StaticResource BackgroundColor}" TextColor="{StaticResource FontColor}" Text="Pathologies" Command="{Binding NavigateCommand}" CommandParameter="NavigationView/PathologiesView"/>
       </StackLayout>
     </ContentPage>
