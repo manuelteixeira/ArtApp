@@ -62,7 +62,7 @@ namespace ArtApp.ViewModels
             //Comunicar com API
 
             //For testing
-            if (this.Email == "a" && this.Password == "a")
+            if (this.Email == "manel" && this.Password == "manel")
             {
                 this._pageDialogService.DisplayAlert("Login Successfully", "Welcome " + this.Email, "Ok");
                 this._navigationService.Navigate("MasterView/NavigationView/HomeView");

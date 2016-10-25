@@ -8,6 +8,23 @@
   
   <ContentPage.Content>
     <StackLayout BackgroundColor="{StaticResource BackgroundColor1}" Padding="10">
+            <Label Text="Projects" TextColor="{StaticResource FontColor}" HorizontalOptions="Center" FontSize="20" VerticalOptions="EndAndExpand"/>
+      <ListView ItemsSource="{Binding Projects}" HasUnevenRows="True" SeparatorVisibility="Default">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Name}" TextColor="{StaticResource BackgroundColor}" Font="Bold"/>
+                <Label Text="{Binding BeginDate, StringFormat='{0:dd-MM-yyyy}'}" TextColor="{StaticResource FontColor}"/>
+                <Label Text="to" TextColor="{StaticResource FontColor}"/>
+                <Label Text="{Binding EndDate,  StringFormat='{0:dd-MM-yyyy}'}" TextColor="{StaticResource FontColor}"/>
+                <Label Text="Works: " TextColor="{StaticResource FontColor}" Font="Bold"/>
+                <Label Text="{Binding Works.Count}" TextColor="{StaticResource MainColor}"/>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
       <Label Text="To do Items" TextColor="{StaticResource FontColor}" HorizontalOptions="Center" FontSize="20" VerticalOptions="EndAndExpand"/>
       <ListView ItemsSource="{Binding TodoItems}" HasUnevenRows="True" SeparatorVisibility="Default" SelectedItem="{Binding TodoItemSelected}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ResfreshTodoItemsListCommand}" IsRefreshing="{Binding isBusy, Mode=OneWay}">
         <ListView.ItemTemplate>

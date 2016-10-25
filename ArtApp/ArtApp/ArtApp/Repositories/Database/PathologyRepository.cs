@@ -30,6 +30,81 @@ namespace ArtApp.Repositories.Database
                     Name = "Water",
                     Description = "Pathology caused by Water",
                 });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Condensation",
+                    Description = "Pathology caused by Water",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Deteoration",
+                    Description = "Pathology caused by Deteoration",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Finger Marks",
+                    Description = "Pathology caused by Finger Marks",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Hinge Failure",
+                    Description = "Pathology caused by Hinge Failure",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Mold",
+                    Description = "Pathology caused by Mold",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Residue",
+                    Description = "Pathology caused by Residue",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Split",
+                    Description = "Pathology caused by Split",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Warping",
+                    Description = "Pathology caused by Warping",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Discoloration",
+                    Description = "Pathology caused by Discoloration",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Insect",
+                    Description = "Pathology caused by Insects",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Stain",
+                    Description = "Pathology caused by Stain",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Bubble",
+                    Description = "Pathology caused by Bubble",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Dent",
+                    Description = "Pathology caused by Dent",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Smudge",
+                    Description = "Pathology caused by Smudge",
+                });
+                _database.SaveItem(new Pathology()
+                {
+                    Name = "Acid",
+                    Description = "Pathology caused by Acid",
+                });
             }
         }
 

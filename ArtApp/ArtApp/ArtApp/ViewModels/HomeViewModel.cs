@@ -17,6 +17,7 @@ namespace ArtApp.ViewModels
         private IPageDialogService _pageDialogService;
         private INavigationService _navigationService;
         private readonly TodoItemRepository _todoRepository;
+        private readonly ProjectRepository _projectRepository;
         #endregion
 
         #region Properties
@@ -49,6 +50,14 @@ namespace ArtApp.ViewModels
             get { return _todoItems; }
             set { SetProperty(ref _todoItems, value); }
         }
+
+
+        private IEnumerable<Project> _projects;
+        public IEnumerable<Project> Projects
+        {
+            get { return _projects; }
+            set { SetProperty(ref _projects, value); }
+        }
         #endregion
 
         #region Command
@@ -63,12 +72,16 @@ namespace ArtApp.ViewModels
             _navigationService = navigationService;
 
             _todoRepository = new TodoItemRepository();
+            _projectRepository = new ProjectRepository();
 
             this.ResfreshTodoItemsListCommand = new DelegateCommand(GetTodoItems);
             this.DetailsTodoItemCommand = new DelegateCommand(DetailsTodoItem);
 
             GetTodoItems();
+            GetProjects();
         }
+
+
 
         #region Command Methods
         private void GetTodoItems()
@@ -90,7 +103,21 @@ namespace ArtApp.ViewModels
             var parameters = new NavigationParameters();
             parameters.Add("id", this.TodoItemSelected.Id);
             this._navigationService.Navigate("DetailsTodoItemView", parameters);
-        } 
+        }
+
+        private void GetProjects()
+        {
+            if (this.isBusy)
+            {
+                return;
+            }
+
+            this.isBusy = true;
+
+            Projects = _projectRepository.GetProjects();
+
+            this.isBusy = false;
+        }
         #endregion
     }
 }

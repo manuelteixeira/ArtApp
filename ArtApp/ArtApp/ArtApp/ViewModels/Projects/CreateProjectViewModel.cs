@@ -6,6 +6,7 @@ using ArtApp.Controls;
 using ArtApp.Model;
 using Prism.Mvvm;
 using ArtApp.Repositories;
+using ArtApp.Repositories.Database;
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Prism.Commands;
 using Prism.Navigation;
@@ -28,6 +29,7 @@ namespace ArtApp.ViewModels
         private readonly ProjectMockRepository _projectMockRepository;
         private readonly ProjectRepository _projectRepository;
         private readonly WorkRepository _workRepository;
+        private readonly TodoItemRepository _todoItemRepository;
         #endregion
 
         #region Properties
@@ -80,6 +82,8 @@ namespace ArtApp.ViewModels
             this._projectMockRepository = new ProjectMockRepository();
             this._projectRepository = new ProjectRepository();
             this._workRepository = new WorkRepository();
+            //for task automation
+            this._todoItemRepository = new TodoItemRepository();
             
 
             this._pageDialogService = pageDialogService;
@@ -118,6 +122,8 @@ namespace ArtApp.ViewModels
                 Works = this.Works
             };
 
+            CreateTasksOfWorks();
+
 
             //For API objects
             //if (await this._conditionReportRepository.PostConditionReportAsync(conditionReport) != null)
@@ -131,6 +137,22 @@ namespace ArtApp.ViewModels
                 await this._pageDialogService.DisplayAlert("Project", "Failed to create project", "Ok");
             }
         }
+
+        private void CreateTasksOfWorks()
+        {
+            foreach (var work in Works)
+            {
+                TodoItem todoitem = new TodoItem()
+                {
+                    Name = "Create CR of " + work.Title,
+                    Notes = "From the project " +  this.Name,
+                    Done = false
+                };
+
+                this._todoItemRepository.SaveTodoItem(todoitem);
+            }
+        }
+
         #endregion
     }
 }
